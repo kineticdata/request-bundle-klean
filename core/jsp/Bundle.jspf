@@ -1,0 +1,87 @@
+<%--
+    TODO: Description of file.
+--%>
+<%!
+    /**
+     * TODO: Description of class
+     *
+     * bundle.context()
+     *   Returns the URL path to the root of the web application.
+     *   Example: "/kinetic"
+     * bundle.path()
+     *   Returns the URL path to the root of the bundle.
+     *   Example: "/kinetic/themes/BUNDLE_NAME"
+     * bundle.relativePath()
+     *   Returns the relative path within the context of web application.
+     *   Example: "/themes/BUNDLE_NAME"
+     */
+    public static class Bundle {
+        // Define the static configuration values
+        private static final String BUNDLE_DIR = "themes";
+        // Declare the private variables
+        private String context;
+        private String path;
+        private String relativePath;
+
+        /**
+         * Given the ServletRequest object, this constructor calculates the
+         * fully qualified and relative paths used by the Bundle.
+         */
+        public Bundle(HttpServletRequest request) {
+            // Retrieve the URI of the request.  This is the actual URI of the 
+            // JSP that is being rendered, not the URL of the Servlet that is
+            // dispatching the request.
+            String requestUri = request.getRequestURI();
+            // Calculate the terminating indexes
+            int endOfRootPath = requestUri.indexOf("/"+BUNDLE_DIR);
+            int startOfBundleName = requestUri.indexOf("/"+BUNDLE_DIR+"/")+("/"+BUNDLE_DIR+"/").length();
+            int endOfBundleName = requestUri.indexOf("/", startOfBundleName);
+            // Set the Bundle paths
+            this.context = requestUri.substring(0, endOfRootPath);
+            this.path = requestUri.substring(0, endOfBundleName);
+            this.relativePath = requestUri.substring(endOfRootPath, endOfBundleName);
+        }
+
+        /**
+         * Returns the URL path to the root of the web application.
+         *
+         * Note that the path string does not end with a '/'.  Paths that
+         * concatenate values with this value should ensure the appended path
+         * starts with a '/'.
+         *
+         * Example (assuming a default Kinetic SR installation):
+         *   /kinetic
+         * Example (assuming Kinetic SR was installed to an alternate location):
+         *   /services/portfolio
+         */
+        public String context() { return context; }
+        
+        /**
+         * Returns the URL path to the root of the bundle.
+         *
+         * Note that the path string does not end with a '/'.  Paths that
+         * concatenate values with this value should ensure the appended path
+         * starts with a '/'.
+         *
+         * Example (assuming a default Kinetic SR installation):
+         *   /kinetic/themes/BUNDLE_NAME
+         * Example (assuming Kinetic SR was installed to an alternate location):
+         *   /services/portfolio/themes/BUNDLE_NAME
+         */
+        public String path() { return path; }
+
+        /**
+         * Returns the relative path within the context of web application.
+         *
+         * Note that the path string does not end with a '/'.  Paths that
+         * concatenate values with this value should ensure the appended path
+         * starts with a '/'.
+         *
+         * Example (assuming a default Kinetic SR installation):
+         *   /themes/BUNDLE_NAME
+         * Example (assuming Kinetic SR was installed to an alternate location):
+         *   /themes/BUNDLE_NAME
+         */
+        public String relativePath() { return relativePath; }
+    }
+%>

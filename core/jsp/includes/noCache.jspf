@@ -1,0 +1,17 @@
+<%--
+    This file prevents JSP content from being cached by client browsers or by
+    proxy servers by setting three HTTP response headers: EXPIRES, which is
+    used to prevent caching at the proxy server; CACHE-CONTOL, which prevents
+    caching of clients using HTTP 1.0; and PRAGMA, which prevents caching of all
+    moder clients using HTTP 1.1.
+--%>
+<%
+    // Prevents responses from being cached at the proxy server
+    response.setDateHeader ("EXPIRES", 0);
+    // Prevents responses from being cached by all modern browsers/clients.
+    response.setHeader("CACHE-CONTROL","no-cache, no-store, must-revalidate, max-age=0");
+    // Prevents responses from being cached by clients using the HTTP 1.0
+    // protocol.  Based on RFC2616, the PRAGMA directive should be included
+    // whenever a no-cache CACHE-CONTROL response is set.
+    response.setHeader("PRAGMA","NO-CACHE");
+%>
