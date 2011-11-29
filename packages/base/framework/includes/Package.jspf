@@ -15,10 +15,11 @@
      *   Returns the relative path within the context of web application.
      *   Example: "/themes/BUNDLE_NAME"
      */
-    public static class Bundle {
+    public static class Package {
         // Define the static configuration values
         private static final String BUNDLE_DIR = "themes";
         // Declare the private variables
+        private java.util.Map<String,String> properties = new java.util.LinkedHashMap();
         private String context;
         private String path;
         private String relativePath;
@@ -27,8 +28,8 @@
          * Given the ServletRequest object, this constructor calculates the
          * fully qualified and relative paths used by the Bundle.
          */
-        public Bundle(HttpServletRequest request) {
-            // Retrieve the URI of the request.  This is the actual URI of the 
+        public Package(HttpServletRequest request) {
+            // Retrieve the URI of the request.  This is the actual URI of the
             // JSP that is being rendered, not the URL of the Servlet that is
             // dispatching the request.
             String requestUri = request.getRequestURI();
@@ -42,6 +43,21 @@
             this.relativePath = requestUri.substring(endOfRootPath, endOfBundleName);
         }
 
+        /***********************************************************************
+         * PROPERTY CONFIGURATION METHODS
+         **********************************************************************/
+        
+        /**
+         * Retrieves the specified property value.  This value may be null if
+         */
+        public String getProperty(String name) {return properties.get(name);}
+
+        public void setProperty(String name, String value) {properties.put(name, value);}
+
+        /***********************************************************************
+         * PATH METHODS
+         **********************************************************************/
+        
         /**
          * Returns the URL path to the root of the web application.
          *
@@ -83,5 +99,37 @@
          *   /themes/BUNDLE_NAME
          */
         public String relativePath() { return relativePath; }
+                      
+        /***********************************************************************
+         * HELPER METHODS
+         **********************************************************************/
+        
+        public String detailsUrl(String csrv) {
+            return context+"/ReviewRequest?csrv="+csrv+"&reviewPage="+relativePath+"/packages/base/details";
+        }
+
+        public String formUrl(String id) {
+            return context+"/DisplayPage?srv="+id;
+        }
+
+        public String formNameUrl(String name) {
+            return context+"/DisplayPage?name="+name;
+        }
+
+        public String loginUrl() {
+            return "";
+        }
+
+        public String portalUrl() {
+            return "";
+        }
+
+        public String reviewUrl(String csrv) {
+            return context+"/ReviewRequest?csrv="+csrv+"&reviewPage="+relativePath+"/packages/base/review";
+        }
+
+        public String submissionUrl(String csrv) {
+            return context+"/DisplayPage?csrv="+csrv;
+        }
     }
 %>

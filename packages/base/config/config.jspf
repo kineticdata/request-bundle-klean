@@ -5,7 +5,7 @@
 <%
     bundleConfig.put("companyName", "ACME");
     bundleConfig.put("portalName", "Service Portal");
-
+    
     // If null, will use the catalog's default logout action
     bundleConfig.put("defaultLoginAction", null);
     // If null, the forgot password link on the login page will not be displayed
