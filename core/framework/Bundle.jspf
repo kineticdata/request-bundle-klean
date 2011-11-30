@@ -2,9 +2,6 @@
     TODO: Description of file.
 --%>
 <%!
-    // TODO: Change context to applicationPath(), path to bundlePath(), and add
-    //  packagePath()
-
     /**
      * TODO: Description of class
      *
@@ -21,17 +18,20 @@
     public static class Bundle {
         // Define the static configuration values
         private static final String BUNDLE_DIR = "themes";
-        // Declare the private variables
-        private java.util.Map<String,String> properties = new java.util.LinkedHashMap();
-        private String context;
-        private String path;
-        private String relativePath;
+        // Initialize the properties hash
+        private java.util.Map<String,String> properties = new java.util.TreeMap();
+        // Declare the path variables
+        private String applicationPath;
+        private String bundlePath;
+        private String packagePath;
+        private String relativeBundlePath;
+        private String relativePackagePath;
 
         /**
          * Given the ServletRequest object, this constructor calculates the
          * fully qualified and relative paths used by the Bundle.
          */
-        public Package(HttpServletRequest request) {
+        public Bundle(HttpServletRequest request) {
             // Retrieve the URI of the request.  This is the actual URI of the
             // JSP that is being rendered, not the URL of the Servlet that is
             // dispatching the request.
@@ -40,27 +40,42 @@
             int endOfRootPath = requestUri.indexOf("/"+BUNDLE_DIR);
             int startOfBundleName = requestUri.indexOf("/"+BUNDLE_DIR+"/")+("/"+BUNDLE_DIR+"/").length();
             int endOfBundleName = requestUri.indexOf("/", startOfBundleName);
-            // Set the Bundle paths
-            this.context = requestUri.substring(0, endOfRootPath);
-            this.path = requestUri.substring(0, endOfBundleName);
-            this.relativePath = requestUri.substring(endOfRootPath, endOfBundleName);
+            String packagesPath = requestUri.substring(0, endOfBundleName) + "/packages/";
+            int startOfPackageName = requestUri.indexOf(packagesPath)+packagesPath.length();
+            int endOfPackageName = requestUri.indexOf("/", startOfPackageName);
+            // Set the paths
+            this.applicationPath = requestUri.substring(0, endOfRootPath);
+            this.bundlePath = requestUri.substring(0, endOfBundleName);
+            this.packagePath = requestUri.substring(0, endOfPackageName);
+            // Set the Relative paths
+            this.relativeBundlePath = this.bundlePath.substring(this.applicationPath.length());
+            this.relativePackagePath = this.packagePath.substring(this.applicationPath.length());
         }
 
         /***********************************************************************
          * PROPERTY CONFIGURATION METHODS
          **********************************************************************/
-        
+
         /**
          * Retrieves the specified property value.  This value may be null if
+         * a property with that name has not been configured.
          */
         public String getProperty(String name) {return properties.get(name);}
 
+        /**
+         * Returns the collection of property keys.
+         */
+        public java.util.Set<String> propertyKeys() {return properties.keySet();}
+
+        /**
+         * Sets the value of a configuration property.
+         */
         public void setProperty(String name, String value) {properties.put(name, value);}
 
         /***********************************************************************
          * PATH METHODS
          **********************************************************************/
-        
+
         /**
          * Returns the URL path to the root of the web application.
          *
@@ -73,8 +88,8 @@
          * Example (assuming Kinetic SR was installed to an alternate location):
          *   /services/portfolio
          */
-        public String context() { return context; }
-        
+        public String applicationPath() { return applicationPath; }
+
         /**
          * Returns the URL path to the root of the bundle.
          *
@@ -87,55 +102,46 @@
          * Example (assuming Kinetic SR was installed to an alternate location):
          *   /services/portfolio/themes/BUNDLE_NAME
          */
-        public String path() { return path; }
-        // TODO: This should be bundlePath
-        
-        // TODO: Implement packagePath
+        public String bundlePath() { return bundlePath; }
 
         /**
-         * Returns the relative path within the context of web application.
+         * Returns the URL path to the root of the package.
          *
          * Note that the path string does not end with a '/'.  Paths that
          * concatenate values with this value should ensure the appended path
          * starts with a '/'.
          *
          * Example (assuming a default Kinetic SR installation):
-         *   /themes/BUNDLE_NAME
+         *   /kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME
          * Example (assuming Kinetic SR was installed to an alternate location):
+         *   /services/portfolio/themes/BUNDLE_NAME/packages/PACKAGE_NAME
+         */
+        public String packagePath() { return packagePath; }
+
+        /**
+         * Returns the URL path to the bundle within the context of web
+         * application.
+         *
+         * Note that the path string does not end with a '/'.  Paths that
+         * concatenate values with this value should ensure the appended path
+         * starts with a '/'.
+         *
+         * Example:
          *   /themes/BUNDLE_NAME
          */
-        public String relativePath() { return relativePath; }
-                      
-        /***********************************************************************
-         * HELPER METHODS
-         **********************************************************************/
-        
-        public String detailsUrl(String csrv) {
-            return context+"/ReviewRequest?csrv="+csrv+"&reviewPage="+relativePath+"/packages/base/details";
-        }
+        public String relativeBundlePath() { return relativeBundlePath; }
 
-        public String formUrl(String id) {
-            return context+"/DisplayPage?srv="+id;
-        }
-
-        public String formNameUrl(String name) {
-            return context+"/DisplayPage?name="+name;
-        }
-
-        public String loginUrl() {
-            return "";
-        }
-
-        public String portalUrl() {
-            return "";
-        }
-
-        public String reviewUrl(String csrv) {
-            return context+"/ReviewRequest?csrv="+csrv+"&reviewPage="+relativePath+"/packages/base/review";
-        }
-
-        public String submissionUrl(String csrv) {
-            return context+"/DisplayPage?csrv="+csrv;
-        }
+        /**
+         * Returns the URL path to the package path within the context of web
+         * application.
+         *
+         * Note that the path string does not end with a '/'.  Paths that
+         * concatenate values with this value should ensure the appended path
+         * starts with a '/'.
+         *
+         * Example:
+         *   /themes/BUNDLE_NAME/packages/PACKAGE_NAME
+         */
+        public String relativePackagePath() { return relativePackagePath; }
     }
 %>
