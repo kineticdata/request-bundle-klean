@@ -2,9 +2,12 @@
     TODO: Description of file.
 --%>
 
-<%--
-    Load the common configuration JSP file (this contains common settings for
-    the bundle such as company name, etc).  This file also initializes the
-    config (HashMap<String,String>) bean.
---%>
-<%@include file="../../../common/jsp/config.jspf" %>
+<%-- TODO: DESCRIBE --%>
+<%@include file="../Bundle.jspf" %>
+
+<%-- TODO: DESCRIBE --%>
+<% Bundle bundle = new Bundle(request); %>
+
+<%-- Include any helper files. --%>
+
+<%-- Include any model files. --%>

@@ -2,20 +2,23 @@
     TODO: Description of file.
 --%>
 <%!
+    // TODO: Change context to applicationPath(), path to bundlePath(), and add
+    //  packagePath()
+
     /**
      * TODO: Description of class
      *
-     * bundle.context()
+     * bundle.applicationPath()
      *   Returns the URL path to the root of the web application.
      *   Example: "/kinetic"
-     * bundle.path()
+     * bundle.bundlePath()
      *   Returns the URL path to the root of the bundle.
      *   Example: "/kinetic/themes/BUNDLE_NAME"
-     * bundle.relativePath()
+     * bundle.packagePath()
      *   Returns the relative path within the context of web application.
-     *   Example: "/themes/BUNDLE_NAME"
+     *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME"
      */
-    public static class Package {
+    public static class Bundle {
         // Define the static configuration values
         private static final String BUNDLE_DIR = "themes";
         // Declare the private variables
@@ -85,6 +88,9 @@
          *   /services/portfolio/themes/BUNDLE_NAME
          */
         public String path() { return path; }
+        // TODO: This should be bundlePath
+        
+        // TODO: Implement packagePath
 
         /**
          * Returns the relative path within the context of web application.

@@ -1,0 +1,47 @@
+<%--
+    TODO: Description of file.
+--%>
+<%!
+    /**
+     * TODO: Description of class
+     */
+    public static class PackageHelper {
+        // Declare the private variables
+        private Bundle bundle;
+
+        // Document
+        public PackageHelper(Bundle bundle) {this.bundle = bundle;}
+                      
+        /***********************************************************************
+         * HELPER METHODS
+         **********************************************************************/
+        
+        public String detailsUrl(String csrv) {
+            return bundle.applicationPath()+"/ReviewRequest?csrv="+csrv+"&reviewPage="+bundle.relativePath()+"/packages/base/details";
+        }
+
+        public String formUrl(String id) {
+            return bundle.applicationPath()+"/DisplayPage?srv="+id;
+        }
+
+        public String formNameUrl(String name) {
+            return bundle.applicationPath()+"/DisplayPage?name="+name;
+        }
+
+        public String loginUrl() {
+            return "";
+        }
+
+        public String portalUrl() {
+            return "";
+        }
+
+        public String reviewUrl(String csrv) {
+            return bundle.applicationPath()+"/ReviewRequest?csrv="+csrv+"&reviewPage="+bundle.relativePath()+"/packages/base/review";
+        }
+
+        public String submissionUrl(String csrv) {
+            return bundle.applicationPath()+"/DisplayPage?csrv="+csrv;
+        }
+    }
+%>

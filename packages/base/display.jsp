@@ -1,12 +1,16 @@
+<%@page contentType="text/html" %>
+
+<%-- Include the package intitialization file. --%>
+<%@include file="jsp/includes/packageInitialization.jspf"%>
+
 <%-- Specify the HTML5 Doctype --%>
 <!DOCTYPE html>
 
-<%-- Include the package intitialization file. --%>
-<%@include file="jsp/includes/base.jspf"%>
-
 <html>
-    <%@include file="../includes/application/headerContent.jsp"%>
-    <%@include file="../includes/application/formListeners.jspf"%>
+    <head>
+        <title><%= bundle.get("title") %></title>
+        <%@include file="interface/fragments/headerContent.jspf"%>
+    </head>
     <body class="yui-skin-sam">
         <div id="bodyContainer">
             <div id="display">

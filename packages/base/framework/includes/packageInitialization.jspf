@@ -1,0 +1,16 @@
+<%-- Initialize the bundle and load any necessary dependencies. --%>
+<%@include file="../../../../core/framework/includes/bundleInitialization.jspf"%>
+
+<%-- Ensure the response is not cached by client or proxy. --%>
+<%@include file="../../../../core/framework/includes/noCache.jspf"%>
+
+<%-- Include the Package class and instantiate the package bean. --%>
+<%@include file="../helpers/PackageHelper.jspf" %>
+<% PackageHelper packageHelper = new PackageHelper(bundle); %>
+
+<%-- Include the package configuration file. --%>
+<%@include file="../../config/config.jspf" %>
+
+<%-- Include any helper files. --%>
+
+<%-- Include any model files. --%>
