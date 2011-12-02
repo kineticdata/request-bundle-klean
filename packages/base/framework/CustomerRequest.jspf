@@ -1,0 +1,38 @@
+<%--
+    TODO: Document.
+--%>
+<%!
+    public static class CustomerRequest {
+        private com.kd.kineticSurvey.beans.CustomerSurvey customerSurvey;
+
+        public CustomerRequest(com.kd.kineticSurvey.beans.CustomerSurvey customerSurvey) {
+            this.customerSurvey = customerSurvey;
+        }
+
+        public String catalogName() {return customerSurvey.getCategory();}
+
+        public String companyName() {return customerSurvey.getCompanyName();}
+
+        public String companyId() {return customerSurvey.getCompanyID();}
+
+        public String errorMessage() {return customerSurvey.getErrorMessage();}
+
+        public String firstName() {return customerSurvey.getFirstName();}
+
+        public String formId() {return customerSurvey.getSurveyTemplateInstanceID();}
+
+        public String formName() {return customerSurvey.getSurveyTemplateName();}
+
+        public String lastName() {return customerSurvey.getLastName();}
+
+        public java.util.Locale locale() {return customerSurvey.getClientLocale();}
+
+        public String pageName() {return customerSurvey.getPageName();}
+
+        public String pageId() {return customerSurvey.getPageInstanceID();}
+
+        public String submissionId() {return customerSurvey.getCustomerSurveyInstanceID();}
+
+        public String successMessage() {return customerSurvey.getSuccessMessage();}
+    }
+%>

@@ -1,0 +1,14 @@
+<%--
+    TODO: Document.
+    ... In general, this file should not need to be modified.
+--%>
+
+<%-- TODO: Do we want to reference customerSurvey? --%>
+<%--Include Remedy-created style/javascript info--%>
+<jsp:getProperty name="customerSurvey" property="styleInfo"/>
+<jsp:getProperty name="customerSurvey" property="customHeaderContent"/>
+
+<!-- Configure an event to initialize the client manager after the window is loaded --> 
+<script type="text/javascript">
+    KD.utils.Action.addListener(window, "load", function() {clientManager.init()});
+</script>

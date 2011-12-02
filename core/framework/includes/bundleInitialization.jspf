@@ -1,13 +1,41 @@
 <%--
-    TODO: Description of file.
+    This file is responsible for initializing the bundle framework.  It declares
+    the Kinetic SR beans that can be used within pages, initializes the bundle
+    and context variables, loads the common configuration file, and loads all of
+    the core helpers and models.
 --%>
 
-<%-- TODO: DESCRIBE --%>
-<%@include file="../Bundle.jspf" %>
+<%-- Include the beans that can be referenced by the bundle pages. --%>
+<jsp:useBean id="UserContext" scope="session" class="com.kd.kineticSurvey.beans.UserContext"/>
+<jsp:useBean id="customerSurvey" scope="request" class="com.kd.kineticSurvey.beans.CustomerSurvey"/>
 
-<%-- TODO: DESCRIBE --%>
+<%-- Initialize the bundle variable. --%>
+<%@include file="../Bundle.jspf" %>
 <% Bundle bundle = new Bundle(request); %>
 
+<%-- Initialize the context variable. --%>
+<%
+    // Initialize the context variable to null
+    HelperContext context = null;
+    // If there is a UserContext set by the session, set the contex variable
+    if (UserContext != null) { context = UserContext.getArContext(); }
+%>
+
+<%-- Include the configuration file in the common package. --%>
+<%@include file="../../../common/config/config.jspf" %>
+
 <%-- Include any helper files. --%>
+<%@include file="../helpers/BundleHelper.jspf" %>
+<%@include file="../helpers/CycleHelper.jspf" %>
+<%@include file="../helpers/DateHelper.jspf" %>
+<%@include file="../helpers/ResponseHelper.jspf" %>
 
 <%-- Include any model files. --%>
+<%@include file="../models/ArsBase.jspf" %>
+<%@include file="../models/kineticRequest/Catalog.jspf" %>
+<%@include file="../models/kineticRequest/Category.jspf" %>
+<%@include file="../models/kineticRequest/Submission.jspf" %>
+<%@include file="../models/kineticRequest/Template.jspf" %>
+<%@include file="../models/kineticRequest/TemplateAttribute.jspf" %>
+<%@include file="../models/kineticTask/Task.jspf" %>
+<%@include file="../models/kineticTask/TaskMessage.jspf" %>

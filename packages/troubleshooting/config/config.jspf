@@ -1,0 +1,3 @@
+<%
+    bundle.setProperty("Test Property Name", "Test Property Value");
+%>

@@ -1,0 +1,196 @@
+<%!
+    public static class Catalog {
+        public static final String FORM_NAME = "KS_RQT_ServiceCatalog_base";
+        public static final String FIELD_DESCRIPTION = "702020006";
+        public static final String FIELD_ID = "179";
+        public static final String FIELD_LOGOUT_ACTION = "700073100";
+        public static final String FIELD_LOGOUT_DESTINATION = "700073102";
+        public static final String FIELD_NAME = "600000500";
+        public static final String FIELD_STATUS = "7";
+
+        public static final String[] FIELD_IDS = new String[] {
+            FIELD_DESCRIPTION, FIELD_ID, FIELD_LOGOUT_ACTION,
+            FIELD_LOGOUT_DESTINATION, FIELD_NAME
+        };
+
+        private static final String CATEGORIZATION_FORM_NAME = "KS_RQT_SurveyTemplateAttrInst_Category_join";
+        private static final String CATEGORIZATION_FIELD_CATEGORY_ID = "700401990";
+        private static final String CATEGORIZATION_FIELD_CATELOG_ID = "600000500";
+        private static final String CATEGORIZATION_FIELD_TEMPLATE_ID = "179";
+
+        private static final String[] CATEGORIZATION_FIELD_IDS = new String[] {
+            CATEGORIZATION_FIELD_CATEGORY_ID, CATEGORIZATION_FIELD_TEMPLATE_ID
+        };
+        
+        private SimpleEntry entry = null;
+
+        private Map<String,Category> categoryMap = new LinkedHashMap();
+        private Map<String,Category> sortedCategoryMap = new TreeMap();
+        private Category[] categories = null;
+        private List<Category> rootCategories = new ArrayList();
+        private Map<String,Template> templateIdMap = new LinkedHashMap();
+        private Map<String,Template> templateNameMap = new LinkedHashMap();
+        private Template[] templates = null;
+        private TemplateAttribute[] templateAttributes = null;
+
+        public Catalog(SimpleEntry entry) {
+            this.entry = entry;
+        }
+
+        public static Catalog findByName(HelperContext context, String name) {
+            Catalog catalog = null;
+            
+            String qualification =
+                "'"+FIELD_STATUS+"' = \"Active\" AND "+
+                "'"+FIELD_NAME+"' = \""+name+"\"";
+
+            SimpleEntry entry = ArsBase.findSingle(context, FORM_NAME, qualification, FIELD_IDS);
+            if (entry != null) {
+                catalog = new Catalog(entry);
+            }
+
+            return catalog;
+        }
+
+        public void preload(HelperContext context) {
+            Category[] categories = this.getAllCategories(context);
+            Template[] templates = this.getTemplates(context);
+            
+            String categorizationQualification =
+                "'"+CATEGORIZATION_FIELD_CATELOG_ID+"' = \""+this.getName()+"\"";
+
+            SimpleEntry[] categorizations = ArsBase.find(context,
+                CATEGORIZATION_FORM_NAME,
+                categorizationQualification,
+                CATEGORIZATION_FIELD_IDS);
+
+            for(SimpleEntry categorization : categorizations) {
+                String categoryId = categorization.getEntryFieldValue(CATEGORIZATION_FIELD_CATEGORY_ID);
+                String templateId = categorization.getEntryFieldValue(CATEGORIZATION_FIELD_TEMPLATE_ID);
+
+                Category category = this.categoryMap.get(categoryId);
+                Template template = this.templateIdMap.get(templateId);
+                category.addTemplate(template);
+                template.addCategory(category);
+            }
+
+            TemplateAttribute[] templateAttributes = this.getTemplateAttributes(context);
+            for (TemplateAttribute templateAttribute : templateAttributes) {
+                Template template = this.templateNameMap.get(templateAttribute.getTemplateName());
+                if (template != null) {
+                    template.addTemplateAttribute(templateAttribute);
+                }
+            }
+        }
+
+        public TemplateAttribute[] getTemplateAttributes(HelperContext context) {
+            if (templateAttributes == null) {
+                templateAttributes = TemplateAttribute.findByCatalogName(context, getName());
+            }
+            return templateAttributes;
+        }
+
+        public Category[] getAllCategories(HelperContext context) {
+            // If the memorized categories are null, populate the array
+            if (categories == null) {
+                categories = Category.findByCatalogName(context, getName());
+                for(Category category : categories) {
+                    categoryMap.put(category.getId(), category);
+                    sortedCategoryMap.put(category.getFullName(), category);
+                }
+                for(Category category : sortedCategoryMap.values()) {
+                    String[] trail = category.getNameTrail();
+                    if (trail.length == 1) {
+                        rootCategories.add(sortedCategoryMap.get(trail[0]));
+                    } else {
+                        Category parentCategory = sortedCategoryMap.get(category.getParentName());
+                        if (parentCategory != null) {
+                            parentCategory.addSubcategory(category);
+                        }
+                    }
+                }
+            }
+
+            return categories;
+        }
+
+        private void printCategoryTree(HelperContext context) {
+            printCategoryTree(getRootCategories(context), 1);
+        }
+
+        private void printCategoryTree(Category[] categories, int depth) {
+            StringBuilder builder = new StringBuilder();
+            for(int i=0;i<depth;i++) {builder.append("  ");}
+            for(Category category : categories) {
+                printCategoryTree(category.getSubcategories(), depth+1);
+            }
+        }
+
+        public Category[] getRootCategories(HelperContext context) {
+            if (categories == null) {
+                getAllCategories(context);
+            }
+
+            return rootCategories.toArray(new Category[rootCategories.size()]);
+        }
+
+        public Template[] getTemplates(HelperContext context) {
+            // If the memorized templates are null, populate the array
+            if (templates == null) {
+                templates = Template.findByCatalogName(context, getName());
+                for(Template template : templates) {
+                    templateIdMap.put(template.getId(), template);
+                    templateNameMap.put(template.getName(), template);
+                }
+            }
+
+            return templates;
+        }
+
+        public String getDefaultLogoutUrl(HelperContext context) {
+            // Initialize the result
+            String result = null;
+            // If the catalog has a URL default logout destination
+            if ("Go to URL".equals(getLogoutAction())) {
+                // Redirect to the default logout action
+                result = getLogoutDestination();
+            }
+            // If the catalog has a Template default logout destination
+            if ("Go to Template".equals(getLogoutAction())) {
+                // Retrieve the template
+                Template template = Template.findById(context, getName(), getLogoutDestination());
+                // If the template was not found
+                if (template == null) {
+                    // Throw an error
+                    throw new RuntimeException("The template ("+
+                        getLogoutDestination()+") was not found.  "+
+                        "Unable to determine default logout action.");
+                }
+                // If the template was found
+                else {
+                    result = template.getAnonymousUrl();
+                }
+            }
+            // Return the result
+            return result;
+        }
+
+        public String getDescription() {return entry.getEntryFieldValue(FIELD_DESCRIPTION);}
+        public String getId() {return entry.getEntryFieldValue(FIELD_ID);}
+        public String getLogoutAction() {return entry.getEntryFieldValue(FIELD_LOGOUT_ACTION);}
+        public String getLogoutDestination() {return entry.getEntryFieldValue(FIELD_LOGOUT_DESTINATION);}
+        public String getName() {return entry.getEntryFieldValue(FIELD_NAME);}
+        public String getStatus() {return entry.getEntryFieldValue(FIELD_STATUS);}
+
+        public String toJson() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("{");
+            builder.append("description: '").append(getDescription()).append("'").append(",");
+            builder.append("id: '").append(getId()).append("'").append(",");
+            builder.append("name: '").append(getName()).append("'");
+            builder.append("status: '").append(getStatus()).append("'");
+            builder.append("}");
+            return builder.toString();
+        }
+    }
+%>

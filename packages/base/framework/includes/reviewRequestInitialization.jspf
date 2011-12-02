@@ -1,0 +1,47 @@
+<%-- 
+    Import the CustomerSurveyReview class, which represents a CustomerSurvey in
+    review mode.  This class represents the Kinetic Request form, a specific 
+    form page, the submission data, and current application request context
+    (such as the requester's IP, locale, etc).
+--%>
+<%@page import="com.kd.kineticSurvey.beans.CustomerSurveyReview"%>
+
+<%--
+    Include the Kinetic Request application reviewFunctions.  These are built in
+    parts of Kinetic Request, that facilitate the display of submission reviews.
+--%>
+<%@include file="../../../../../../resources/partials/reviewFunctions.jsp" %>
+
+<%-- 
+    Reconfigure the state so that the application can process the Review request
+    properly.  This is done because the ReviewRequest Servlet does not build the
+    customerSurvey bean in the same manner as DisplayPage, but it is 
+    advantageous to treat a ReveiwRequest page request as a DisplayPage request.
+--%>
+<%
+    // Typcast the RequestPages bean to a CustomerSurveyReview list.
+    java.util.Vector<CustomerSurveyReview> reviewPages = (java.util.Vector)request.getAttribute("RequestPages");
+    // Ensure the reviewPages object is never null
+    if (reviewPages == null) {reviewPages = new java.util.Vector();}
+
+    // Declare a CustomerSurveyReview object
+    CustomerSurveyReview customerSurveyReview = null;
+
+    // If there were no reviewable pages
+    if (reviewPages != null && reviewPages.size() != 0) {
+        // Use the first customerSurveyReview to represent the overall review
+        customerSurveyReview = reviewPages.get(0);
+        // Overwrite the default customer survey values (which are blank) with
+        // appropriate values from the CustomerSurveyReview object.
+        customerSurvey.setSurveyTemplateName(customerSurveyReview.getSurveyTemplateName());
+        customerSurvey.setSuccessMessage(customerSurveyReview.getSuccessMessage());
+        customerSurvey.setErrorMessage(customerSurveyReview.getErrorMessage());
+        customerSurvey.setCustomerSessionInstanceID(customerSurveyReview.getCustomerSessionInstanceID());
+        customerSurvey.setCustomerSurveyInstanceID(customerSurveyReview.getCustomerSurveyInstanceID());
+        customerSurvey.setSurveyTemplateInstanceID(customerSurveyReview.getSurveyTemplateInstanceID());
+        customerSurvey.setStylesheetFileName(customerSurveyReview.getStylesheetFileName());
+        customerSurvey.setJavascriptFileName(customerSurveyReview.getJavascriptFileName());
+        customerSurvey.setSubmitType("ReviewRequest");
+    }
+    // TODO: What to do if there are no review pages? (IE test)
+%>

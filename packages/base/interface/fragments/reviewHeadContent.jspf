@@ -1,0 +1,40 @@
+<%--
+    TODO: Document.
+    ... In general, this file should not need to be modified.
+--%>
+
+<%--
+  CSS - Page Styles
+    Include the page style information (or all page styles if the content is
+    being displayed as a Review page).
+--%>
+<% for (CustomerSurveyReview reviewPage : reviewPages) { %>
+    <%= reviewPage.getStyleInfo() %>
+<% } %>
+
+<%--
+  CSS - Review Content
+    ...
+--%>
+<link type="text/css" href="<%=request.getContextPath()%>/resources/css/kd_review.css" rel="stylesheet" type="text/css"/>
+<%--
+  Javascript - Review Javascript
+    ...
+--%>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_review.js"%>"></script>
+
+<%--
+  Javascript - Custom Header Content
+    ...
+--%>
+<script type="text/javascript">
+    var pageIds = [];
+    <% if (customerSurveyReview.getLoadAllPages()) { %>
+        <% for (CustomerSurveyReview reviewPage : reviewPages) { %>
+            pageIds.push("<%=reviewPage.getSanitizedPageId()%>");
+        <% } %>
+    <% } %>
+    var clientManager = KD.utils.ClientManager;
+    var reviewObj = { clientManager: clientManager, loadAllPages: <%=customerSurveyReview.getLoadAllPages()%>, pageIds: pageIds };
+    KD.utils.Action.addListener(window, "load", KD.utils.Review.init);
+</script>

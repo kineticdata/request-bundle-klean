@@ -1,4 +1,7 @@
 <%!
+    /**
+     * TODO: Document.
+     */
     public static class CycleHelper {
         private static int SKIP_FIRST_CYCLE = 1;
         private static int ONLY_FIRST_CYCLE = 2;

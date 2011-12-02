@@ -1,0 +1,33 @@
+<%!
+    /**
+     * The BundleHelper is a core helper (meaning that it rarely, if ever be
+     * modified).  It includes helper methods that simplify very common display
+     * logic within the bundle.
+     */
+    public static class BundleHelper {
+        /**
+         * Returns true if there is a "debugjs" parameter that was passed with
+         * the HTTP request and the value is set to "true" (case insensitive).
+         */
+        public static boolean debugJs(javax.servlet.http.HttpServletRequest request) {
+            String debugParam = (String)request.getParameter("debugjs");
+            boolean debug = false;
+            if (debugParam != null) {
+                debug = Boolean.valueOf(debugParam).booleanValue();
+            }
+            return debug;
+        }
+
+        /**
+         * Returns true if the object is not null, not false, and the
+         * object.toString() value contains characters other than whitespace.
+         */
+        public static boolean isBlank(Object object) {
+            boolean isBlank = true;
+            if (object != null && object != Boolean.FALSE && object.toString().trim().length() > 0) {
+                isBlank = false;
+            }
+            return isBlank;
+        }
+    }
+%>

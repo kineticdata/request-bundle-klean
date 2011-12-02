@@ -1,0 +1,13 @@
+<%@page import="java.io.*,javax.servlet.http.*"%>
+<%!
+    /**
+     * TODO: Document.
+     */
+    public static class ResponseHelper {
+        public static void sendUnauthorizedResponse(HttpServletResponse response) throws IOException {
+            response.setStatus(response.SC_UNAUTHORIZED);
+            response.setHeader("X-KD-ErrorMessage", "Please log in.");
+            response.getWriter().write("Please log in.");
+        }
+    }
+%>

@@ -1,0 +1,14 @@
+<%--
+    TODO: Document.
+    ... In general, this file should not need to be modified.
+--%>
+
+<div id="reviewContent">
+    <% if (!customerSurveyReview.getLoadAllPages()) { %>
+        <%= renderPageTabs(reviewPages, "frame") %>
+    <% } else { %>
+        <%= renderPages(reviewPages, "frame") %>
+    <% } %>
+    <input type="hidden" name="templateID" id= "templateID" value="<%=customerSurvey.getSurveyTemplateInstanceID()%>"/>
+    <input type="hidden" name="pageID" id="pageID" value=""/>
+</div>

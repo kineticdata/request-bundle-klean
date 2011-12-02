@@ -1,0 +1,50 @@
+<%--
+    This file will send an HTTP (302) Found redirection response if there is a
+    context associated with the request (indicating the user is presently logged
+    in).  It is frequently included by login pages so that the user is never
+    returned to the login page after they have logged in.
+
+    If a user navigates directly to a login page, rather than navigating to a
+    page that requires authentication, and logs in, the server does not know
+    what page the user is attempting to access.  When an already authenticated
+    user requests a page that includes this file (which should be inserted
+    immediately after the packageInitialization.jspf include on package pages),
+    they will automatically redirect to the default login action that is
+    specified in the configuration file (or the catalog's default logout action
+    if the default login action was not configured) rather than back to the
+    originating page.
+--%>
+<%
+    // If there is a context associated with the request, indicating the user
+    // has previously logged in.
+    if (context != null) {
+        // If there is a default login action configured for the theme
+        if (bundle.getProperty("defaultLoginAction") != null) {
+            // Retrieve the configured default login action
+            String defaultLoginAction = (bundle.getProperty("defaultLoginAction");
+            // Redirect to the default login action
+            response.sendRedirect(defaultLoginAction);
+        }
+        // If there is not a default login action configured for the theme
+        else {
+            String catalogName = customerSurvey.getCategory();
+            // Look up the default logout action
+            Catalog catalog = Catalog.findByName(context, catalogName);
+            // If the catalog was not found
+            if (catalog == null) {
+                // Throw an error
+                throw new RuntimeException("The \""+catalogName+"\" catalog "+
+                    "was not found.  Unable to retrieve the default logout "+
+                    "action.");
+            }
+            // If the catalog was found
+            else {
+                // Redirect to the appropriate action
+                response.sendRedirect(catalog.getDefaultLogoutUrl(context));
+            }
+        }
+
+        // Return so the proceeding JSP content is not evaluated or rendered
+        return;
+    }
+%>

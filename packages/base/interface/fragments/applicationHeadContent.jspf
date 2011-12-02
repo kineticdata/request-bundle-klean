@@ -1,0 +1,108 @@
+<%--
+    TODO: Document.
+    ... In general, this file should not need to be modified.
+--%>
+
+<%--
+  CSS
+    Require the YUI css files that are required to properly style Kinetic SR
+    form widgets (such as the date question calendar picker).
+--%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/calendar/assets/calendar.css"%>"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/container/assets/container.css"%>"/>
+
+<%--
+  Javascript
+    Require the YUI javascript files that are required to properly process a
+    Kinetic SR form.
+
+    If there is a debugjs=true HTTP request parameter, expand out all of the YUI
+    javascript files.  If there is not a debugjs parameter (indicating a typical
+    request), include the minified version of the files.
+--%>
+<% if (BundleHelper.debugJs(request)) { %>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/yahoo/yahoo.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/dom/dom.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/event/event.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/element/element.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/utilities/utilities.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/calendar/calendar.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/button/button.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/container/container.js"%>"></script>
+<% } else { %>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/yahoo-dom-event/yahoo-dom-event.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/element/element-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/utilities/utilities.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/calendar/calendar-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/button/button-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/container/container-min.js"%>"></script>
+<% } %>
+
+<%--
+  Javascript
+    TODO: Document
+--%>
+<% if (BundleHelper.debugJs(request)) { %>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_actions.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_utils.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_client.js"%>"></script>
+<% } else {%>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_complete.js"%>"></script>
+<% }%>
+
+<%--
+  CSS
+    Include the custom css file if one has been uploaded as an attachment on the
+    Advanced Tab of the Service Catalog Console.
+--%>
+<% if (!BundleHelper.isBlank(customerSurvey.getStylesheetFileName())) {%>
+<!-- Include the CSS file attached to the Template. -->
+<link href="<%= customerSurvey.getStylesheetFileName().trim()%>" rel="stylesheet" type="text/css"/>
+<%}%>
+
+<%--
+  Javascript
+    Include the custom javascript file if one has been uploaded as an attachment
+    on the Advanced Tab of the Service Catalog Console.
+--%>
+<% if (!BundleHelper.isBlank(customerSurvey.getJavascriptFileName())) {%>
+<!-- Include the Javascript file attached to the Template. -->
+<script type="text/javascript" src="<%= customerSurvey.getJavascriptFileName().trim()%>"></script>
+<% }%>
+
+<%--
+  Javascript
+    TODO: Document - What is the purpose of these?
+--%>
+<!-- Specify the KD.utils.ClientManager values.-->
+<script type="text/javascript">
+    function ks_initSessionVars(){
+        clientManager.authenticated = <%=UserContext.isAuthenticated()%>;
+        clientManager.authenticationType = '<%=UserContext.getAuthenticationType()%>';
+        clientManager.catalogName = '<%=customerSurvey.getCategory()%>';
+        clientManager.categoryId = '<%=customerSurvey.getCategoryId()%>';
+        clientManager.customerSurveyId = '<%=customerSurvey.getCustomerSurveyInstanceID()%>';
+        clientManager.errorMessage = '<%=customerSurvey.getErrorMessage()%><%=UserContext.getErrorMessage()%>';
+        clientManager.isAuthenticationRequired = '<%= customerSurvey.isAuthenticationRequired()%>';
+        clientManager.isNewPage = <%=customerSurvey.getIsNewPage()%>;
+        clientManager.maxCharsOnSubmit = <%=customerSurvey.getMaxCharsOnSubmit()%>;
+        clientManager.originatingPage = '<%= UserContext.getOriginatingPage()%>';
+        clientManager.sessionId = '<%=customerSurvey.getCustomerSessionInstanceID()%>';
+        clientManager.submitType = '<%=customerSurvey.getSubmitType()%>'
+        clientManager.successMessage = '<%=customerSurvey.getSuccessMessage()%><%=UserContext.getSuccessMessage()%>';
+        clientManager.templateId = '<%=customerSurvey.getSurveyTemplateInstanceID()%>';
+        clientManager.themesDirectory = '<%= bundle.applicationPath() + "/" + Bundle.BUNDLE_DIR%>';
+        clientManager.userName = '<%= UserContext.getUserName()%>';
+        clientManager.webAppContextPath = '<%=request.getContextPath()%>';
+    }
+    var clientManager = KD.utils.ClientManager;
+</script>
+
+<%--
+  CSS / Javascript - Custom Header Content
+    TODO: Document
+--%>
+<% if(!BundleHelper.isBlank(customerSurveyReview.getCustomHeaderContent())) { %>
+    <!-- Custom Header Content -->
+    <%= customerSurveyReview.getCustomHeaderContent() %>
+<% } %>

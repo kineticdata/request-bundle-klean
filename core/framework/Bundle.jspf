@@ -1,6 +1,3 @@
-<%--
-    TODO: Description of file.
---%>
 <%!
     /**
      * TODO: Description of class
@@ -8,6 +5,12 @@
      * bundle.applicationPath()
      *   Returns the URL path to the root of the web application.
      *   Example: "/kinetic"
+     * bundle.bundlePath()
+     *   Returns the URL path to the root of the bundle.
+     *   Example: "/kinetic/themes/BUNDLE_NAME"
+     * bundle.packagePath()
+     *   Returns the relative path within the context of web application.
+     *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME"
      * bundle.bundlePath()
      *   Returns the URL path to the root of the bundle.
      *   Example: "/kinetic/themes/BUNDLE_NAME"
@@ -65,7 +68,7 @@
         /**
          * Returns the collection of property keys.
          */
-        public java.util.Set<String> propertyKeys() {return properties.keySet();}
+        public java.util.Set<String> propertyNames() {return properties.keySet();}
 
         /**
          * Sets the value of a configuration property.
