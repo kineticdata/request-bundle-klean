@@ -1,14 +1,38 @@
 <%--
-    TODO: Document.
-    ... In general, this file should not need to be modified.
+    This file should be included in any bundle or package pages that render a
+    Kinetic SR form in display mode.  The file defines the HTML head content
+    that is required for the Kinetic form to be rendered properly.  
+
+    The file includes the currently displayed page css styles, registeres any of
+    the events that are defined for Kinetic form elements defined for the
+    current page, and then initializes the page request.
+
+    In general, this file should not be modified.
 --%>
 
-<%-- TODO: Do we want to reference customerSurvey? --%>
-<%--Include Remedy-created style/javascript info--%>
-<jsp:getProperty name="customerSurvey" property="styleInfo"/>
-<jsp:getProperty name="customerSurvey" property="customHeaderContent"/>
+<!-- START Page Styles and Events -->
+<%= customerSurvey.getStyleInfo() %>
+<!--   END Page Styles and Events -->
 
-<!-- Configure an event to initialize the client manager after the window is loaded --> 
+<!-- Initialize the Kinetic form page. -->
 <script type="text/javascript">
+    /**
+     * Register the Kinetic clientManager initialization to occur once the page
+     * has finished loading.
+     * 
+     * During initialization, the following additional actions occur:
+     *   * If there is a success or error message associated with the current
+     *     session, the client manager will look for an element with an id of
+     *     'message'.  If one exists, the innerHTML will be set to the message
+     *     and the element will be made visible.
+     *   * Remove the parent element of any form with an id of 'loginForm'
+     *     from the DOM.
+     *   * Replace the string "--loginName--" with within the innerHTML of the
+     *     element with an id of 'authenticatedName' with the name of the
+     *     authenticated user.
+     *   * Set the value of the input elements with ids 'originatingPage',
+     *     'authenticationType', and 'loginSessionID' to their associated
+     *     values.
+     */
     KD.utils.Action.addListener(window, "load", clientManager.init, clientManager, true);
 </script>

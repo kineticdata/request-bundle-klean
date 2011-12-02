@@ -18,27 +18,30 @@
     <head>
         <title><%= customerRequest.formName() %></title>
 
-        <!-- START Application Head Content -->
+        <%-- Include the application head content. --%>
         <%@include file="interface/fragments/applicationHeadContent.jspf" %>
-        <!--   END Application Head Content -->
-        
-        <!-- START Review Head Content -->
         <%@include file="interface/fragments/reviewHeadContent.jspf"%>
-        <!--   END Review Head Content -->
 
-        <!-- START Common Head Content -->
+        <%-- Include the application common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
-        <!--   END Common Head Content -->
 
-        <!-- Page specific stylesheets -->
+        <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>/resources/css/display.css" type="text/css">
         <link rel="stylesheet" href="<%= bundle.packagePath()%>/resources/css/review.css" type="text/css">
 
-        <!-- Page specific javascript -->
+        <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>/resources/js/display.js"></script>
     </head>
 
     <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%>">
-        <%@include file="interface/fragments/reviewBodyContent.jspf"%>
+        <div id="bodyContainer">
+            <%@include file="../../common/interface/fragments/contentHeader.jspf"%>
+
+            <div id="contentBody">
+                <%@include file="interface/fragments/reviewBodyContent.jspf"%>
+            </div>
+            
+            <%@include file="../../common/interface/fragments/contentFooter.jspf"%>
+        </div>
     </body>
 </html>

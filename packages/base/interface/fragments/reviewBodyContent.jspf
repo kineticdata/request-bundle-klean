@@ -1,14 +1,25 @@
 <%--
-    TODO: Document.
-    ... In general, this file should not need to be modified.
---%>
+    This file should be included in any bundle or package pages that render a
+    Kinetic SR form in review mode.  The file defines the HTML body content
+    responsible for rendering the page content of the Kinetic submission that is
+    being reviewed.
 
+    The review content is built up by the renderPages or renderPageTabs methods,
+    which are defined within the Kinetic SR application, not in the bundle.
+
+    In general, this file should not be modified.
+--%>
+<!-- START Kinetic Form Review Content -->
 <div id="reviewContent">
+    <!-- Kinetic SR Reviewed Form Page Content -->
     <% if (!customerSurveyReview.getLoadAllPages()) { %>
-        <%= renderPageTabs(reviewPages, "frame") %>
+    <%= renderPageTabs(reviewPages, "frame") %>
     <% } else { %>
-        <%= renderPages(reviewPages, "frame") %>
+    <%= renderPages(reviewPages, "frame") %>
     <% } %>
+
+    <!-- Kinetic SR State Values -->
     <input type="hidden" name="templateID" id= "templateID" value="<%=customerSurvey.getSurveyTemplateInstanceID()%>"/>
     <input type="hidden" name="pageID" id="pageID" value=""/>
 </div>
+<!--   END Kinetic Form Review Content -->

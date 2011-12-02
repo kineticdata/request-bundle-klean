@@ -1,16 +1,19 @@
 <%--
-    The file loads the HTML head content that is required for Kinetic SR to
-    function normally.  This includes dependencies such as the YUI css and
-    javascript files that the core application behavior depends upon, core
-    Kinetic javascript files, any css or javascript files attached to the
-    current Kinetic SR form, the custom header content of the current Kinetic SR
-    form, and the javascript code used to initialize the clientManager context.
+    This file should be included in any bundle or package pages that render a
+    Kinetic SR form (either in display or review mode).  The file loads the HTML
+    head content that is required for Kinetic SR to function normally.
+
+    This includes dependencies such as the YUI css and javascript files that the
+    core application behavior depends upon, core Kinetic javascript files, any
+    css or javascript files attached to the current Kinetic SR form, the custom
+    header content of the current Kinetic SR form, and the javascript code used
+    to initialize the clientManager context.
 
     By default, this file includes the minified versions of javascript files.
     To include the expanded versions of these files, pass a debugjs=true
     parameter with the page request.
 
-    In general, this file should not need to be modified.
+    In general, this file should not be modified.
 --%>
 
 <%--
@@ -18,6 +21,7 @@
     Require the YUI css files that are required to properly style Kinetic SR
     form widgets (such as the date question calendar picker).
 --%>
+<!-- Application CSS Dependencies -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/calendar/assets/calendar.css"%>"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/container/assets/container.css"%>"/>
 
@@ -30,6 +34,7 @@
     javascript files.  If there is not a debugjs parameter (indicating a typical
     request), include the minified version of the files.
 --%>
+<!-- Application Javascript Dependencies -->
 <% if (BundleHelper.debugJs(request)) { %>
 <script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/yahoo/yahoo.js"%>"></script>
 <script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/dom/dom.js"%>"></script>
@@ -58,6 +63,7 @@
     javascript files.  If there is not a debugjs parameter (indicating a typical
     request), include the minified version of the files.
 --%>
+<!-- Application Javascript -->
 <% if (BundleHelper.debugJs(request)) { %>
 <script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_actions.js"%>"></script>
 <script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_utils.js"%>"></script>
@@ -72,8 +78,8 @@
     custom header content section of the Kinetic form defintion.
 --%>
 <% if(!BundleHelper.isBlank(customerSurvey.getCustomHeaderContent())) { %>
-    <!-- Custom Header Content -->
-    <%= customerSurvey.getCustomHeaderContent() %>
+<!-- Custom Header Content -->
+<%= customerSurvey.getCustomHeaderContent() %>
 <% } %>
 
 <%--
@@ -82,7 +88,7 @@
     Kinetic form definition.
 --%>
 <% if (!BundleHelper.isBlank(customerSurvey.getStylesheetFileName())) {%>
-<!-- Include the CSS file attached to the Template. -->
+<!-- Attached CSS Stylesheet File -->
 <link href="<%= customerSurvey.getStylesheetFileName().trim()%>" rel="stylesheet" type="text/css"/>
 <%}%>
 
@@ -92,7 +98,7 @@
     to the Kinetic form definition.
 --%>
 <% if (!BundleHelper.isBlank(customerSurvey.getJavascriptFileName())) {%>
-<!-- Include the Javascript file attached to the Template. -->
+<!-- Attached Javascript File -->
 <script type="text/javascript" src="<%= customerSurvey.getJavascriptFileName().trim()%>"></script>
 <% }%>
 
@@ -116,20 +122,20 @@
     function ks_initSessionVars(){
         clientManager.authenticated = <%=UserContext.isAuthenticated()%>;
         clientManager.authenticationType = '<%=UserContext.getAuthenticationType()%>';
-        clientManager.catalogName = '<%=customerSurvey.getCategory()%>';
+        clientManager.catalogName = '<%=String.valueOf(customerSurvey.getCategory()).replaceAll("'", "\\\\'")%>';
         clientManager.categoryId = '<%=customerSurvey.getCategoryId()%>';
         clientManager.customerSurveyId = '<%=customerSurvey.getCustomerSurveyInstanceID()%>';
-        clientManager.errorMessage = '<%=customerSurvey.getErrorMessage()%><%=UserContext.getErrorMessage()%>';
+        clientManager.errorMessage = '<%=String.valueOf(customerSurvey.getErrorMessage()).replaceAll("'", "\\\\'")%><%=String.valueOf(UserContext.getErrorMessage()).replaceAll("'", "\\\\'")%>';
         clientManager.isAuthenticationRequired = '<%= customerSurvey.isAuthenticationRequired()%>';
         clientManager.isNewPage = <%=customerSurvey.getIsNewPage()%>;
         clientManager.maxCharsOnSubmit = <%=customerSurvey.getMaxCharsOnSubmit()%>;
-        clientManager.originatingPage = '<%= UserContext.getOriginatingPage()%>';
+        clientManager.originatingPage = '<%=String.valueOf(UserContext.getOriginatingPage()).replaceAll("'", "\\\\'")%>';
         clientManager.sessionId = '<%=customerSurvey.getCustomerSessionInstanceID()%>';
         clientManager.submitType = '<%=customerSurvey.getSubmitType()%>'
-        clientManager.successMessage = '<%=customerSurvey.getSuccessMessage()%><%=UserContext.getSuccessMessage()%>';
+        clientManager.successMessage = '<%=String.valueOf(customerSurvey.getSuccessMessage()).replaceAll("'", "\\\\'")%><%=String.valueOf(UserContext.getSuccessMessage()).replaceAll("'", "\\\\'")%>';
         clientManager.templateId = '<%=customerSurvey.getSurveyTemplateInstanceID()%>';
-        clientManager.themesDirectory = '<%= bundle.applicationPath() + "/" + Bundle.BUNDLE_DIR%>';
-        clientManager.userName = '<%= UserContext.getUserName()%>';
+        clientManager.themesDirectory = '<%=bundle.applicationPath() + "/" + Bundle.BUNDLE_DIR%>';
+        clientManager.userName = '<%=String.valueOf(UserContext.getUserName()).replaceAll("'", "\\\\'")%>';
         clientManager.webAppContextPath = '<%=request.getContextPath()%>';
     }
 </script>

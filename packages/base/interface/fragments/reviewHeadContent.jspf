@@ -1,39 +1,59 @@
 <%--
-    TODO: Document.
-    ... In general, this file should not need to be modified.
+    This file should be included in any bundle or package pages that render a
+    Kinetic SR form in review mode.
+
+    In general, this file should not be modified.
 --%>
 
 <%--
-  CSS - Page Styles
-    Include the page style information (or all page styles if the content is
-    being displayed as a Review page).
+  CSS and Javascript - Page Styles and Events
+    Include the page style information and events for any of the pages that are
+    being reviewed.
 --%>
 <% for (CustomerSurveyReview reviewPage : reviewPages) { %>
+    <!-- START Page Styles and Events for the "<%= reviewPage.getPageName() %>" page. -->
     <%= reviewPage.getStyleInfo() %>
+    <!--   END Page Styles and Events for the "<%= reviewPage.getPageName() %>" page. -->
 <% } %>
 
-<%--
-  CSS - Review Content
-    ...
---%>
+<!-- Review Request Base Styling -->
 <link type="text/css" href="<%=request.getContextPath()%>/resources/css/kd_review.css" rel="stylesheet" type="text/css"/>
-<%--
-  Javascript - Review Javascript
-    ...
---%>
+<!-- Review Request Core Javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_review.js"%>"></script>
 
-<%--
-  Javascript - Custom Header Content
-    ...
---%>
+<!-- Initialize the Kinetic review form. -->
 <script type="text/javascript">
+    // Initialize the array of Kinetic Form pages that should be initialized
     var pageIds = [];
     <% if (customerSurveyReview.getLoadAllPages()) { %>
-        <% for (CustomerSurveyReview reviewPage : reviewPages) { %>
-            pageIds.push("<%=reviewPage.getSanitizedPageId()%>");
-        <% } %>
+    // Add each of the review pages to the list of pages to be initialized
+    <% for (CustomerSurveyReview reviewPage : reviewPages) { %>pageIds.push("<%=reviewPage.getSanitizedPageId()%>");<% } %>
     <% } %>
-    var reviewObj = { clientManager: clientManager, loadAllPages: <%=customerSurveyReview.getLoadAllPages()%>, pageIds: pageIds };
+    // Define the javascript object that is used to configure the behavior of
+    // the KD.utils.Review initialization.
+    var reviewObj = { 
+        clientManager: clientManager,
+        loadAllPages: <%=customerSurveyReview.getLoadAllPages()%>,
+        pageIds: pageIds
+    };
+
+    /**
+     * Register the KD.utils.Review initialization to occur once the page has
+     * finished loading.
+     *
+     * During initialization, the following additional actions occur:
+     *   * If there is a success or error message associated with the current
+     *     session, the client manager will look for an element with an id of
+     *     'message'.  If one exists, the innerHTML will be set to the message
+     *     and the element will be made visible.
+     *   * Remove the parent element of any form with an id of 'loginForm'
+     *     from the DOM.
+     *   * Replace the string "--loginName--" with within the innerHTML of the
+     *     element with an id of 'authenticatedName' with the name of the
+     *     authenticated user.
+     *   * Set the value of the input elements with ids 'originatingPage',
+     *     'authenticationType', and 'loginSessionID' to their associated
+     *     values.
+     */
     KD.utils.Action.addListener(window, "load", KD.utils.Review.init, reviewObj, true);
 </script>

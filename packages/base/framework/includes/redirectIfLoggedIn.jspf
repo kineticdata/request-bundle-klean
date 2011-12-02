@@ -21,7 +21,7 @@
         // If there is a default login action configured for the theme
         if (bundle.getProperty("defaultLoginAction") != null) {
             // Retrieve the configured default login action
-            String defaultLoginAction = (bundle.getProperty("defaultLoginAction");
+            String defaultLoginAction = (bundle.getProperty("defaultLoginAction"));
             // Redirect to the default login action
             response.sendRedirect(defaultLoginAction);
         }

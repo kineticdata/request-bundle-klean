@@ -1,3 +1,4 @@
+<!-- Common Head Content -->
 <%-- 
     Specify that modern IE versions should render the page with their own 
     rendering engine (as opposed to falling back to compatibility mode.
@@ -9,7 +10,7 @@
     image with any bookmarks to the site, display the icon in tabs that are
     rendering the site, and may also display it in the URL bar.
 --%>
-<link rel="shortcut icon" href="<%=bundle.bundlePath()%>/common/images/favicon.png" type="image/x-icon">
+<link rel="shortcut icon" href="<%=bundle.bundlePath()%>/common/resources/images/favicon.png" type="image/x-icon">
 
 <%--
     Load the common bundle styling.  This will typically be loaded in the HEAD
@@ -17,18 +18,15 @@
     specific styles.
 --%>
 <link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.css" />
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.ie6.css" />
-<![endif]-->
-<!--[if IE 7]>
-<link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.ie7.css" />
-<![endif]-->
+<!--[if IE 6]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.ie6.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.ie7.css" /><![endif]-->
 
 <%-- 
     Initialize the BUNDLE javascript object.  This object is used to store the
     configuration properties for requests in a manner that the client browser
     can access them after the initial page request has been made.
 --%>
+<!-- Configure the BUNDLE object and store the necessary configuration/state.-->
 <script type="text/javascript">
     // Initialize the BUNDLE object.
     var BUNDLE = {};
@@ -39,9 +37,9 @@
     // Initialize the BUNDLE configuration hash.
     BUNDLE.config = {};
     // Set all of the bundle configuration properties
-    <% for (String name : bundle.propertyNames()) {%>
-        BUNDLE.config['<%=name%>'] = '<%=bundle.getProperty(name)%>';
-    <% }%>
+    <% for (String name : bundle.propertyNames()) { %>
+    BUNDLE.config['<%=name%>'] = '<%=bundle.getProperty(name)%>';
+    <% } %>
     // Set any additional BUNDLE properties
     BUNDLE.config.user = '<%= (context == null) ? "" : context.getUserName()%>';
 </script>
