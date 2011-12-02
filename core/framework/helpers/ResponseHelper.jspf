@@ -4,6 +4,15 @@
      * TODO: Document.
      */
     public static class ResponseHelper {
+        public static void sendOkResponse(HttpServletResponse response) throws IOException {
+            response.setStatus(response.SC_OK);
+        }
+        
+        public static void sendRedirectResponse(HttpServletResponse response, String location) throws IOException {
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", location);
+        }
+
         public static void sendUnauthorizedResponse(HttpServletResponse response) throws IOException {
             response.setStatus(response.SC_UNAUTHORIZED);
             response.setHeader("X-KD-ErrorMessage", "Please log in.");

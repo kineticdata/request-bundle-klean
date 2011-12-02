@@ -41,7 +41,7 @@
         public String submissionUrl(String csrv) {
             return bundle.applicationPath()+"/DisplayPage?csrv="+csrv;
         }
-        
+
         public String templateUrl(String id) {
             return bundle.applicationPath()+"/DisplayPage?srv="+id;
         }

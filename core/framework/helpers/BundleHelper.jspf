@@ -29,5 +29,13 @@
             }
             return isBlank;
         }
+
+        /**
+         * Returns a String representation of the current time in milliseconds
+         * since Epoch.
+         */
+        public static String timestamp() {
+            return String.valueOf(System.currentTimeMillis());
+        }
     }
 %>

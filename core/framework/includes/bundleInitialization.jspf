@@ -13,6 +13,10 @@
 <%@include file="../Bundle.jspf" %>
 <% Bundle bundle = new Bundle(request); %>
 
+<%-- Initialize the customerRequest variable. --%>
+<%@include file="../CustomerRequest.jspf" %>
+<% CustomerRequest customerRequest = new CustomerRequest(customerSurvey); %>
+
 <%-- Initialize the context variable. --%>
 <%
     // Initialize the context variable to null

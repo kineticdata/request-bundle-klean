@@ -1,16 +1,9 @@
-<%-- Initialize the theme configuration bean used for this request. --%>
-<jsp:useBean id="bundleConfig" scope="request" class="java.util.LinkedHashMap"/>
-
-<%-- Set the values of the themes configurable settings. --%>
+<%-- TODO: Describe. --%>
 <%
-    bundleConfig.put("companyName", "ACME");
-    bundleConfig.put("portalName", "Service Portal");
-    
-    // If null, will use the catalog's default logout action
-    bundleConfig.put("defaultLoginAction", null);
-    // If null, the forgot password link on the login page will not be displayed
-    bundleConfig.put("forgotPasswordAction", "http://www.kineticdata.com");
+    bundle.setProperty("portalName", "Service Portal");
 
-    // TODO: Make comma separated rather than instantiating a String array
-    bundleConfig.put("searchableAttributes", new String[] {"Keyword"});
+    // If null, will use the catalog's default logout action
+    bundle.setProperty("defaultLoginAction", packageHelper.templateNameUrl("LoremPortal"));
+    // If null, the forgot password link on the login page will not be displayed
+    bundle.setProperty("forgotPasswordAction", null);
 %>

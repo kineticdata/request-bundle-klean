@@ -15,14 +15,13 @@
 
 <html>
     <head>
-        <%-- TODO: Do we want to reference customerSurvey? --%>
         <title><%= customerRequest.formName()%></title>
 
         <%-- Include the application head content. --%>
         <%@include file="interface/fragments/applicationHeadContent.jspf" %>
         <%@include file="interface/fragments/displayHeadContent.jspf"%>
 
-        <%-- Include the application common content. --%>
+        <%-- Include the bundle common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->

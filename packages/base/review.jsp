@@ -22,7 +22,7 @@
         <%@include file="interface/fragments/applicationHeadContent.jspf" %>
         <%@include file="interface/fragments/reviewHeadContent.jspf"%>
 
-        <%-- Include the application common content. --%>
+        <%-- Include the bundle common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->

@@ -4,7 +4,7 @@
     bundle.setProperty("companyName", "ACME");
 
     // If null, will use the catalog's default logout action
-    bundle.setProperty("defaultLoginAction", packageHelper.formNameUrl("Login"));
+    bundle.setProperty("defaultLoginAction", packageHelper.templateNameUrl("LoremPortal"));
     // If null, the forgot password link on the login page will not be displayed
     bundle.setProperty("forgotPasswordAction", "http://www.kineticdata.com");
 %>

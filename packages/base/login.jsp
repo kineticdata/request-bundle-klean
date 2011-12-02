@@ -11,25 +11,16 @@
 --%>
 <%@include file="framework/includes/redirectIfLoggedIn.jspf"%>
 
-<%--
-    This page must not specify an HTML doctype in order for the built in Kinetic
-    display widgets to be displayed consistently in browsers.  Omitting the
-    doctype declaration will force browsers to render in "Quirks" mode.  This
-    mode refers to a technique used by modern browsers to mimic the behavior of
-    older browsers (written before HTML doctypes existed) rather than strictly
-    complying with the W3C specification for "Standards" mode.
---%>
+<!DOCTYPE html>
 
 <html>
     <head>
-        <%-- TODO: Do we want to reference customerSurvey? --%>
         <title><%= customerRequest.formName()%></title>
 
         <%-- Include the application head content. --%>
         <%@include file="interface/fragments/applicationHeadContent.jspf" %>
-        <%@include file="interface/fragments/displayHeadContent.jspf"%>
 
-        <%-- Include the application common content. --%>
+        <%-- Include the bundle common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
@@ -44,15 +35,13 @@
             <%@include file="../../common/interface/fragments/contentHeader.jspf"%>
 
             <div id="contentBody">
-                <!-- Render the log in box -->
-                <div class="tertiaryColorBorder" id="loginBox">
-                    <!-- Header -->
-                    <h2 class="auxiliaryTitleColor">Please Log In</h2>
+                <!-- Render the Login Box -->
+                <div id="loginBox">
+                    <!-- Login Box Header -->
+                    <div class="title">Please Log In</h2>
 
-                    <!-- Empty message div (this is automatically populated with 
-                         Kinetic Request messages; such as when a user logs out
-                         or enters an incorrect password). -->
-                    <div id="message"></div>
+                    <!-- Error Message -->
+                    <div id="message"><%= customerRequest.errorMessage()%></div>
 
                     <!-- Login Form -->
                     <form name="Login" id="loginForm" method="post" action="KSAuthenticationServlet">
@@ -79,24 +68,17 @@
 
                             <% if (bundle.getProperty("forgotPasswordAction") != null) { %>
                             <!-- Forgot Password -->
-                            <a class="primaryColor" href="<%= bundle.getProperty("forgotPasswordAction") %>" id="forgotPasswordLink">Forgot Password</a>
+                            <a href="<%= bundle.getProperty("forgotPasswordAction") %>" id="forgotPasswordLink">Forgot Password</a>
                             <% } %>
 
                             <!-- Logging In Spinner -->
                             <div class="hidden" id="loader">Authenticating... <img alt="Loading Indicator" src="<%=bundle.bundlePath()%>/resources/spinner.gif"></div>
                         </div>
 
-                        <!-- Specify the required hidden elements.  The value of these are set by kd_client.js on page load. -->
-                        <input type="hidden" name="originatingPage" id="originatingPage">
-                        <input type="hidden" name="sessionID" id="loginSessionID">
-                        <input type="hidden" name="authenticationType" id="authenticationType">
-
                         <!-- Clear the floats -->
                         <div class="clear"></div>
                     </form>
                 </div>
-
-                <%@include file="interface/fragments/displayBodyContent.jspf"%>
             </div>
 
             <%@include file="../../common/interface/fragments/contentFooter.jspf"%>
