@@ -20,15 +20,15 @@
 
         <!-- START Application Head Content -->
         <%@include file="interface/fragments/applicationHeadContent.jspf" %>
-        <!-- END Application Head Content -->
+        <!--   END Application Head Content -->
         
         <!-- START Review Head Content -->
         <%@include file="interface/fragments/reviewHeadContent.jspf"%>
-        <!-- END Review Head Content -->
+        <!--   END Review Head Content -->
 
         <!-- START Common Head Content -->
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
-        <!-- END Common Head Content -->
+        <!--   END Common Head Content -->
 
         <!-- Page specific stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>/resources/css/display.css" type="text/css">

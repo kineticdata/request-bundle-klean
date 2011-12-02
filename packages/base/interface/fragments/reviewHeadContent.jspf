@@ -34,7 +34,6 @@
             pageIds.push("<%=reviewPage.getSanitizedPageId()%>");
         <% } %>
     <% } %>
-    var clientManager = KD.utils.ClientManager;
     var reviewObj = { clientManager: clientManager, loadAllPages: <%=customerSurveyReview.getLoadAllPages()%>, pageIds: pageIds };
-    KD.utils.Action.addListener(window, "load", KD.utils.Review.init);
+    KD.utils.Action.addListener(window, "load", KD.utils.Review.init, reviewObj, true);
 </script>

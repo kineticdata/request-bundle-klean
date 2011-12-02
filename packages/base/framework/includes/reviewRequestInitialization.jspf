@@ -39,6 +39,7 @@
         customerSurvey.setCustomerSessionInstanceID(customerSurveyReview.getCustomerSessionInstanceID());
         customerSurvey.setCustomerSurveyInstanceID(customerSurveyReview.getCustomerSurveyInstanceID());
         customerSurvey.setSurveyTemplateInstanceID(customerSurveyReview.getSurveyTemplateInstanceID());
+        customerSurvey.setCustomHeaderContent(customerSurveyReview.getCustomHeaderContent());
         customerSurvey.setStylesheetFileName(customerSurveyReview.getStylesheetFileName());
         customerSurvey.setJavascriptFileName(customerSurveyReview.getJavascriptFileName());
         customerSurvey.setSubmitType("ReviewRequest");

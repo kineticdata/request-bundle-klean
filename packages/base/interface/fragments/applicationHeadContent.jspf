@@ -1,6 +1,16 @@
 <%--
-    TODO: Document.
-    ... In general, this file should not need to be modified.
+    The file loads the HTML head content that is required for Kinetic SR to
+    function normally.  This includes dependencies such as the YUI css and
+    javascript files that the core application behavior depends upon, core
+    Kinetic javascript files, any css or javascript files attached to the
+    current Kinetic SR form, the custom header content of the current Kinetic SR
+    form, and the javascript code used to initialize the clientManager context.
+
+    By default, this file includes the minified versions of javascript files.
+    To include the expanded versions of these files, pass a debugjs=true
+    parameter with the page request.
+
+    In general, this file should not need to be modified.
 --%>
 
 <%--
@@ -40,7 +50,13 @@
 
 <%--
   Javascript
-    TODO: Document
+    Include the core Kinetic SR javascript files.  These are responsible for the
+    basic client-side application logic (such as client side validations,
+    events, etc).
+
+    If there is a debugjs=true HTTP request parameter, expand out all of the YUI
+    javascript files.  If there is not a debugjs parameter (indicating a typical
+    request), include the minified version of the files.
 --%>
 <% if (BundleHelper.debugJs(request)) { %>
 <script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_actions.js"%>"></script>
@@ -51,9 +67,19 @@
 <% }%>
 
 <%--
+  CSS and Javascript - Custom Header Content
+    Include the custom header content if any has been specified within the
+    custom header content section of the Kinetic form defintion.
+--%>
+<% if(!BundleHelper.isBlank(customerSurvey.getCustomHeaderContent())) { %>
+    <!-- Custom Header Content -->
+    <%= customerSurvey.getCustomHeaderContent() %>
+<% } %>
+
+<%--
   CSS
-    Include the custom css file if one has been uploaded as an attachment on the
-    Advanced Tab of the Service Catalog Console.
+    Include the custom css file if one has been uploaded as an attachment to the
+    Kinetic form definition.
 --%>
 <% if (!BundleHelper.isBlank(customerSurvey.getStylesheetFileName())) {%>
 <!-- Include the CSS file attached to the Template. -->
@@ -63,7 +89,7 @@
 <%--
   Javascript
     Include the custom javascript file if one has been uploaded as an attachment
-    on the Advanced Tab of the Service Catalog Console.
+    to the Kinetic form definition.
 --%>
 <% if (!BundleHelper.isBlank(customerSurvey.getJavascriptFileName())) {%>
 <!-- Include the Javascript file attached to the Template. -->
@@ -72,10 +98,21 @@
 
 <%--
   Javascript
-    TODO: Document - What is the purpose of these?
+    Prepare the clientManager javascript object.  This object is used to store
+    state information about the page request.  This information is used by
+    functions within the core Kinetic javascript libraries.
+
+    The ks_initSessionVars() method is automatically called at the appropriate
+    time by the core kinetic libraries (via the KD.utils.ClientManager.init or
+    KD.utils.Review.init initialization function).
 --%>
 <!-- Specify the KD.utils.ClientManager values.-->
 <script type="text/javascript">
+    // Initialize a convenience reference to the client manager object
+    var clientManager = KD.utils.ClientManager;
+    
+    // Define the ks_initSessionVars function, which is automatically called at
+    // the appropriate time by the core kinetic libraries.
     function ks_initSessionVars(){
         clientManager.authenticated = <%=UserContext.isAuthenticated()%>;
         clientManager.authenticationType = '<%=UserContext.getAuthenticationType()%>';
@@ -95,14 +132,4 @@
         clientManager.userName = '<%= UserContext.getUserName()%>';
         clientManager.webAppContextPath = '<%=request.getContextPath()%>';
     }
-    var clientManager = KD.utils.ClientManager;
 </script>
-
-<%--
-  CSS / Javascript - Custom Header Content
-    TODO: Document
---%>
-<% if(!BundleHelper.isBlank(customerSurveyReview.getCustomHeaderContent())) { %>
-    <!-- Custom Header Content -->
-    <%= customerSurveyReview.getCustomHeaderContent() %>
-<% } %>
