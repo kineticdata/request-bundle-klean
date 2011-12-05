@@ -31,7 +31,7 @@
                 <div class="title"><%= bundle.getProperty("companyName")%> <%= bundle.getProperty("portalName")%></div>
 
                 <div class="categories">
-                    <% for (Category category : catalog.getRootCategories(context)) { %>
+                    <% for (Category category : catalog.getAllCategories(context)) { %>
                     <% if (category.hasTemplates()) { %>
                     <div class="category">
                         <div class="name"><%= category.getName()%></div>

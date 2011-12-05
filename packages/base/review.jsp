@@ -16,7 +16,7 @@
 
 <html>
     <head>
-        <title><%= customerRequest.formName() %></title>
+        <title><%= customerRequest.templateName() %></title>
 
         <%-- Include the application head content. --%>
         <%@include file="interface/fragments/applicationHeadContent.jspf" %>

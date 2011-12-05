@@ -19,10 +19,6 @@
 
         public String firstName() {return customerSurvey.getFirstName();}
 
-        public String formId() {return customerSurvey.getSurveyTemplateInstanceID();}
-
-        public String formName() {return customerSurvey.getSurveyTemplateName();}
-
         public String lastName() {return customerSurvey.getLastName();}
 
         public java.util.Locale locale() {return customerSurvey.getClientLocale();}
@@ -34,5 +30,9 @@
         public String submissionId() {return customerSurvey.getCustomerSurveyInstanceID();}
 
         public String successMessage() {return customerSurvey.getSuccessMessage();}
+
+        public String templateId() {return customerSurvey.getSurveyTemplateInstanceID();}
+
+        public String templateName() {return customerSurvey.getSurveyTemplateName();}
     }
 %>
