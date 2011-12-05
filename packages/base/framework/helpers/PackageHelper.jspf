@@ -22,15 +22,15 @@
          * HELPER METHODS
          **********************************************************************/
 
+        public String catalogUrl() {
+            return "";
+        }
+
         public String detailsUrl(String csrv) {
             return bundle.applicationPath()+"/ReviewRequest?csrv="+csrv+"&reviewPage="+bundle.relativePackagePath()+"/details";
         }
 
         public String loginUrl() {
-            return "";
-        }
-
-        public String portalUrl() {
             return "";
         }
 

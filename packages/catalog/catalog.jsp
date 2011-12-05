@@ -11,16 +11,16 @@
 
 <html>
     <head>
-        <title><%= bundle.getProperty("companyName")%> <%= bundle.getProperty("portalName")%></title>
+        <title><%= bundle.getProperty("companyName")%> <%= bundle.getProperty("catalogName")%></title>
 
         <%-- Include the common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>/resources/css/portal.css" type="text/css">
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>/resources/css/catalog.css" type="text/css">
 
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.packagePath()%>/resources/js/portal.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>/resources/js/catalog.js"></script>
     </head>
 
     <body>
@@ -28,7 +28,7 @@
             <%@include file="../../common/interface/fragments/contentHeader.jspf"%>
 
             <div id="contentBody">
-                <div class="title"><%= bundle.getProperty("companyName")%> <%= bundle.getProperty("portalName")%></div>
+                <div class="title"><%= bundle.getProperty("companyName")%> <%= bundle.getProperty("catalogName")%></div>
 
                 <div class="categories">
                     <% for (Category category : catalog.getAllCategories(context)) { %>
