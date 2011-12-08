@@ -4,5 +4,5 @@
     NOTE: This file is required.
 --%>
 <%
-    bundle.setProperty("companyName", "ACME");
+    bundle.setProperty("companyName", "Sithco");
 %>

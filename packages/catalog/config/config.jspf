@@ -1,6 +1,6 @@
 <%-- TODO: Describe. --%>
 <%
-    bundle.setProperty("catalogName", "Service Portal");
+    bundle.setProperty("catalogName", "Lorem Ipsum");
 
     // If null, will use the catalog's default logout action
     bundle.setProperty("defaultLoginAction", packageHelper.templateNameUrl("LoremPortal"));
