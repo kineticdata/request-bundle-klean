@@ -1,0 +1,52 @@
+textarea {
+    width: 99%;
+}
+#pageQuestionsForm {   
+    background: #FFFFFF;
+    border: 1px solid #A1A1A1;
+
+}
+.questionLabel {
+    float: left;
+    font-weight: bold;
+    width: 200px;
+}
+.questionAnswer {
+    margin-left: 200px;
+}
+.questionLayer {
+    padding: 3px;
+}
+.questionLayer:hover {
+    background: #F6F6F6;
+}
+
+.questionLayer:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+*.questionLayer {
+    /* for IE 6/7 */
+    zoom: expression(this.runtimeStyle.zoom="1", this.appendChild(document.createElement("br")).style.cssText="clear:both;font:0/0 serif");
+}
+
+.subtitle {
+    border-top: 1px solid #A1A1A1;
+    color: #A1A1A1;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 5px;
+    text-align: center;
+}
+.title {
+    color: #3B6E9C;
+    font-size: 19px;
+    padding: 5px;
+}
+.description {
+    color: #616161;
+    margin-top: 10px;
+    padding: 5px;
+}
