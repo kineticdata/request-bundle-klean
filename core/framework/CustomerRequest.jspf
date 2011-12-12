@@ -3,36 +3,77 @@
 --%>
 <%!
     public static class CustomerRequest {
+
         private com.kd.kineticSurvey.beans.CustomerSurvey customerSurvey;
 
         public CustomerRequest(com.kd.kineticSurvey.beans.CustomerSurvey customerSurvey) {
             this.customerSurvey = customerSurvey;
         }
 
-        public String catalogName() {return customerSurvey.getCategory();}
+        public String catalogName() {
+            return customerSurvey.getCategory();
+        }
 
-        public String companyName() {return customerSurvey.getCompanyName();}
+        public String companyName() {
+            return customerSurvey.getCompanyName();
+        }
 
-        public String companyId() {return customerSurvey.getCompanyID();}
+        public String companyId() {
+            return customerSurvey.getCompanyID();
+        }
 
-        public String errorMessage() {return customerSurvey.getErrorMessage();}
+        public String errorMessage() {
+            return customerSurvey.getErrorMessage() + customerSurvey.getCustomerSession().getUserContext().getErrorMessage();
+        }
 
-        public String firstName() {return customerSurvey.getFirstName();}
+        public String clearErrorMessage() {
+            String result = customerSurvey.getErrorMessage() + customerSurvey.getCustomerSession().getUserContext().getErrorMessage();
+            customerSurvey.setErrorMessage("");
+            customerSurvey.getCustomerSession().getUserContext().setErrorMessage("");
+            return result;
+        }
 
-        public String lastName() {return customerSurvey.getLastName();}
+        public String firstName() {
+            return customerSurvey.getFirstName();
+        }
 
-        public java.util.Locale locale() {return customerSurvey.getClientLocale();}
+        public String lastName() {
+            return customerSurvey.getLastName();
+        }
 
-        public String pageName() {return customerSurvey.getPageName();}
+        public java.util.Locale locale() {
+            return customerSurvey.getClientLocale();
+        }
 
-        public String pageId() {return customerSurvey.getPageInstanceID();}
+        public String pageName() {
+            return customerSurvey.getPageName();
+        }
 
-        public String submissionId() {return customerSurvey.getCustomerSurveyInstanceID();}
+        public String pageId() {
+            return customerSurvey.getPageInstanceID();
+        }
 
-        public String successMessage() {return customerSurvey.getSuccessMessage();}
+        public String submissionId() {
+            return customerSurvey.getCustomerSurveyInstanceID();
+        }
 
-        public String templateId() {return customerSurvey.getSurveyTemplateInstanceID();}
+        public String successMessage() {
+            return customerSurvey.getSuccessMessage() + customerSurvey.getCustomerSession().getUserContext().getSuccessMessage();
+        }
 
-        public String templateName() {return customerSurvey.getSurveyTemplateName();}
+        public String clearSuccessMessage() {
+            String result = customerSurvey.getSuccessMessage() + customerSurvey.getCustomerSession().getUserContext().getSuccessMessage();
+            customerSurvey.setSuccessMessage("");
+            customerSurvey.getCustomerSession().getUserContext().setSuccessMessage("");
+            return result;
+        }
+
+        public String templateId() {
+            return customerSurvey.getSurveyTemplateInstanceID();
+        }
+
+        public String templateName() {
+            return customerSurvey.getSurveyTemplateName();
+        }
     }
 %>

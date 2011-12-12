@@ -41,7 +41,7 @@
                     <div class="title">Please Log In</div>
 
                     <!-- Error Message -->
-                    <div id="message"><%= customerRequest.errorMessage()%></div>
+                    <div id="message"><%= customerRequest.clearErrorMessage()%></div>
 
                     <!-- Login Form -->
                     <form name="Login" id="loginForm" method="post" action="KSAuthenticationServlet">
