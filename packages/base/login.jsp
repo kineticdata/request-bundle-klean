@@ -24,10 +24,10 @@
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>/resources/css/display.css" type="text/css">
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>/resources/css/login.css" type="text/css">
 
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.packagePath()%>/resources/js/display.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>/resources/js/login.js"></script>
     </head>
 
     <body>
