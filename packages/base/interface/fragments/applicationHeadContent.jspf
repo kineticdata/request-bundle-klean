@@ -134,7 +134,7 @@
         clientManager.submitType = '<%=customerSurvey.getSubmitType()%>'
         clientManager.successMessage = '<%=String.valueOf(customerSurvey.getSuccessMessage()).replaceAll("'", "\\\\'")%><%=String.valueOf(UserContext.getSuccessMessage()).replaceAll("'", "\\\\'")%>';
         clientManager.templateId = '<%=customerSurvey.getSurveyTemplateInstanceID()%>';
-        clientManager.themesDirectory = '<%=bundle.applicationPath() + "/" + Bundle.BUNDLE_DIR%>';
+        clientManager.themesDirectory = '<%=bundle.applicationPath() + Bundle.BUNDLE_DIR + "/"%>';
         clientManager.userName = '<%=String.valueOf(UserContext.getUserName()).replaceAll("'", "\\\\'")%>';
         clientManager.webAppContextPath = '<%=bundle.applicationPath()%>';
     }
