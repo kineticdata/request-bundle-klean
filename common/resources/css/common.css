@@ -32,7 +32,7 @@ a:hover {
     padding-bottom: 35px;
 }
 #contentFooter {
-    background: url('../images/footerBackground.png') no-repeat;
+    background: url('../images/roundRectangle.png') no-repeat top;
     bottom: 0;
     color: #616161;
     line-height: 35px;
@@ -41,9 +41,9 @@ a:hover {
     width: 100%;
 }
 #contentHeader {
-    background: url('../images/headerBackground.png') no-repeat;
+    background: url('../images/roundRectangle.png') no-repeat bottom;
     color: #616161;
-    padding: 2px 5px 0 5px;
+    padding: 7px;
 }
 #contentHeader img.logo {
     float: left;

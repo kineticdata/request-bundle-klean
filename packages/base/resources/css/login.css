@@ -1,3 +1,43 @@
+#contentBody {
+    text-align: center;
+}
+#loginBox {
+    background-color: #FFFFFF;
+    border: 1px solid #3B6E9C;
+    height: 250px;
+    margin: 100px auto;
+    text-align: left;
+    width: 500px;
+}
+#loginBox #loginForm {
+    padding: 5px;
+}
+#loginBox #loginForm .field {
+    margin-top: 10px;
+}
+#loginBox #loginForm .field .label {
+    color: #333333;
+    float: left;
+    font-weight: bold;
+    width: 150px;
+}
+#loginBox #loginForm .field .value {
+    margin-left: 150px;
+}
+#loginBox #loginForm #loginFormFooter {
+    margin-top: 10px;
+}
+#loginBox .title {
+    background: #88A7C3 url('../../../../common/resources/images/background_blue_3B6E9C_88A7C3.png') repeat-x;
+    border-bottom: 1px solid #3B6E9C;
+    color: #FFFFFF;
+    font-weight: bold;
+    line-height: 26px;
+    padding: 0 5px;
+}
+#loginBox:hover .title {
+    background: #A0B9CE url('../../../../common/resources/images/background_light_blue_628BAF_A0B9CE.png') repeat-x;
+}
 #contentHeader .userInfo {
     display: none;
 }

@@ -38,7 +38,7 @@
                 <!-- Render the Login Box -->
                 <div id="loginBox">
                     <!-- Login Box Header -->
-                    <div class="title">Please Log In</h2>
+                    <div class="title">Please Log In</div>
 
                     <!-- Error Message -->
                     <div id="message"><%= customerRequest.errorMessage()%></div>
@@ -47,13 +47,15 @@
                     <form name="Login" id="loginForm" method="post" action="KSAuthenticationServlet">
                         <!-- User Name -->
                         <div class="field" id="usernameField">
-                            <label for="UserName">User:</label>
-                            <input id="UserName" class="formField" name="UserName" type="text" autocomplete="off" >
+                            <div class="label"><label for="UserName">User:</label></div>
+                            <div class="value"><input id="UserName" class="formField" name="UserName" type="text" autocomplete="off" ></div>
+                            <div class="clear"></div>
                         </div>
                         <!-- Password -->
                         <div class="field" id="passwordField">
-                            <label for="Password">Password:</label>
-                            <input id="Password" class="formField" name="Password" type="password" autocomplete="off" >
+                            <div class="label"><label for="Password">Password:</label></div>
+                            <div class="value"><input id="Password" class="formField" name="Password" type="password" autocomplete="off" ></div>
+                            <div class="clear"></div>
                         </div>
 
                         <!-- Options -->
@@ -61,10 +63,10 @@
                             <!-- Log In Button (manipulated on DOMReady; see header) -->
                             <input id="logInButton" name="logInButton" type="submit" value="Log In">
 
-                            <% if (bundle.getProperty("forgotPasswordAction") != null) { %>
+                            <% if (bundle.getProperty("forgotPasswordAction") != null) {%>
                             <!-- Forgot Password -->
-                            <a href="<%= bundle.getProperty("forgotPasswordAction") %>" id="forgotPasswordLink">Forgot Password</a>
-                            <% } %>
+                            <a href="<%= bundle.getProperty("forgotPasswordAction")%>" id="forgotPasswordLink">Forgot Password</a>
+                            <% }%>
 
                             <!-- Logging In Spinner -->
                             <div class="hidden" id="loader">Authenticating... <img alt="Loading Indicator" src="<%=bundle.bundlePath()%>common/resources/images/spinner.gif"></div>
