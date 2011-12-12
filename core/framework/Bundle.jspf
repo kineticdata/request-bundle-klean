@@ -4,19 +4,19 @@
      *
      * bundle.applicationPath()
      *   Returns the URL path to the root of the web application.
-     *   Example: "/kinetic"
+     *   Example: "/kinetic/"
      * bundle.bundlePath()
      *   Returns the URL path to the root of the bundle.
-     *   Example: "/kinetic/themes/BUNDLE_NAME"
+     *   Example: "/kinetic/themes/BUNDLE_NAME/"
      * bundle.packagePath()
      *   Returns the relative path within the context of web application.
-     *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME"
+     *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME/"
      * bundle.bundlePath()
      *   Returns the URL path to the root of the bundle.
-     *   Example: "/kinetic/themes/BUNDLE_NAME"
+     *   Example: "/kinetic/themes/BUNDLE_NAME/"
      * bundle.packagePath()
      *   Returns the relative path within the context of web application.
-     *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME"
+     *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME/"
      */
     public static class Bundle {
         // Define the static configuration values
@@ -47,9 +47,9 @@
             int startOfPackageName = requestUri.indexOf(packagesPath)+packagesPath.length();
             int endOfPackageName = requestUri.indexOf("/", startOfPackageName);
             // Set the paths
-            this.applicationPath = requestUri.substring(0, endOfRootPath);
-            this.bundlePath = requestUri.substring(0, endOfBundleName);
-            this.packagePath = requestUri.substring(0, endOfPackageName);
+            this.applicationPath = requestUri.substring(0, endOfRootPath)+"/";
+            this.bundlePath = requestUri.substring(0, endOfBundleName)+"/";
+            this.packagePath = requestUri.substring(0, endOfPackageName)+"/";
             // Set the Relative paths
             this.relativeBundlePath = this.bundlePath.substring(this.applicationPath.length());
             this.relativePackagePath = this.packagePath.substring(this.applicationPath.length());

@@ -17,9 +17,9 @@
 <% } %>
 
 <!-- Review Request Base Styling -->
-<link type="text/css" href="<%=request.getContextPath()%>/resources/css/kd_review.css" rel="stylesheet" type="text/css"/>
+<link type="text/css" href="<%=bundle.applicationPath()%>resources/css/kd_review.css" rel="stylesheet" type="text/css"/>
 <!-- Review Request Core Javascript -->
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_review.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_review.js"%>"></script>
 
 <!-- Initialize the Kinetic review form. -->
 <script type="text/javascript">

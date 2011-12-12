@@ -1,5 +1,5 @@
 <div id="contentHeader">
-    <img class="logo" src="<%= bundle.bundlePath()%>/common/resources/images/SithcoLogo.png"></img>
+    <img class="logo" src="<%= bundle.bundlePath()%>common/resources/images/SithcoLogo.png"></img>
     <% if (context != null) {%>
     <div class="userInfo">logged in as <a href="javascript:void(0)">Demo</a> | <a href="KSAuthenticationServlet?Logout=true">logout</a></div>
     <% } else {%>

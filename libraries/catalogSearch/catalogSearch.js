@@ -40,7 +40,7 @@ CatalogSearch.prototype.search = function() {
         this.searchBeginCallback();
     }
     jQuery.ajax({
-        url: BUNDLE.bundlePath + '/libraries/catalogSearch/catalogSearch.html.jsp?catalogName=' + catalogName + '&query=' + searchValue,
+        url: BUNDLE.bundlePath + 'libraries/catalogSearch/catalogSearch.html.jsp?catalogName=' + catalogName + '&query=' + searchValue,
         success: __bind(function(data) {
             if (this.searchEndCallback != undefined) {
                 this.searchEndCallback();

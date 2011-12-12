@@ -27,7 +27,7 @@
         }
 
         public String detailsUrl(String csrv) {
-            return bundle.applicationPath()+"/ReviewRequest?csrv="+csrv+"&reviewPage="+bundle.relativePackagePath()+"/details";
+            return bundle.applicationPath()+"ReviewRequest?csrv="+csrv+"&reviewPage="+bundle.relativePackagePath()+"details";
         }
 
         public String loginUrl() {
@@ -35,19 +35,19 @@
         }
 
         public String reviewUrl(String csrv) {
-            return bundle.applicationPath()+"/ReviewRequest?csrv="+csrv+"&reviewPage="+bundle.relativePackagePath()+"/review";
+            return bundle.applicationPath()+"ReviewRequest?csrv="+csrv+"&reviewPage="+bundle.relativePackagePath()+"review";
         }
 
         public String submissionUrl(String csrv) {
-            return bundle.applicationPath()+"/DisplayPage?csrv="+csrv;
+            return bundle.applicationPath()+"DisplayPage?csrv="+csrv;
         }
 
         public String templateUrl(String id) {
-            return bundle.applicationPath()+"/DisplayPage?srv="+id;
+            return bundle.applicationPath()+"DisplayPage?srv="+id;
         }
 
         public String templateNameUrl(String name) {
-            return bundle.applicationPath()+"/DisplayPage?name="+name;
+            return bundle.applicationPath()+"DisplayPage?name="+name;
         }
     }
 %>

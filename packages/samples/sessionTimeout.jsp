@@ -33,7 +33,7 @@
                 // the core generic callback JSP (and passes a parameter
                 // indicating whether the response should simulate a HTTP (200)
                 // OK or a HTTP (401) UNAUTHORIZED response.
-                var sUrl = "<%=bundle.bundlePath()%>/core/interface/callbacks/callback.jsp";
+                var sUrl = "<%=bundle.bundlePath()%>core/interface/callbacks/callback.jsp";
                 if (authenticated) {sUrl += '?status=200';}
                 else {sUrl += '?status=401'}
                 

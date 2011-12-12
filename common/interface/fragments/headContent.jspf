@@ -10,16 +10,16 @@
     image with any bookmarks to the site, display the icon in tabs that are
     rendering the site, and may also display it in the URL bar.
 --%>
-<link rel="shortcut icon" href="<%=bundle.bundlePath()%>/common/resources/images/favicon.png" type="image/x-icon">
+<link rel="shortcut icon" href="<%=bundle.bundlePath()%>common/resources/images/favicon.png" type="image/x-icon">
 
 <%--
     Load the common bundle styling.  This will typically be loaded in the HEAD
     element before any package specific CSS, so it may be overriden with package
     specific styles.
 --%>
-<link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.css" />
-<!--[if IE 6]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.ie6.css" /><![endif]-->
-<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>/common/resources/css/common.ie7.css" /><![endif]-->
+<link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.css" />
+<!--[if IE 6]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.ie6.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.ie7.css" /><![endif]-->
 
 <%-- 
     Initialize the BUNDLE javascript object.  This object is used to store the

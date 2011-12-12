@@ -22,8 +22,8 @@
     form widgets (such as the date question calendar picker).
 --%>
 <!-- Application CSS Dependencies -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/calendar/assets/calendar.css"%>"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/container/assets/container.css"%>"/>
+<link rel="stylesheet" type="text/css" href="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/assets/calendar.css"%>"/>
+<link rel="stylesheet" type="text/css" href="<%=bundle.applicationPath() + "resources/js/yui/build/container/assets/container.css"%>"/>
 
 <%--
   Javascript
@@ -36,21 +36,21 @@
 --%>
 <!-- Application Javascript Dependencies -->
 <% if (BundleHelper.debugJs(request)) { %>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/yahoo/yahoo.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/dom/dom.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/event/event.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/element/element.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/utilities/utilities.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/calendar/calendar.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/button/button.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/container/container.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/yahoo/yahoo.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/dom/dom.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/event/event.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/element/element.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/utilities/utilities.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/container/container.js"%>"></script>
 <% } else { %>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/yahoo-dom-event/yahoo-dom-event.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/element/element-min.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/utilities/utilities.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/calendar/calendar-min.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/button/button-min.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/container/container-min.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/yahoo-dom-event/yahoo-dom-event.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/element/element-min.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/utilities/utilities.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar-min.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button-min.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/container/container-min.js"%>"></script>
 <% } %>
 
 <%--
@@ -65,11 +65,11 @@
 --%>
 <!-- Application Javascript -->
 <% if (BundleHelper.debugJs(request)) { %>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_actions.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_utils.js"%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_client.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_actions.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_utils.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_client.js"%>"></script>
 <% } else {%>
-<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_complete.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_complete.js"%>"></script>
 <% }%>
 
 <%--
@@ -136,6 +136,6 @@
         clientManager.templateId = '<%=customerSurvey.getSurveyTemplateInstanceID()%>';
         clientManager.themesDirectory = '<%=bundle.applicationPath() + "/" + Bundle.BUNDLE_DIR%>';
         clientManager.userName = '<%=String.valueOf(UserContext.getUserName()).replaceAll("'", "\\\\'")%>';
-        clientManager.webAppContextPath = '<%=request.getContextPath()%>';
+        clientManager.webAppContextPath = '<%=bundle.applicationPath()%>';
     }
 </script>
