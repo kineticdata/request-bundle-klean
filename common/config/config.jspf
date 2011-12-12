@@ -4,6 +4,6 @@
     NOTE: This file is required.
 --%>
 <%
-    bundle.setProperty("companyName", "Sithco");
+    bundle.setProperty("companyName", "Kinetic Data");
     bundle.setProperty("catalogName", customerRequest.catalogName());
 %>

@@ -1,7 +1,7 @@
 <div id="contentHeader">
     <img class="logo" src="<%= bundle.bundlePath()%>common/resources/images/Kinetic Data.gif"></img>
     <% if (context != null) {%>
-    <div class="userInfo">logged in as <a href="javascript:void(0)">Demo</a> | <a href="KSAuthenticationServlet?Logout=true">logout</a></div>
+    <div class="userInfo">logged in as <a href="javascript:void(0)"><%= context.getUserName()%></a> | <a href="KSAuthenticationServlet?Logout=true">logout</a></div>
     <% } else {%>
     <div class="userInfo">not logged in | <a href="javascript:void(0)">login</a></div>
     <% }%>
