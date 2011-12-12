@@ -1,7 +1,5 @@
 <%-- TODO: Describe. --%>
 <%
-    bundle.setProperty("catalogName", "Lorem Ipsum");
-
     // If null, will use the catalog's default logout action
     bundle.setProperty("defaultLoginAction", packageHelper.templateNameUrl("LoremPortal"));
     // If null, the forgot password link on the login page will not be displayed

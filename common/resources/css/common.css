@@ -8,9 +8,9 @@ html {
 }
 body {
     height: 100%;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
-    width: 975px;
+    text-align: center;
 }
 a {
     color: #3B6E9C;
@@ -21,8 +21,11 @@ a:hover {
 }
 
 #bodyContainer {
+    margin: 0 auto;
     min-height: 100%;
     position: relative;
+    text-align: left;
+    width: 975px;
 }
 #contentBody {
     margin-top: 25px;
@@ -41,6 +44,9 @@ a:hover {
     background: url('../images/headerBackground.png') no-repeat;
     color: #616161;
     padding: 2px 5px 0 5px;
+}
+#contentHeader img.logo {
+    float: left;
 }
 #contentHeader .userInfo {
     float: right;

@@ -5,4 +5,5 @@
 --%>
 <%
     bundle.setProperty("companyName", "Sithco");
+    bundle.setProperty("catalogName", customerRequest.catalogName());
 %>
