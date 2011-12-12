@@ -18,7 +18,7 @@
 
 <html>
     <head>
-        <title><%= bundle.getProperty("companyName")%> <%= bundle.getProperty("catalogName")%></title>
+        <title><%= bundle.getProperty("companyName") + " " + bundle.getProperty("catalogName")%></title>
 
         <%-- Include the common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
