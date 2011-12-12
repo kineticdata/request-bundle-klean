@@ -55,11 +55,6 @@
                             <label for="Password">Password:</label>
                             <input id="Password" class="formField" name="Password" type="password" autocomplete="off" >
                         </div>
-                        <!-- Authentication -->
-                        <div class="field" id="authenticationField">
-                            <label for="Authentication">Authentication:</label>
-                            <input class="formField" name="Authentication" type="text" id="Authentication">
-                        </div>
 
                         <!-- Options -->
                         <div id="loginFormFooter">
