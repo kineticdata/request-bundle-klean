@@ -38,7 +38,19 @@
 
             <div id="contentBody">
                 <div class="header">
-                    <div class="title"><%= bundle.getProperty("companyName")%> <%= bundle.getProperty("catalogName")%></div>
+                    <div class="breadcrumbs">
+                        <div id="homeActive"class="link active">
+                            <%= bundle.getProperty("catalogName")%>
+                        </div>
+                        <div id="homeInactive" class="link">
+                            <a href="javascript:void(0)"><%= bundle.getProperty("catalogName")%></a>
+                        </div>
+                        <div id="divider">/</div>
+                        <div id="searchActive" class="link active">
+                            Search Results ("<span id="searchValue"></span>")
+                        </div>
+                        <div class="clear"></div>
+                    </div>
                     <div class="search">
                         <input id="searchInput"></input>
                         <input id="searchButton" type="button" value="Search"></inupt>
@@ -46,9 +58,14 @@
                     <div class="clear"></div>
                 </div>
 
-                <div id="searchResultsContainer"></div>
+                <div id="searchSpinner">
+                    LOADING...
+                    <img src="<%= bundle.bundlePath%>common/resources/images/spinner_00427E_FFFFFF.gif"></img>
+                </div>
+                <div id="searchResults">
+                </div>
 
-                <div class="categories">
+                <div id="catalogContainer">
                     <% CycleHelper cycle = new CycleHelper(new String[]{"odd", "even"});%>
                     <% for (Category category : catalog.getRootCategories(context)) {%>
                     <% if (category.hasTemplates()) {%>

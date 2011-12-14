@@ -9,6 +9,7 @@ function CatalogSearch(options) {
      * Store the options passed to this 'constructor' as 'instance' variables of
      * the object.
      */
+    this.catalogName = options['catalogName'];
     this.searchButton = options['searchButton'];
     this.searchInput = options['searchInput'];
     this.searchResultsContainer = options['searchResultsContainer'];
@@ -34,23 +35,30 @@ function CatalogSearch(options) {
 }
 
 CatalogSearch.prototype.search = function() {
-    var catalogName = BUNDLE.config['catalogName'];
-    var searchValue = jQuery(this.searchInput).val();
+    // Build a timestamp variable to be passed as a noCache parameter on the ajax
+    // request to ensure that browsers do not cache these requests.
+    var date = new Date();
+    var timestamp = date.getTime();
+    
+    // Retrieve the search value from the search input
+    this.searchValue = jQuery(this.searchInput).val();
+    
+    // Trigger the search begin callback.  We pass the callback the catalog name
+    // and the search value paramters
     if (this.searchBeginCallback != undefined) {
-        this.searchBeginCallback();
+        this.searchBeginCallback(this.catalogName, this.searchValue);
     }
+    
+    // Execute the ajax request.
     jQuery.ajax({
-        url: BUNDLE.bundlePath + 'libraries/catalogSearch/catalogSearch.html.jsp?catalogName=' + catalogName + '&query=' + searchValue,
+        url: BUNDLE.bundlePath + 'libraries/catalogSearch/catalogSearch.html.jsp?catalogName=' + this.catalogName + '&query=' + this.searchValue + '&noCache=' + timestamp,
         success: __bind(function(data) {
-            if (this.searchEndCallback != undefined) {
-                this.searchEndCallback();
-            }
             jQuery(this.searchInput).val('');
             jQuery(this.searchResultsContainer).empty();
             jQuery(this.searchResultsContainer).append(data);
-        }, this),
-        failure: function(data) {
-            alert('failure: ' + data);
-        }
+            if (this.searchEndCallback != undefined) {
+                this.searchEndCallback(this.catalogName, this.searchValue);
+            }
+        }, this)
     });
 };

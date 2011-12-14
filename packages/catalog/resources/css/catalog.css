@@ -1,34 +1,33 @@
-.categories .categoryWrapper {
+#catalogContainer .categoryWrapper {
     float: left;
     width: 50%;
 }
-.categories .categoryWrapper .category {
+#catalogContainer .categoryWrapper .category {
     background: #FFFFFF;
     border: 1px solid #3B6E9C;
     margin: 3px;
 }
-.categories .categoryWrapper .category:hover {
+#catalogContainer .categoryWrapper .category:hover {
     border: 1px solid #628BAF;
 }
-.categories .categoryWrapper .category .name {
+#catalogContainer .categoryWrapper .category .name {
     background: #88A7C3 url('../../../../common/resources/images/background_blue_3B6E9C_88A7C3.png') repeat-x;
     border-bottom: 1px solid #3B6E9C;
     color: #FFFFFF;
-    font-size: 15px;
     font-weight: bold;
     line-height: 26px;
     margin-bottom: 10px;
     padding: 0 10px;
 }
-.categories .categoryWrapper .category:hover .name {
+#catalogContainer .categoryWrapper .category:hover .name {
     background: #A0B9CE url('../../../../common/resources/images/background_light_blue_628BAF_A0B9CE.png') repeat-x;
     border-bottom: 1px solid #628BAF;
 }
-.categories .categoryWrapper .category .description {
+#catalogContainer .categoryWrapper .category .description {
     color: #616161;
     margin-left: 50px;
 }
-.categories .categoryWrapper .category .image {
+#catalogContainer .categoryWrapper .category .image {
     float: left;
     height: 40px;
     margin: 0 5px;
@@ -36,7 +35,7 @@
     text-align: center;
     width: 40px;
 }
-.categories .categoryWrapper .category .templates {
+#catalogContainer .categoryWrapper .category .templates {
     border-top: 1px solid #3B6E9C;
     margin: 0 75px;
     padding: 10px;
@@ -44,12 +43,69 @@
 .header .search {
     float: right;
 }
-.header .title {
+.header .breadcrumbs {
     color: #3B6E9C;
     float: left;
-    font-size: 19px;
-    line-height: 26px;
+    font-weight: bold;
+    line-height: 30px;
 }
-.highlighted {
-    background: #EEEE00;
+.header .breadcrumbs .link {
+    float: left;
+}
+.header .breadcrumbs #divider {
+    float: left;
+    margin: 0 5px;
+}
+.header .breadcrumbs .link.active {
+    font-size: 15px;
+}
+#searchResults {
+    display: none;
+}
+#searchResults .highlighted {
+    background: #CCFF00;
+}
+#searchResults .templates {
+    margin-top: 10px;
+}
+#searchResults .templates .template {
+    background: #FFFFFF;
+    border: 1px solid #A1A1A1;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+#searchResults .templates .template .attribute {
+    border-top: 1px solid #3B6E9C;
+    margin-bottom: 5px;
+    padding-top: 5px;
+}
+#searchResults .templates .template .attributeName {
+    float: left;
+    width: 100px;
+}
+#searchResults .templates .template .attributeValues {
+    margin-left: 110px;
+}
+#searchResults .templates .template .attributeValues .attributeValue {
+    border-right: 2px solid #616161;
+    float: left;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+#searchResults .templates .template .templateDescription {
+    color: #616161;
+    margin-bottom: 5px;
+}
+#searchResults .templates .template .templateName {
+    margin-bottom: 5px;
+}
+#searchSpinner {
+    color: #3B6E9C;
+    display: none;
+    font-size: 19px;
+    line-height: 150px;
+    padding: 5px;
+}
+#searchSpinner img {
+    text-align: middle;
 }

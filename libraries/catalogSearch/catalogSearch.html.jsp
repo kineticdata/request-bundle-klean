@@ -42,7 +42,12 @@
 <div class="templates">
     <% for (int i = 0; i < matchingTemplates.length; i++) {%>
     <div class="template">
-        <div class="templateName"><%= CatalogSearch.replaceAll(combinedPattern, matchingTemplates[i].getName())%></div>
+        <div class="templateName">
+            <a href="DisplayPage?srv=<%= matchingTemplates[i].getId()%>">
+                <%= CatalogSearch.replaceAll(combinedPattern, matchingTemplates[i].getName())%>
+            </a>
+        </div>
+
         <div class="templateDescription"><%= CatalogSearch.replaceAll(combinedPattern, matchingTemplates[i].getDescription())%></div>
         <% String[] attributeNames = matchingTemplates[i].getTemplateAttributeNames();%>
         <div class="attributes">
@@ -51,15 +56,18 @@
                 <div class="attributeName"><%= attributeNames[j]%></div>
                 <div class="attributeValues">
                     <% String[] attributeValues = matchingTemplates[i].getTemplateAttributeValues(attributeNames[j]);%>
-                    <% for (int k = 0; k < attributeValues.length && k < 5; k++) {%>
+                    <% for (int k = 0; k < attributeValues.length && k < 10; k++) {%>
                     <div class="attributeValue"><%= CatalogSearch.replaceAll(combinedPattern, attributeValues[k])%></div>
                     <% }%>
+                    <div class="clear"></div>
                 </div>
             </div>
             <% }%>
+            <div class="clear"></div>
         </div>
     </div>
     <% }%>
+    <div class="clear"></div>
 </div>
 <%
 }
