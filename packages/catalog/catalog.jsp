@@ -47,7 +47,7 @@
                         </div>
                         <div id="divider">/</div>
                         <div id="searchActive" class="link active">
-                            Search Results ("<span id="searchValue"></span>")
+                            Search Results: "<span class="searchValue"></span>"
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div id="searchSpinner">
-                    LOADING...
+                    Searching for "<span class="searchValue"></span>"
                     <img src="<%= bundle.bundlePath%>common/resources/images/spinner_00427E_FFFFFF.gif"></img>
                 </div>
                 <div id="searchResults">
