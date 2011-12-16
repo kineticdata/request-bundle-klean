@@ -8,6 +8,9 @@
 <%@include file="../helpers/PackageHelper.jspf" %>
 <% PackageHelper packageHelper = new PackageHelper(bundle); %>
 
+<%@include file="../../../../common/framework/helpers/PathHelper.jspf" %>
+<% PathHelper pathHelper = new PathHelper(bundle); %>
+
 <%-- Include the package configuration file. --%>
 <%@include file="../../config/config.jspf" %>
 

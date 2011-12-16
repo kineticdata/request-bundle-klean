@@ -78,7 +78,7 @@
                             <div class="templates">
                                 <% for (Template template : category.getTemplates()) {%>
                                 <div class="template">
-                                    <a href="<%= packageHelper.templateUrl(template.getId())%>" help="foo"><%= template.getName()%></a>
+                                    <a href="<%= pathHelper.templateUrl(template.getId())%>" help="foo"><%= template.getName()%></a>
                                 </div>
                                 <% }%>
                             </div>

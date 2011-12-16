@@ -1,0 +1,61 @@
+<%--
+    This file is responsible for initializing the package framework.  It loads
+    the core bundleInitialization.jspf file (which is responsible for
+    initializing the bundle framework), loads the core noCache.jspf file (which
+    ensures that all of the package pages are not cached by the client or a
+    proxy, loads the package configuration file, and loads any present helpers
+    or models.
+
+    This file will need to be modified if there are any helper or model classes
+    that are added to the package.  Samples are included below.
+--%>
+
+<%-- 
+    Initialize the bundle and load any necessary dependencies.
+--%>
+<%@include file="../../../../core/framework/includes/bundleInitialization.jspf"%>
+
+<%-- 
+    Ensure the response is not cached by client or proxy.
+--%>
+<%@include file="../../../../core/framework/includes/noCache.jspf"%>
+
+<%-- 
+    Include any helper files.  By convention, package specific logic (such as
+    the building of URLs) should be included in a PackageHelper helper class.
+
+    Format:
+      <%@include file="../helpers/HELPER.jspf
+    Example:
+      <%@include file="../helpers/LanguageHelper.jspf
+      <%@include file="../helpers/PackageHelper.jspf
+--%>
+<%@include file="../helpers/PackageHelper.jspf" %>
+<%@include file="../../../../common/framework/helpers/PathHelper.jspf" %>
+
+<%--
+    Include any model files.
+
+    Format:
+      <%@include file="../models/SYSTEM/MODEL.jspf
+    Example:
+      <%@include file="../models/kineticSample/Change.jspf
+      <%@include file="../models/kineticSample/Incident.jspf
+      <%@include file="../models/kineticSample/Person.jspf
+--%>
+
+<%--
+    Instantiate any appropriate helper objects.  By convention, the
+    PackageHelper class will typically be instantiated here.  The PackageHelper
+    requires the current bundle object to be passed as a parameter (so that the
+    package URL paths can be made relative to the current bundle/package without
+    hard coding in the name of the bundle or package).
+--%>
+<% PackageHelper packageHelper = new PackageHelper(bundle); %>
+<% PathHelper pathHelper = new PathHelper(bundle); %>
+
+<%--
+    Include the package configuration file.
+--%>
+<%@include file="../../config/config.jspf" %>
+

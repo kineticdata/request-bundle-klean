@@ -1,0 +1,55 @@
+<%!
+    /**
+     * TODO: Description of class
+     *  ... This class takes the current bundle object as a parameter so that it
+     *    can utilize the current bundle/package path information to build up
+     *    the necessary URLs.  This allows the package to be easily portable
+     *    and avoids the need to change any path information if the name of the
+     *    bundle or package is changed.
+     *  ... By convention, values that will not be consistent (such as the name
+     *    or csrv of a Kinetic Login or Catalog form) should be retrieved from
+     *    the package configuration file, rather than hard coded.  This improves
+     *    portability of a bundle and package between environments.
+     */
+    public static class PathHelper {
+        // Declare the private variables
+
+        private Bundle bundle;
+
+        // Document
+        public PathHelper(Bundle bundle) {
+            this.bundle = bundle;
+        }
+
+        /***********************************************************************
+         * HELPER METHODS
+         **********************************************************************/
+        public String catalogUrl() {
+            return "";
+        }
+
+        public String detailsUrl(String csrv) {
+            return bundle.applicationPath() + "ReviewRequest?csrv=" + csrv + "&reviewPage=" + bundle.relativePackagePath() + "details";
+        }
+
+        public String loginUrl() {
+            return "";
+        }
+
+        public String reviewUrl(String csrv) {
+            return bundle.applicationPath() + "ReviewRequest?csrv=" + csrv + "&reviewPage=" + bundle.relativePackagePath() + "review";
+        }
+
+        public String submissionUrl(String csrv) {
+            return bundle.applicationPath() + "DisplayPage?csrv=" + csrv;
+        }
+
+        public String templateUrl(String id) {
+            return bundle.applicationPath() + "DisplayPage?srv=" + id;
+        }
+
+        public String templateNameUrl(String name) {
+            return bundle.applicationPath() + "DisplayPage?name=" + name;
+        }
+    }
+%>

@@ -31,6 +31,7 @@
       <%@include file="../helpers/PackageHelper.jspf
 --%>
 <%@include file="../helpers/PackageHelper.jspf" %>
+<%@include file="../../../../common/framework/helpers/PathHelper.jspf" %>
 
 <%--
     Include any model files.
@@ -52,6 +53,7 @@
     hard coding in the name of the bundle or package).
 --%>
 <% PackageHelper packageHelper = new PackageHelper(bundle); %>
+<% PathHelper pathHelper = new PathHelper(bundle); %>
 
 <%--
     Include the package configuration file.
