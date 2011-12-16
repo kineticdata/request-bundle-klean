@@ -10,7 +10,9 @@
         public static final String FIELD_SUBMITTER = "2";
         public static final String FIELD_TEMPLATE_ID = "700000800";
         public static final String FIELD_TEMPLATE_NAME = "700001000";
-		public static final String FIELD_REQUEST_CLOSED_DATE = "700088489";
+	public static final String FIELD_REQUEST_CLOSED_DATE = "700088489";
+        public static final String FIELD_LOOKUP_ID = "700002450";
+        public static final String FIELD_ORIGINATING_ID = "600000310";
 
         // Represents the status of the Submission.
         public static final String FIELD_STATUS = "7";
@@ -86,6 +88,18 @@
                 }
             }
 
+            return results;
+        }
+        
+        public Submission[] getChildren(HelperContext context) {
+            String qualification = "'"+FIELD_LOOKUP_ID+"' = \""+getId()+"\" AND '"+FIELD_ID+"' != '"+FIELD_LOOKUP_ID+"'";
+            Submission[] results = Submission.find(context, qualification);
+            return results;
+        }
+        
+        public Submission[] getDescendents(HelperContext context) {
+            String qualification = "'"+FIELD_ORIGINATING_ID+"' = \""+getId()+"\" AND '"+FIELD_ID+"' != '"+FIELD_ORIGINATING_ID+"'";
+            Submission[] results = Submission.find(context, qualification);
             return results;
         }
 
