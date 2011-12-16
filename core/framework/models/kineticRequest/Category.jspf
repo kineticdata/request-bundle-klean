@@ -11,7 +11,7 @@
         public static final String FIELD_SORT_ORDER = "700061010";
         public static final String FIELD_STATUS = "7";
         public static final String[] FIELD_IDS = new String[]{
-            FIELD_DESCRIPTION, FIELD_ID, FIELD_IMAGE_TAG, FIELD_NAME, FIELD_NUMBER_OF_ITEMS};
+            FIELD_DESCRIPTION, FIELD_ID, FIELD_IMAGE_TAG, FIELD_NAME, FIELD_NUMBER_OF_ITEMS, FIELD_STATUS};
         public static final String[] SORT_FIELD_IDS = new String[]{
             FIELD_SORT_ORDER, FIELD_NAME};
 
@@ -84,7 +84,8 @@
         public String getDescription() { return entry.getEntryFieldValue(FIELD_DESCRIPTION); }
         public String getFullName() {return entry.getEntryFieldValue(FIELD_NAME);}
         public String getId() {return entry.getEntryFieldValue(FIELD_ID);}
-		public String getImageTag() {return entry.getEntryFieldValue(FIELD_IMAGE_TAG);}
+        public String getStatus() {return entry.getEntryFieldValue(FIELD_STATUS);}
+        public String getImageTag() {return entry.getEntryFieldValue(FIELD_IMAGE_TAG);}
         public String getName() {
             if (name == null) {
                 String[] trail = getNameTrail();
