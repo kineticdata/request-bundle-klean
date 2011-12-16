@@ -44,7 +44,6 @@
       <%@include file="../models/kineticSample/Person.jspf
 --%>
 
-
 <%--
     Instantiate any appropriate helper objects.  By convention, the
     PackageHelper class will typically be instantiated here.  The PackageHelper
