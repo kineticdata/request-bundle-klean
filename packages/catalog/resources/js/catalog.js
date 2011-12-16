@@ -5,19 +5,18 @@ jQuery(document).ready(function() {
         searchInput: '#searchInput',
         searchResultsContainer: '#searchResults',
         searchBeginCallback : function(catalogName, searchValue) {
+            jQuery('.searchValue').text(searchValue);
             jQuery('#catalogContainer').hide();
             jQuery('#searchResults').hide();
             jQuery('#searchSpinner').show();
-            
+            jQuery('#homeActive').hide();
+            jQuery('#homeInactive').show();
+            jQuery('#divider').show();
+            jQuery('#searchActive').show();
         },
         searchEndCallback : function(catalogName, searchValue) {
             jQuery('#searchSpinner').hide();
             jQuery('#searchResults').show();
-            jQuery('#homeActive').hide();
-            jQuery('#homeInactive').show();
-            jQuery('#divider').show();
-            jQuery('#searchValue').text(searchValue);
-            jQuery('#searchActive').show();
         }
     });
     

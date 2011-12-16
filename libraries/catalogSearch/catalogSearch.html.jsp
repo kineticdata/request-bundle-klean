@@ -28,9 +28,9 @@
 
     // Display an error message if there are 0 querySegments or > 10 querySegments
     if (querySegments.length == 0 || querySegments[0].length() == 0) {
-        out.println("<div>Error: Please enter a search term.</div>");
+        out.println("<div class=\"message\">Error: Please enter a search term.</div>");
     } else if (querySegments.length > 10) {
-        out.println("<div>Error: Search is limited to 10 search terms.</div>");
+        out.println("<div class=\"message\">Error: Search is limited to 10 search terms.</div>");
     } else {
         bundle.setProperty("searchableAttributes", "Keyword,Expiration Days");
         String[] searchableAttributes = bundle.getProperty("searchableAttributes").split("\\s*,\\s*");
@@ -38,6 +38,9 @@
         Category[] matchingCategories = catalogSearch.getMatchingCategories();
         Template[] matchingTemplates = catalogSearch.getMatchingTemplates(searchableAttributes);
         Pattern combinedPattern = catalogSearch.getCombinedPattern();
+        if (matchingTemplates.length == 0) {
+            out.println("<div class=\"message\">No results were found.</div>");
+        } else {
 %>
 <div class="templates">
     <% for (int i = 0; i < matchingTemplates.length; i++) {%>
@@ -70,5 +73,6 @@
     <div class="clear"></div>
 </div>
 <%
+    }
 }
 %>

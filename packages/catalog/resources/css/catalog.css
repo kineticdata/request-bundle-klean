@@ -46,7 +46,6 @@
 .header .breadcrumbs {
     color: #3B6E9C;
     float: left;
-    font-weight: bold;
     line-height: 30px;
 }
 .header .breadcrumbs .link {
@@ -58,6 +57,7 @@
 }
 .header .breadcrumbs .link.active {
     font-size: 15px;
+    font-weight: bold;
 }
 #searchResults {
     display: none;
