@@ -34,6 +34,8 @@
     BUNDLE.applicationPath = '<%=bundle.applicationPath()%>';
     BUNDLE.bundlePath = '<%=bundle.bundlePath()%>';
     BUNDLE.packagePath = '<%=bundle.packagePath()%>';
+    BUNDLE.relativeBundlePath = '<%=bundle.relativeBundlePath()%>';
+    BUNDLE.relativePackagePath = '<%=bundle.relativePackagePath()%>';
     // Initialize the BUNDLE configuration hash.
     BUNDLE.config = {};
     // Set all of the bundle configuration properties
