@@ -39,18 +39,20 @@
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/yahoo/yahoo.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/dom/dom.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/event/event.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/connection/connection.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/animation/animation.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/dragdrop/dragdrop.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/element/element.js"%>"></script>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/utilities/utilities.js"%>"></script>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar.js"%>"></script>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/get/get.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/yuiloader/yuiloader.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/container/container.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar.js"%>"></script>
 <% } else { %>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/yahoo-dom-event/yahoo-dom-event.js"%>"></script>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/element/element-min.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/utilities/utilities.js"%>"></script>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar-min.js"%>"></script>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button-min.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/container/container-min.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button-min.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar-min.js"%>"></script>
 <% } %>
 
 <%--
@@ -69,7 +71,7 @@
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_utils.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_client.js"%>"></script>
 <% } else {%>
-<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_complete.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/kd_core.js"%>"></script>
 <% }%>
 
 <%--
@@ -134,7 +136,6 @@
         clientManager.submitType = '<%=customerSurvey.getSubmitType()%>'
         clientManager.successMessage = '<%=String.valueOf(customerSurvey.getSuccessMessage()).replaceAll("'", "\\\\'")%><%=String.valueOf(UserContext.getSuccessMessage()).replaceAll("'", "\\\\'")%>';
         clientManager.templateId = '<%=customerSurvey.getSurveyTemplateInstanceID()%>';
-        clientManager.themesDirectory = '<%=bundle.applicationPath() + Bundle.BUNDLE_DIR + "/"%>';
         clientManager.userName = '<%=String.valueOf(UserContext.getUserName()).replaceAll("'", "\\\\'")%>';
         clientManager.webAppContextPath = '<%=bundle.applicationPath()%>';
     }
