@@ -1,9 +1,10 @@
 html {
     background: #FFFFFF url('../images/background.png') repeat-x top;
-    font-family: Verdana, sans-serif; 
+    font-family: Arial, sans-serif;
     font-size: 12px;
     height: 100%;
     margin: 0;
+    overflow-y: scroll;
     padding: 0;
 }
 body {
