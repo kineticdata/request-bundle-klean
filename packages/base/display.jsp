@@ -18,8 +18,8 @@
         <title><%= customerRequest.templateName()%></title>
 
         <%-- Include the application head content. --%>
-        <%@include file="interface/fragments/applicationHeadContent.jspf" %>
-        <%@include file="interface/fragments/displayHeadContent.jspf"%>
+        <%@include file="../../core/interface/fragments/applicationHeadContent.jspf" %>
+        <%@include file="../../core/interface/fragments/displayHeadContent.jspf"%>
 
         <%-- Include the bundle common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
@@ -36,7 +36,7 @@
             <%@include file="../../common/interface/fragments/contentHeader.jspf"%>
 
             <div id="contentBody">
-                <%@include file="interface/fragments/displayBodyContent.jspf"%>
+                <%@include file="../../core/interface/fragments/displayBodyContent.jspf"%>
             </div>
 
             <%@include file="../../common/interface/fragments/contentFooter.jspf"%>
