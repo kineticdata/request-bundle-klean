@@ -6,4 +6,8 @@
 <%
     bundle.setProperty("companyName", "Kinetic Data");
     bundle.setProperty("catalogName", customerRequest.catalogName());
+
+    bundle.setProperty("homeUrl", bundle.applicationPath() + "DisplayPage?name=LoremPortal");
+    bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=LoremLogin");
+    bundle.setProperty("logoutUrl", "KSAuthenticationServlet?Logout=true");
 %>
