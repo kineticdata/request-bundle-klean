@@ -62,6 +62,12 @@
 #searchResults {
     display: none;
 }
+#searchResults .message {
+    color: #FF0000;
+    font-size: 15px;
+    line-height: 150px;
+    padding: 5px;
+}
 #searchResults .highlighted {
     background: #CCFF00;
 }
