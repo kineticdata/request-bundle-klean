@@ -60,13 +60,13 @@ textarea {
 table.resultsTableAdv {
     border-collapse: collapse;
     margin-top: 10px;
+    text-align: left;
 }
 table.resultsTableAdv td {
     border-bottom: 1px solid #A0A0A0;
 }
 table.resultsTableAdv tr#headerRow {
     color: #3B6E9C;
-    text-align: left;
 }
 table.resultsTableAdv tr.row_odd {
     background: #FFFFFF;
