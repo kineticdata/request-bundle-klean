@@ -18,7 +18,7 @@
         <title><%= customerRequest.templateName()%></title>
 
         <%-- Include the application head content. --%>
-        <%@include file="interface/fragments/applicationHeadContent.jspf" %>
+        <%@include file="../../core/interface/fragments/applicationHeadContent.jspf" %>
 
         <%-- Include the bundle common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
