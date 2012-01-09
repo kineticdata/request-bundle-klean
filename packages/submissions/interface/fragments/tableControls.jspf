@@ -1,0 +1,26 @@
+<div class="controls">
+    <div class="control button firstPage"><img src="<%= bundle.packagePath()%>resources/images/control_first_FFFFFF.png"/></div>
+    <div class="control button previousPage"><img src="<%= bundle.packagePath()%>resources/images/control_previous_FFFFFF.png"/></div>
+    <div class="control pageNumber">
+        Page: <input type="text" class="currentPage" size="1"/> of 
+        <span class="lastPage"></span> 
+        (<span class="recordCount"></span> total records)
+    </div>
+    <div class="control button nextPage"><img src="<%= bundle.packagePath()%>resources/images/control_next_FFFFFF.png"/></div>
+    <div class="control button lastPage"><img src="<%= bundle.packagePath()%>resources/images/control_last_FFFFFF.png"/></div>
+    <div class="control pageSize">
+        Page Size: <select>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+            <option value="100">100</option>                                    
+        </select>
+    </div>
+    <div class="control button refresh"><img src="<%= bundle.packagePath()%>resources/images/refresh_FFFFFF.png"/></div>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>

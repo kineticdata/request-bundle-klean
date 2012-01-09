@@ -1,0 +1,15 @@
+<%!
+    /**
+     * TODO: Description of class
+     */
+    public static class PackageHelper {
+
+        // Declare the private variables
+        private Bundle bundle;
+
+        // Document
+        public PackageHelper(Bundle bundle) {
+            this.bundle = bundle;
+        }
+    }
+%>

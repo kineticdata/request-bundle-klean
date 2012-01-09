@@ -15,10 +15,11 @@ body {
 }
 a {
     color: #3B6E9C;
+    font-weight: bold;
     text-decoration: none;
 }
 a:hover {
-    text-decoration: underline;
+    color: #88A7C3;
 }
 
 #bodyContainer {
