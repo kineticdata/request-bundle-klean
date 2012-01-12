@@ -69,7 +69,7 @@
                             <% }%>
 
                             <!-- Logging In Spinner -->
-                            <div class="hidden" id="loader">Authenticating... <img alt="Loading Indicator" src="<%=bundle.bundlePath()%>common/resources/images/spinner.gif"></div>
+                            <div class="hidden" id="loader">Authenticating... <img alt="Loading Indicator" src="<%=bundle.bundlePath()%>common/resources/images/spinner_00427E_FFFFFF.gif"></div>
                         </div>
 
                         <!-- Clear the floats -->

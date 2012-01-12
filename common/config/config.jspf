@@ -12,5 +12,5 @@
     bundle.setProperty("logoutUrl", "KSAuthenticationServlet?Logout=true");
 
     // This is a path to the review jsp to be used by review request.
-    bundle.setProperty("reviewJsp", "klean/packages/base/review.jsp");
+    bundle.setProperty("reviewJsp", bundle.relativeBundlePath() + "packages/base/review.jsp");
 %>
