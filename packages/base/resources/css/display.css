@@ -4,6 +4,7 @@ textarea {
 #pageQuestionsForm {   
     background: #FFFFFF;
     border: 1px solid #A1A1A1;
+    margin: 0;
 
 }
 .questionLabel {
