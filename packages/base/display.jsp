@@ -4,14 +4,7 @@
 <%-- Include the package initialization file. --%>
 <%@include file="framework/includes/packageInitialization.jspf"%>
 
-<%--
-    This page must not specify an HTML doctype in order for the built in Kinetic
-    display widgets to be displayed consistently in browsers.  Omitting the
-    doctype declaration will force browsers to render in "Quirks" mode.  This
-    mode refers to a technique used by modern browsers to mimic the behavior of
-    older browsers (written before HTML doctypes existed) rather than strictly
-    complying with the W3C specification for "Standards" mode.
---%>
+<!DOCTYPE html>
 
 <html>
     <head>
