@@ -21,5 +21,7 @@
     <!-- Kinetic SR State Values -->
     <input type="hidden" name="templateID" id= "templateID" value="<%=customerSurvey.getSurveyTemplateInstanceID()%>"/>
     <input type="hidden" name="pageID" id="pageID" value=""/>
+    <div style="clear:both;"></div>
 </div>
+<div style="clear:both;"></div>
 <!--   END Kinetic Form Review Content -->

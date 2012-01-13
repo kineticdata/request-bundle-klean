@@ -7,6 +7,10 @@
 <%-- Include the package initialization file for preparing a review page. --%>
 <%@include file="framework/includes/reviewRequestInitialization.jspf"%>
 
+<%--
+    Set the docutype to XHTML 1.0 Transitional, this is required for Review
+    Request iFrame elements to be sized properly.
+--%>
 <!DOCTYPE html>
 
 <html>
@@ -30,15 +34,7 @@
 
     <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%>">
         <div id="bodyContainer">
-            <%@include file="../../common/interface/fragments/contentHeader.jspf"%>
-
-            <div id="contentBody">
-                <div id="reviewBorder">
-                    <%@include file="../../core/interface/fragments/reviewBodyContent.jspf"%>
-                </div>
-            </div>
-
-            <%@include file="../../common/interface/fragments/contentFooter.jspf"%>
+            <%@include file="../../core/interface/fragments/reviewBodyContent.jspf"%>
         </div>
     </body>
 </html>
