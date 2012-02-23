@@ -1,18 +1,50 @@
 <%@page import="java.io.*,javax.servlet.http.*"%>
 <%!
     /**
-     * TODO: Document.
+     * Helpers are essentially Java classes that can be used in JSP pages.  The 
+     * ResponseHelper is a core helper (meaning that it rarely, if ever be 
+     * modified).  It includes helper methods for sending HTTP responses.
+     *
+     * A typical use for this helper is within a callback JSP fragment to test 
+     * if the response was successful, or to test if the user needs to 
+     * authenticate before they are allowed to see the page contents.
      */
     public static class ResponseHelper {
+    
+        /**
+         * Sends an HTTP OK status code (200) back as a response code indicating
+         * the request was handled successfully.
+         *
+         * @param javax.servlet.http.HttpServletResponse The response object
+         * @throws java.io.IOException
+         */
         public static void sendOkResponse(HttpServletResponse response) throws IOException {
             response.setStatus(response.SC_OK);
         }
         
+        /**
+         * Sends an HTTP redirection/temporarily moved status code (302) back 
+         * as a response code indicating the request was redirected to another
+         * location.  The new location should be handled automatically by the 
+         * browser, but can be obtained as the location header of the response.
+         * 
+         * @param javax.servlet.http.HttpServletResponse The response object
+         * @param String The location (URL) to redirect to
+         * @throws java.io.IOException
+         */
         public static void sendRedirectResponse(HttpServletResponse response, String location) throws IOException {
             response.setStatus(response.SC_MOVED_TEMPORARILY);
             response.setHeader("Location", location);
         }
 
+        /**
+         * Sends an HTTP unauthorized status code (401) back as a response code
+         * indicating the user must authenticate before accessing the intended
+         * URL.
+         * 
+         * @param javax.servlet.http.HttpServletResponse The response object
+         * @throws java.io.IOException
+         */
         public static void sendUnauthorizedResponse(HttpServletResponse response) throws IOException {
             response.setStatus(response.SC_UNAUTHORIZED);
             response.setHeader("X-KD-ErrorMessage", "Please log in.");

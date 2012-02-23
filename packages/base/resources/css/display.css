@@ -54,6 +54,9 @@ textarea {
     margin-top: 10px;
     padding: 5px;
 }
+.requiredLabel  {
+    color: #FF0000 !important;
+}
 
 /*
  * Styles for the table panel displayed for set fields external events

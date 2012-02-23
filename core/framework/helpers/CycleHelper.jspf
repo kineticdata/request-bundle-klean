@@ -1,9 +1,27 @@
 <%!
     /**
-     * TODO: Document.
+     * Helpers are essentially Java classes that can be used in JSP pages.  The
+     * CycleHelper is a core helper (meaning that it rarely, if ever be 
+     * modified).  It includes helper methods to loop through a list of 
+     * elements, and then start over again at the beginning.
+     *
+     * A common use of the cycle helper is to provide zebra striping on html 
+     * tables or list elements. Zebra striping means that each table row or 
+     * list item will alternate backgrounds, typically between a lighter and 
+     * darker shade.  This makes it easier to associate data with the specific 
+     * row or item.
+     *
+     * Another use could be to apply a different class name to columns or tabs.
      */
     public static class CycleHelper {
+        /**
+         * A property that indicates the first row should be skipped in the cycle.
+         */
         private static int SKIP_FIRST_CYCLE = 1;
+        
+        /**
+         * A property that indicates only the first row in the cycle will be calculated.
+         */
         private static int ONLY_FIRST_CYCLE = 2;
 
         private String[] cycles = null;
@@ -11,19 +29,86 @@
         private int cycle = 0;
         private int index = 0;
 
-        public CycleHelper(String value, int options) {
-            this(new String[] {value}, options);
+        /**
+         * @constructor
+         * Creates a new instance of the CycleHelper, setting the cycle values 
+         * without any special treatment of the first row.
+         * 
+         * value - a String[] containing the values for each cycle iteration.  
+         *
+         * Example - Create a new CycleHelper that will be used to apply a 
+         *           class to a list item:
+         *   CycleHelper cycleHelper = new CycleHelper(new String[]{"odd", "even"});
+         */
+        public CycleHelper(String[] cycles) {
+            this.cycles = cycles;
         }
 
+        /**
+         * @constructor
+         * Creates a new instance of the CycleHelper, setting the cycle values 
+         * and any options to specifically treat the first row differently than 
+         * the other rows.
+         *
+         * value - a String[] containing the values for each cycle iteration.  
+         * options - an integer value indicating the desired option.  Currently 
+         *     there are two supported options:
+         *       SKIP_FIRST_CYCLE (1) - skips the first row in the cycle, and 
+         *           applied the first cycle element to the second row in the
+         *           cycle.
+         *       ONLY_FIRST_CYCLE (2) - applies the first cycle element to only
+         *           the first row in the cycle.  All other rows are skipped.
+         *
+         * Example - Create a new CycleHelper that applies the cycle only to 
+         *           the first row:
+         *   CycleHelper cycleHelper = new CycleHelper(new String[]{"first"}, 
+         *                                        CycleHelper.ONLY_FIRST_CYCLE);
+         *
+         * Example - Create a new CycleHelper that skips the first row, possibly
+         *           because the first row is a header row:
+         *   CycleHelper cycleHelper = new CycleHelper(new String[]{"odd", "even"}, 
+         *                                        CycleHelper.SKIP_FIRST_CYCLE);
+         */
         public CycleHelper(String[] cycles, int options) {
             this.cycles = cycles;
             this.options = options;
         }
 
-        public CycleHelper(String[] cycles) {
-            this.cycles = cycles;
+        /**
+         * @constructor
+         * Creates a new instance of the CycleHelper, setting a single cycle 
+         * value and any options to specifically treat the first row differently
+         * than the other rows.
+         *
+         * value - the value to use for each cycle iteration.
+         * options - an integer value indicating the desired option.  Currently
+         * there are two supported options:
+         *     SKIP_FIRST_CYCLE (1) - skips the first row in the cycle, and 
+         *       applied the first cycle element to the second row in the cycle.
+         *     ONLY_FIRST_CYCLE (2) - applies the first cycle element to only 
+         *       the first row in the cycle.  All other rows are skipped.
+         *
+         * Example - Create a new CycleHelper that applies the cycle only to 
+         *           the first row:
+         *    CycleHelper cycleHelper = new CycleHelper("first", 
+         *                                        CycleHelper.ONLY_FIRST_CYCLE);
+         *
+         * Example - Create a new CycleHelper that skips the first row, possibly
+         *           because the first row is a header row:
+         *    CycleHelper cycleHelper = new CycleHelper("after-first", 
+         *                                        CycleHelper.SKIP_FIRST_CYCLE);
+         */
+        public CycleHelper(String value, int options) {
+            this(new String[] {value}, options);
         }
 
+        /**
+         * Calculates the next value in the options array, and returns the 
+         * value.  If the last value is currently used, then the cycle helper 
+         * automatically resets and uses the first index value.
+         * @returns The next cycle value, or the first cycle value if currently
+         *     at the last position in the cycle.
+         */
         public String cycle() {
             String result = "";
             if (options == SKIP_FIRST_CYCLE && cycle == 0) {
@@ -38,6 +123,9 @@
             return result;
         }
 
+        /**
+         * Sets the current index to 0 to restart at the first row.
+         */
         public void reset() {
             index = 0;
         }

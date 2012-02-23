@@ -1,13 +1,18 @@
 <%!
     /**
-     * The BundleHelper is a core helper (meaning that it rarely, if ever be
-     * modified).  It includes helper methods that simplify very common display
+     * Helpers are essentially Java classes that can be used in JSP pages.  The 
+     * BundleHelper is a core helper (meaning that it rarely, if ever be 
+     * modified).  It includes helper methods that simplify very common display 
      * logic within the bundle.
      */
     public static class BundleHelper {
         /**
-         * Returns true if there is a "debugjs" parameter that was passed with
-         * the HTTP request and the value is set to "true" (case insensitive).
+         * Returns true if there is a "debugjs" parameter was passed with the 
+         * HTTP request and the value is set to "true" (case insensitive).  The 
+         * purpose of this parameter is to load the complete javascript source 
+         * files instead of the minified versions.  This allows for easier 
+         * troubleshooting and debugging.  Minified versions are normally used 
+         * for faster page loads.
          */
         public static boolean debugJs(javax.servlet.http.HttpServletRequest request) {
             String debugParam = (String)request.getParameter("debugjs");
