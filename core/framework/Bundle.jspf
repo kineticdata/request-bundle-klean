@@ -1,6 +1,8 @@
 <%!
     /**
-     * TODO: Description of class
+     * Wrappers are preinitialized Java objects that provide easy access to 
+     * various settings within the bundle.  The Bundle wrapper contains methods 
+     * to retrieve various path variables that can be used in any JSP page.
      *
      * bundle.applicationPath()
      *   Returns the URL path to the root of the web application.
@@ -9,13 +11,15 @@
      *   Returns the URL path to the root of the bundle.
      *   Example: "/kinetic/themes/BUNDLE_NAME/"
      * bundle.packagePath()
-     *   Returns the relative path within the context of web application.
+     *   Returns the URL path to the root of a package within the bundle.
      *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME/"
      * bundle.bundlePath()
-     *   Returns the URL path to the root of the bundle.
+     *   Returns the relative URL path to the root of the bundle within the 
+     *   context of the web application.
      *   Example: "/kinetic/themes/BUNDLE_NAME/"
      * bundle.packagePath()
-     *   Returns the relative path within the context of web application.
+     *   Returns the relative URL path to the root of the package within the 
+     *   context of the web application.
      *   Example: "/kinetic/themes/BUNDLE_NAME/packages/PACKAGE_NAME/"
      */
     public static class Bundle {
