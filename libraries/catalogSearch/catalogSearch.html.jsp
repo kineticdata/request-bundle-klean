@@ -32,10 +32,18 @@
     } else if (querySegments.length > 10) {
         out.println("<div class=\"message\">Error: Search is limited to 10 search terms.</div>");
     } else {
-        bundle.setProperty("searchableAttributes", "Keyword,Expiration Days");
-        String[] searchableAttributes = bundle.getProperty("searchableAttributes").split("\\s*,\\s*");
+        // Retrieve the searchableAttribute property
+        String searchableAttributeString = bundle.getProperty("searchableAttributes");
+        // Default the searchableAttribute property to "Keyword" if it wasn't specified
+        if (searchableAttributeString == null) {searchableAttributeString = "Keyword";}
+        // Initialize the searchable attributes array
+        String[] searchableAttributes = new String[0];
+        // If the searchableAttributeString is not empty
+        if (!searchableAttributeString.equals("")) {
+            searchableAttributes = searchableAttributeString.split("\\s*,\\s*");
+        }
         CatalogSearch catalogSearch = new CatalogSearch(context, catalogName, querySegments);
-        Category[] matchingCategories = catalogSearch.getMatchingCategories();
+        //Category[] matchingCategories = catalogSearch.getMatchingCategories();
         Template[] matchingTemplates = catalogSearch.getMatchingTemplates(searchableAttributes);
         Pattern combinedPattern = catalogSearch.getCombinedPattern();
         if (matchingTemplates.length == 0) {
@@ -52,15 +60,13 @@
         </div>
 
         <div class="templateDescription"><%= CatalogSearch.replaceAll(combinedPattern, matchingTemplates[i].getDescription())%></div>
-        <% String[] attributeNames = matchingTemplates[i].getTemplateAttributeNames();%>
         <div class="attributes">
-            <% for (int j = 0; j < attributeNames.length; j++) {%>
+            <% for (String attributeName : searchableAttributes) {%>
             <div class="attribute">
-                <div class="attributeName"><%= attributeNames[j]%></div>
+                <div class="attributeName"><%= attributeName %></div>
                 <div class="attributeValues">
-                    <% String[] attributeValues = matchingTemplates[i].getTemplateAttributeValues(attributeNames[j]);%>
-                    <% for (int k = 0; k < attributeValues.length && k < 10; k++) {%>
-                    <div class="attributeValue"><%= CatalogSearch.replaceAll(combinedPattern, attributeValues[k])%></div>
+                    <% for (String attributeValue : matchingTemplates[i].getTemplateAttributeValues(attributeName)) {%>
+                    <div class="attributeValue"><%= CatalogSearch.replaceAll(combinedPattern, attributeValue)%></div>
                     <% }%>
                     <div class="clear"></div>
                 </div>
