@@ -151,22 +151,27 @@
         }
     }
 
+    /*
+     * Finally, iterate through the table data and print the JSON output.  Note
+     * that we escape any new-line characters in the data.  We also escape the
+     * double-quote chracter in the as well because they are our delimiter.
+     */
+    out.println("{");
+    out.println("\"count\" : " + count + ",");
+    out.println("\"records\" : [");
+    for (int i = 0; i < tableData.length; i++) {
+        if (i != 0) {
+            out.println(",");
+        }
+        out.print("[");
+        for (int j = 0; j < tableData[i].length; j++) {
+            if (j != 0) {
+                out.print(",");
+            }
+            out.print("\"" + tableData[i][j].replaceAll("\"","\\\\\"").replaceAll("\n", "\\\\n") + "\"");
+        }
+        out.print("]");
+    }
+    out.println("]");
+    out.println("}");
 %>
-{
-"count" : <%= count%>,
-"records" : [
-<% for (int i = 0; i < tableData.length; i++) {%>
-<% if (i != 0) {%>
-,
-<% }%>
-[
-<% for (int j = 0; j < tableData[i].length; j++) {%>
-<% if (j != 0) {%>
-,
-<% }%>
-"<%= tableData[i][j]%>"
-<% }%>
-]
-<% }%>
-]
-}
