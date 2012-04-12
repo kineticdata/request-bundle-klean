@@ -168,7 +168,11 @@
             if (j != 0) {
                 out.print(",");
             }
-            out.print("\"" + tableData[i][j].replaceAll("\"","\\\\\"").replaceAll("\n", "\\\\n") + "\"");
+            if (tableData[i][j] == null) {
+                out.print("\"\"");
+            } else {
+                out.print("\"" + tableData[i][j].replaceAll("\"","\\\\\"").replaceAll("\n", "\\\\n") + "\"");
+            }
         }
         out.print("]");
     }
