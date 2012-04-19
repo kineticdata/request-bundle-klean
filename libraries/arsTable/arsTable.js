@@ -195,22 +195,7 @@ Table.prototype.redraw = function() {
                 }, function() {
                     jQuery(this).removeClass('kd-highlight');
                 });
-
-                // If there is a newline in the current piece of table data then
-                // we will need to build the HTML a little differently.  Instead
-                // of just putting the table data in the table cell we will
-                // wrap each line with a div element then add the divs to the
-                // table cell.
-                if (this.tableData[i][j].match(/\n/)) {
-                    var lines = this.tableData[i][j].split(/\n/);
-                    for ( var k=0; k<lines.length; k++ ) {
-                        var line = jQuery('<div></div>');
-                        line.text(lines[k]);
-                        cell.append(line);
-                    }
-                } else {
-                    cell.text(this.tableData[i][j])
-                }
+                cell.text(this.tableData[i][j])
 
                 if (this.cellCallback != undefined) {
                     this.cellCallback(this, cell, this.tableData[i], i, this.tableData[i][j], j);
