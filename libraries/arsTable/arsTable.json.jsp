@@ -171,7 +171,7 @@
             if (tableData[i][j] == null) {
                 out.print("\"\"");
             } else {
-                out.print("\"" + tableData[i][j].replaceAll("\"","\\\\\"").replaceAll("\n", "\\\\n") + "\"");
+                out.print("\"" + tableData[i][j].replaceAll("\"","\\\\\"").replaceAll("\n", "\\\\n").replaceAll("\r", "\\\\r") + "\"");
             }
         }
         out.print("]");
