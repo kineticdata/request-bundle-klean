@@ -11,6 +11,9 @@
 <%@include file="CatalogSearch.jspf"%>
 
 <%
+    if (context == null) {
+        ResponseHelper.sendUnauthorizedResponse(response);
+    } else {
     /*
      * Clear the output stream to remove any newlines inserted before and after
      * the initialization comments.
@@ -81,4 +84,5 @@
 <%
     }
 }
+    }
 %>

@@ -4,6 +4,9 @@
 <%@page import="java.util.*"%>
 <%@include file="../../core/framework/includes/bundleInitialization.jspf"%>
 <%
+    if (context == null) {
+        ResponseHelper.sendUnauthorizedResponse(response);
+    } else {
     /*
      * Here we are pulling the parameters for the ars helpers call from the request
      * object and processing a few of them as necessary.
@@ -178,4 +181,5 @@
     }
     out.println("]");
     out.println("}");
+    }
 %>
