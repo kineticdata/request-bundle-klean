@@ -34,7 +34,9 @@ textarea {
     /* for IE 6/7 */
     zoom: expression(this.runtimeStyle.zoom="1", this.appendChild(document.createElement("br")).style.cssText="clear:both;font:0/0 serif");
 }
-
+.dynamicText {
+    padding: 10px 3px;
+}
 .subtitle {
     border-top: 1px solid #A1A1A1;
     color: #A1A1A1;
