@@ -40,8 +40,9 @@
     BUNDLE.config = {};
     // Set all of the bundle configuration properties
     <% for (String name : bundle.propertyNames()) {%>
-        BUNDLE.config['<%=name%>'] = '<%=bundle.getProperty(name)%>';
+        BUNDLE.config['<%=name%>'] = '<%=bundle.getProperty(name).replaceAll("'", "\\\\'")%>';
     <% }%>
-        // Set any additional BUNDLE properties
-        BUNDLE.config.user = '<%= (context == null) ? "" : context.getUserName()%>';
+    // Set any additional BUNDLE properties
+    BUNDLE.config.user = '<%= (context == null) ? "" : context.getUserName()%>';
+
 </script>
