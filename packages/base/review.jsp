@@ -30,7 +30,7 @@
         <%@include file="../../core/interface/fragments/formHeadContent.jspf"%>
     </head>
 
-    <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%>">
+    <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%> review">
         <div id="bodyContainer">
             <%@include file="../../common/interface/fragments/contentHeader.jspf"%>
 
