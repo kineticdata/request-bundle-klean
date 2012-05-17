@@ -196,6 +196,7 @@ Table.prototype.redraw = function() {
                     jQuery(this).removeClass('kd-highlight');
                 });
                 cell.text(this.tableData[i][j])
+
                 if (this.cellCallback != undefined) {
                     this.cellCallback(this, cell, this.tableData[i], i, this.tableData[i][j], j);
                 }

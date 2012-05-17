@@ -42,7 +42,7 @@
             // query querySegments that were passed.
             this.queryPatterns = new Pattern[querySegments.length];
             for (int i = 0; i < querySegments.length; i++) {
-                this.queryPatterns[i] = Pattern.compile(".*" + Pattern.quote(querySegments[i]) + ".*", Pattern.CASE_INSENSITIVE);
+                this.queryPatterns[i] = Pattern.compile(".*" + Pattern.quote(querySegments[i]) + ".*", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
             }
 
             // Build a Regex Pattern for matching any of the query querySegments.  This
@@ -58,7 +58,7 @@
                 patternBuilder.append(Pattern.quote(querySegments[i]));
             }
             patternBuilder.append(")(.*?)");
-            this.combinedPattern = Pattern.compile(patternBuilder.toString(), Pattern.CASE_INSENSITIVE);
+            this.combinedPattern = Pattern.compile(patternBuilder.toString(), Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
         }
 
         public Pattern getCombinedPattern() {

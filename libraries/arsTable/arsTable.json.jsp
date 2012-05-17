@@ -4,6 +4,9 @@
 <%@page import="java.util.*"%>
 <%@include file="../../core/framework/includes/bundleInitialization.jspf"%>
 <%
+    if (context == null) {
+        ResponseHelper.sendUnauthorizedResponse(response);
+    } else {
     /*
      * Here we are pulling the parameters for the ars helpers call from the request
      * object and processing a few of them as necessary.
@@ -151,22 +154,32 @@
         }
     }
 
+    /*
+     * Finally, iterate through the table data and print the JSON output.  Note
+     * that we escape any new-line characters in the data.  We also escape the
+     * double-quote chracter in the as well because they are our delimiter.
+     */
+    out.println("{");
+    out.println("\"count\" : " + count + ",");
+    out.println("\"records\" : [");
+    for (int i = 0; i < tableData.length; i++) {
+        if (i != 0) {
+            out.println(",");
+        }
+        out.print("[");
+        for (int j = 0; j < tableData[i].length; j++) {
+            if (j != 0) {
+                out.print(",");
+            }
+            if (tableData[i][j] == null) {
+                out.print("\"\"");
+            } else {
+                out.print("\"" + tableData[i][j].replaceAll("\"","\\\\\"").replaceAll("\n", "\\\\n").replaceAll("\r", "\\\\r") + "\"");
+            }
+        }
+        out.print("]");
+    }
+    out.println("]");
+    out.println("}");
+    }
 %>
-{
-"count" : <%= count%>,
-"records" : [
-<% for (int i = 0; i < tableData.length; i++) {%>
-<% if (i != 0) {%>
-,
-<% }%>
-[
-<% for (int j = 0; j < tableData[i].length; j++) {%>
-<% if (j != 0) {%>
-,
-<% }%>
-"<%= tableData[i][j]%>"
-<% }%>
-]
-<% }%>
-]
-}

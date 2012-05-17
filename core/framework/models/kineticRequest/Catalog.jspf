@@ -20,15 +20,24 @@
         private static final String CATEGORIZATION_FIELD_CATEGORY_ID = "700401990";
         private static final String CATEGORIZATION_FIELD_CATELOG_ID = "600000500";
         private static final String CATEGORIZATION_FIELD_TEMPLATE_ID = "179";
+        private static final String CATEGORIZATION_FIELD_CATEGORY_NAME = "700401900";
+        private static final String CATEGORIZATION_FIELD_CATEGORY_SORT_ORDER = "536870914";
+        private static final String CATEGORIZATION_FIELD_TEMPLATE_NAME = "700001000";
+        private static final String CATEGORIZATION_FIELD_TEMPLATE_PRIORITY = "700061010";
 
         private static final String[] CATEGORIZATION_FIELD_IDS = new String[] {
             CATEGORIZATION_FIELD_CATEGORY_ID, CATEGORIZATION_FIELD_TEMPLATE_ID
         };
         
+        private static final String[] CATEGORIZATION_SORT_FIELD_IDS = new String[] {
+            CATEGORIZATION_FIELD_CATEGORY_SORT_ORDER, CATEGORIZATION_FIELD_CATEGORY_NAME,
+            CATEGORIZATION_FIELD_TEMPLATE_PRIORITY, CATEGORIZATION_FIELD_TEMPLATE_NAME
+        };
+
         private SimpleEntry entry = null;
 
         private Map<String,Category> categoryMap = new LinkedHashMap();
-        private Map<String,Category> sortedCategoryMap = new TreeMap();
+        private Map<String,Category> sortedCategoryMap = new LinkedHashMap();
         private Category[] categories = null;
         private List<Category> rootCategories = new ArrayList();
         private Map<String,Template> templateIdMap = new LinkedHashMap();
@@ -65,7 +74,8 @@
             SimpleEntry[] categorizations = ArsBase.find(context,
                 CATEGORIZATION_FORM_NAME,
                 categorizationQualification,
-                CATEGORIZATION_FIELD_IDS);
+                CATEGORIZATION_FIELD_IDS,
+                CATEGORIZATION_SORT_FIELD_IDS);
 
             for(SimpleEntry categorization : categorizations) {
                 String categoryId = categorization.getEntryFieldValue(CATEGORIZATION_FIELD_CATEGORY_ID);
