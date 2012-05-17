@@ -18,7 +18,7 @@
 
         private static final String CATEGORIZATION_FORM_NAME = "KS_RQT_SurveyTemplateAttrInst_Category_join";
         private static final String CATEGORIZATION_FIELD_CATEGORY_ID = "700401990";
-        private static final String CATEGORIZATION_FIELD_CATELOG_ID = "600000500";
+        private static final String CATEGORIZATION_FIELD_CATALOG_ID = "600000500";
         private static final String CATEGORIZATION_FIELD_TEMPLATE_ID = "179";
         private static final String CATEGORIZATION_FIELD_CATEGORY_NAME = "700401900";
         private static final String CATEGORIZATION_FIELD_CATEGORY_SORT_ORDER = "536870914";
@@ -69,7 +69,7 @@
             Template[] templates = this.getTemplates(context);
             
             String categorizationQualification =
-                "'"+CATEGORIZATION_FIELD_CATELOG_ID+"' = \""+this.getName()+"\"";
+                "'"+CATEGORIZATION_FIELD_CATALOG_ID+"' = \""+this.getName()+"\"";
 
             SimpleEntry[] categorizations = ArsBase.find(context,
                 CATEGORIZATION_FORM_NAME,

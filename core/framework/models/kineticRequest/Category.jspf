@@ -7,7 +7,7 @@
         public static final String FIELD_NAME = "700401900";
         public static final String FIELD_NUMBER_OF_ITEMS = "700401940";
 
-        public static final String FIELD_CATELOG = "600000500";
+        public static final String FIELD_CATALOG = "600000500";
         public static final String FIELD_SORT_ORDER = "700061010";
         public static final String FIELD_STATUS = "7";
         public static final String[] FIELD_IDS = new String[]{
@@ -27,7 +27,7 @@
         public static Category[] findByCatalogName(HelperContext context, String catalogName) {
             Category[] results = new Category[0];
 
-            String qualification = "'"+FIELD_CATELOG+"' = \""+catalogName+"\"";
+            String qualification = "'"+FIELD_CATALOG+"' = \""+catalogName+"\"";
 
             SimpleEntry[] entries = ArsBase.find(context, FORM_NAME, qualification, FIELD_IDS, SORT_FIELD_IDS);
             if (entries != null && entries.length > 0) {
