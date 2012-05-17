@@ -5,7 +5,7 @@
 --%>
 <%
     bundle.setProperty("companyName", "Kinetic Data");
-    bundle.setProperty("catalogName", customerRequest.catalogName());
+    bundle.setProperty("catalogName", customerRequest.getCatalogName());
 
     bundle.setProperty("homeUrl", bundle.applicationPath() + "DisplayPage?name=LoremPortal");
     bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=LoremLogin");

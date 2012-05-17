@@ -8,7 +8,7 @@
 
 <html>
     <head>
-        <title><%= customerRequest.templateName()%></title>
+        <title><%= customerRequest.getTemplateName()%></title>
 
         <%-- Include the application head content. --%>
         <%@include file="../../core/interface/fragments/applicationHeadContent.jspf"%>

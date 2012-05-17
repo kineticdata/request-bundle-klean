@@ -10,6 +10,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title><%= customerRequest.getTemplateName()%></title>
+
         <%-- Include the application head content. --%>
         <%@include file="../../core/interface/fragments/applicationHeadContent.jspf" %>
         <%@include file="../../core/interface/fragments/reviewHeadContent.jspf"%>

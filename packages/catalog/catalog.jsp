@@ -7,7 +7,7 @@
 <%-- Retrieve the Catalog --%>
 <%
     // Retrieve the main catalog object
-    Catalog catalog = Catalog.findByName(context, customerRequest.catalogName());
+    Catalog catalog = Catalog.findByName(context, customerRequest.getCatalogName());
     // Preload the catalog child objects (such as Categories, Templates, etc) so
     // that they are available.  Preloading all of the related objects at once
     // is more efficient than loading them individually.
