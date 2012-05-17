@@ -46,3 +46,6 @@
 #reviewContent .frame#PAGE_ReviewPages {
     width: 100%;
 }
+.questionLayer:hover {
+    background: transparent;
+}
