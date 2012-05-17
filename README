@@ -1,1 +1,30 @@
-TODO: This README should include documentation about the klean bundle.
+== Klean Bundle
+The Klean bundle is a simple theming skeleton intended to function as a drop in
+solution or to be extended and modified to fit your theming and branding needs.
+
+For more information about bundle development, see the Kinetic Request Bundle
+Guide on our community site:  http://community.kineticdata.com/
+  10_Kinetic_Request/Documentation/Kinetic_Request_Bundle_Guide
+
+For more information about the Klean bundle, see the Klean Bundle Reference
+Guide on our community site: http://community.kineticdata.com/
+  10_Kinetic_Request/Documentation/Kinetic_Request_Bundle_Guide/Bundle%3A_Klean
+
+
+== Theming and Branding with Kinetic Request
+Kinetic Request allows you to completely customize the look and feel of your 
+service catalog, forms, and other consoles.  Since Kinetic Request is a Java 
+web application, accessed by a web browser (such as Internet Explorer, Firefox,
+Safari, or Chrome), specifying the overall look and feel is accomplished using
+standard and well established web development technologies: HTML, CSS, 
+Javascript, and a little bit of Java.
+
+A Bundle is a self contained collection of files intended to simplify the 
+improvement of web-based Kinetic Request interfaces. These files are stored 
+with the Kinetic Request web application, and help to define both interface 
+architecture (such as how to retrieve dynamic Kinetic Request information) 
+and the interface look and feel. The Kinetic Bundle strategy leverages common 
+web technologies (HTML, CSS, Javascript) together with JSP to implement a 
+fully brandable service interface.  A Bundle represents a consistent web 
+presence or identity for the Kinetic Request application, and allows a single 
+Kinetic Request installation to serve multiple themes and brands.
