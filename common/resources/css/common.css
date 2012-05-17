@@ -21,6 +21,9 @@ a {
 a:hover {
     color: #88A7C3;
 }
+img {
+    border: none;
+}
 
 #bodyContainer {
     margin: 0 auto;
