@@ -46,11 +46,13 @@
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/container/container.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/json/json.js"%>"></script>
 <% } else { %>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/utilities/utilities.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/container/container-min.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/button/button-min.js"%>"></script>
 <script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/calendar/calendar-min.js"%>"></script>
+<script type="text/javascript" src="<%=bundle.applicationPath() + "resources/js/yui/build/json/json-min.js"%>"></script>
 <% } %>
 
 <%--
