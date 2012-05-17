@@ -7,12 +7,7 @@
 <%-- Include the package initialization file. --%>
 <%@include file="framework/includes/packageInitialization.jspf"%>
 
-<%--
-    Set the docutype to XHTML 1.0 Transitional, this is required for Review
-    Request iFrame elements to be sized properly.
---%>
 <!DOCTYPE html>
-
 <html>
     <head>
         <%-- Include the application head content. --%>
@@ -25,9 +20,11 @@
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css">
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/review.css" type="text/css">
-
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/display.js"></script>
+
+        <%-- Include the form head content, including attached css/javascript files and custom header content --%>
+        <%@include file="../../core/interface/fragments/formHeadContent.jspf"%>
     </head>
 
     <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%>">

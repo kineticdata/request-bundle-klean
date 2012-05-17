@@ -1,0 +1,37 @@
+<%--
+    This file should be included in any bundle or package pages that want to
+    include head content specified in the Kinetic Form (IE attached css or
+    javascript files and custom header content).
+
+    In general, this file should not be modified.
+--%>
+
+<%--
+  CSS
+    Include the custom css file if one has been uploaded as an attachment to the
+    Kinetic form definition.
+--%>
+<% if (!BundleHelper.isBlank(customerSurvey.getStylesheetFileName())) {%>
+<!-- Attached CSS Stylesheet File -->
+<link href="<%= customerSurvey.getStylesheetFileName().trim()%>" rel="stylesheet" type="text/css"/>
+<%}%>
+
+<%--
+  Javascript
+    Include the custom javascript file if one has been uploaded as an attachment
+    to the Kinetic form definition.
+--%>
+<% if (!BundleHelper.isBlank(customerSurvey.getJavascriptFileName())) {%>
+<!-- Attached Javascript File -->
+<script type="text/javascript" src="<%= customerSurvey.getJavascriptFileName().trim()%>"></script>
+<% }%>
+
+<%--
+  CSS and Javascript - Custom Header Content
+    Include the custom header content if any has been specified within the
+    custom header content section of the Kinetic form defintion.
+--%>
+<% if(!BundleHelper.isBlank(customerSurvey.getCustomHeaderContent())) { %>
+<!-- Custom Header Content -->
+<%= customerSurvey.getCustomHeaderContent() %>
+<% } %>
