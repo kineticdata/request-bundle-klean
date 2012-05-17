@@ -33,6 +33,19 @@
         customerSurveyReview = reviewPages.get(0);
         // Overwrite the default customer survey values (which are blank) with
         // appropriate values from the CustomerSurveyReview object.
+        com.kd.kineticSurvey.beans.CustomerSurvey customerSurvey = (com.kd.kineticSurvey.beans.CustomerSurvey) request.getAttribute("customerSurvey");
+        if (customerSurvey == null) {
+            customerSurvey = new com.kd.kineticSurvey.beans.CustomerSurvey();
+            request.setAttribute("customerSurvey", customerSurvey);
+        }
+        customerSurvey.setCategory(customerSurveyReview.getCategory());
+        customerSurvey.setCompanyName(customerSurveyReview.getCompanyName());
+        customerSurvey.setCompanyID(customerSurveyReview.getCompanyID());
+        customerSurvey.setFirstName(customerSurveyReview.getFirstName());
+        customerSurvey.setLastName(customerSurveyReview.getLastName());
+        customerSurvey.setClientLocale(customerSurveyReview.getClientLocale());
+        customerSurvey.setSurveyTemplateInstanceID(customerSurveyReview.getSurveyTemplateInstanceID());
+        customerSurvey.setCustomerSurveyInstanceID(customerSurveyReview.getCustomerSurveyInstanceID());
         customerSurvey.setSurveyTemplateName(customerSurveyReview.getSurveyTemplateName());
         customerSurvey.setSuccessMessage(customerSurveyReview.getSuccessMessage());
         customerSurvey.setErrorMessage(customerSurveyReview.getErrorMessage());
