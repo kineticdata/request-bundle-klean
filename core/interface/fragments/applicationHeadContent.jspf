@@ -101,7 +101,7 @@
         clientManager.isAuthenticationRequired = '<%= customerSurvey.isAuthenticationRequired()%>';
         clientManager.isNewPage = <%=customerSurvey.getIsNewPage()%>;
         clientManager.maxCharsOnSubmit = <%=customerSurvey.getMaxCharsOnSubmit()%>;
-        clientManager.originatingPage = '<%=com.kd.kineticSurvey.impl.SurveyUtilities.encodeXMLContent(UserContext.getOriginatingPage())%>';
+        clientManager.originatingPage = '<%=org.apache.commons.lang3.StringEscapeUtils.escapeXml(UserContext.getOriginatingPage())%>';
         clientManager.sessionId = '<%=customerSurvey.getCustomerSessionInstanceID()%>';
         clientManager.submitType = '<%=customerSurvey.getSubmitType()%>'
         clientManager.successMessage = '<%=String.valueOf(customerSurvey.getSuccessMessage()).replaceAll("'", "\\\\'")%><%=String.valueOf(UserContext.getSuccessMessage()).replaceAll("'", "\\\\'")%>';
