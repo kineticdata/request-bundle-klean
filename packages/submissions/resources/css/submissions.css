@@ -18,12 +18,12 @@ table.kd-table th, table.kd-table td {
     padding: 3px;
 }
 table.kd-table th {
-    background: url('../../../../common/resources/images/background_blue_3B6E9C_88A7C3.png');
+    background-color: #88A7C3;
     color: #FFFFFF;
     cursor: pointer;
 }
 table.kd-table th:hover {
-    background: url('../../../../common/resources/images/background_light_blue_628BAF_A0B9CE.png');
+    background-color: #A0B9CE;
 }
 table.kd-table tr {
     background: #E9E9E9;
@@ -32,7 +32,7 @@ table.kd-table tr.kd-odd {
     background: #F9F9F9;
 }
 table.kd-table tr:hover {
-    background: #88A7C3;
+    background: #A0B9CE;
     color: white;
 }
 table.kd-table tr:hover a {
@@ -50,13 +50,13 @@ table.kd-table tr:hover a:hover {
     margin-left: 10px;
 }
 .control.button {
-    background: url('../../../../common/resources/images/background_grey_A1A1A1_C6C6C6.png') repeat-x;
+    background-color: #C6C6C6;
     border: 1px solid #A1A1A1;
     cursor: pointer;
     padding: 1px;
 }
 .control.button:hover {
-    background: url('../../../../common/resources/images/background_light_grey_B4B4B4_D2D2D2.png') repeat-x;
+    background-color: #D2D2D2;
 }
 .control.summary {
 }
@@ -71,7 +71,7 @@ table.kd-table tr:hover a:hover {
 }
 
 .navigation {
-    width: 975px; /* width of the image */
+    width: 940px; /* width of the image */
 }
 .navigationItem {
     color: #3B6E9C;
@@ -97,7 +97,7 @@ table.kd-table tr:hover a:hover {
     float: left;
 }
 .switch {
-    background: url('../../../../common/resources/images/background_grey_A1A1A1_C6C6C6.png');
+    background-color: #C6C6C6;
     border: 1px solid #A1A1A1;
     color: #FFFFFF;
     cursor: pointer;
@@ -111,14 +111,14 @@ table.kd-table tr:hover a:hover {
 
 }
 .switch:hover {
-    background: url('../../../../common/resources/images/background_light_grey_B4B4B4_D2D2D2.png');
+    background-color: #D2D2D2;
 }
 .switch.active {
-    background: url('../../../../common/resources/images/background_blue_3B6E9C_88A7C3.png');
+    background-color: #88A7C3;
     border: 1px solid #3B6E9C;
 }
 .switch.active:hover {
-    background: url('../../../../common/resources/images/background_light_blue_628BAF_A0B9CE.png');
+    background-color: #A0B9CE;
 }
 
 .ui-dialog {
@@ -126,7 +126,7 @@ table.kd-table tr:hover a:hover {
     text-align: left;
 }
 .ui-dialog .ui-dialog-titlebar {
-    background: url('../../../../common/resources/images/background_blue_3B6E9C_88A7C3.png');
+    background-color: #88A7C3;
     border: 1px solid #3B6E9C;
     cursor: move;
     padding: 3px;

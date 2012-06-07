@@ -21,23 +21,20 @@ a {
 a:hover {
     color: #88A7C3;
 }
-img {
-    border: none;
-}
 
 #bodyContainer {
     margin: 0 auto;
     min-height: 100%;
     position: relative;
     text-align: left;
-    width: 975px;
+    width: 940px;
 }
 #contentBody {
     margin-top: 15px;
     padding-bottom: 50px;
 }
 #contentFooter {
-    background: url('../images/roundRectangle.png') no-repeat top;
+    background-color: #D2D2D2;
     bottom: 0;
     color: #616161;
     line-height: 35px;
@@ -46,7 +43,7 @@ img {
     width: 100%;
 }
 #contentHeader {
-    background: url('../images/roundRectangle.png') no-repeat bottom;
+    background-color: #D2D2D2;
     color: #616161;
     padding: 7px;
 }
