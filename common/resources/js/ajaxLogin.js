@@ -44,7 +44,7 @@ BUNDLE.ajaxLogin = function(options) {
     jQuery('#bodyContainer').append(element);
     element.dialog({
         closeText: 'cancel',
-        width: 500,
+        width: 300,
         modal: true,
         buttons : {
             "Log In": function() {

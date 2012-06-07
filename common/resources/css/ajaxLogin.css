@@ -1,11 +1,12 @@
-#ajaxLogin #ajaxLoginForm {
-}
 #ajaxLogin .field {
     padding: 5px;
 }
 #ajaxLogin .field .label {
     float: left;
     font-weight: bold;
+    line-height: 21px;
+    width: 90px;
 }
 #ajaxLogin .field .input {
+    margin-left: 90px;
 }
