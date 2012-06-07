@@ -1,0 +1,11 @@
+#ajaxLogin #ajaxLoginForm {
+}
+#ajaxLogin .field {
+    padding: 5px;
+}
+#ajaxLogin .field .label {
+    float: left;
+    font-weight: bold;
+}
+#ajaxLogin .field .input {
+}

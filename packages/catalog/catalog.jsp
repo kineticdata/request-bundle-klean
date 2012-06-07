@@ -26,7 +26,6 @@
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/catalog.css" type="text/css">
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.bundlePath()%>libraries/jQuery/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="<%=bundle.bundlePath()%>libraries/catalogSearch/catalogSearch.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/catalog.js"></script>
     </head>

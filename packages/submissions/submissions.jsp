@@ -16,8 +16,6 @@
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissions.css" type="text/css">
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.bundlePath()%>libraries/jQuery/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="<%=bundle.bundlePath()%>libraries/jQuery/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript" src="<%=bundle.bundlePath()%>libraries/arsTable/arsTable.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissions.js"></script>
     </head>

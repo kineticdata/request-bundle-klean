@@ -19,6 +19,8 @@
 --%>
 <link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.css" />
+<link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/dialog.css" />
+<link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/ajaxLogin.css" />
 <!--[if IE 6]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.ie6.css" /><![endif]-->
 <!--[if IE 7]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.ie7.css" /><![endif]-->
 
@@ -47,3 +49,10 @@
     BUNDLE.config.user = '<%= (context == null) ? "" : context.getUserName()%>';
 
 </script>
+
+<%--
+    Load the common bundle javascript files
+--%>
+<script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/ajaxLogin.js"></script>

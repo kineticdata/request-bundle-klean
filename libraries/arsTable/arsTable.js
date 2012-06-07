@@ -137,7 +137,7 @@ Table.prototype.refresh = function() {
     '&pageSize=' + this.pageSize +
     '&pageNumber=' + this.pageNumber +
     '&noCache=' + timestamp;
-    jQuery.ajax({
+    BUNDLE.ajax({
         url: url,
         type: 'GET',
         dataType: 'json',
