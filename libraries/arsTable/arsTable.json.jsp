@@ -15,7 +15,7 @@
      * as Strings and no further processing is needed.
      */
     String form = request.getParameter("form");
-    String qualification = request.getParameter("qualification");
+    String qualification = bundle.getProperty(request.getParameter("qualification"));
 
     /*
      * Retrieve the pageSize and pageNumber parameters.  These need to be converted

@@ -94,15 +94,6 @@ jQuery(document).ready(function() {
     var submissionsSortOrder = 'descending';
     var submissionsPageSize = 15;
     var submissionsPageNumber = 1;
-        
-    var qualificationBase = '\'ApplicationName\'="Kinetic Request" AND ';
-    var qualifications = {
-        'RequestsParked'     : qualificationBase + '\'Status\'="In Progress" AND \'Request_Status\'="Open" AND \'Submit Type\'=$NULL$',
-        'RequestsOpen'       : qualificationBase + '\'Status\'="Completed" AND \'Request_Status\'="Open" AND \'Submit Type\'=$NULL$',
-        'RequestsClosed'     : qualificationBase + '\'Request_Status\'="Closed" AND \'Submit Type\'=$NULL$',
-        'ApprovalsPending'   : qualificationBase + '\'Request_Status\'="Open" AND \'Submit Type\'="Approval"',
-        'ApprovalsCompleted' : qualificationBase + '\'ApplicationName\'="Kinetic Request" AND \'Request_Status\'="Closed" AND \'Submit Type\'="Approval"'
-    }
 
     function commonTableCallback(table, element) {
         jQuery('.controls .pageNumber .currentPage').val(table.pageNumber);
@@ -173,7 +164,7 @@ jQuery(document).ready(function() {
     tables['RequestsOpen'] = new Table({
         container: '#tableContainerRequestsOpen',
         form: submissionsForm,
-        qualification: qualifications['RequestsOpen'],
+        qualification: 'RequestsOpen',
         fields: submissionsFields,
         hiddenFields: submissionsHiddenFields,
         sortField: submissionsSortField,
@@ -188,7 +179,7 @@ jQuery(document).ready(function() {
     tables['RequestsClosed'] = new Table({
         container: '#tableContainerRequestsClosed',
         form: submissionsForm,
-        qualification: qualifications['RequestsClosed'],
+        qualification: 'RequestsClosed',
         fields: submissionsFields,
         hiddenFields: submissionsHiddenFields,
         sortField: submissionsSortField,
@@ -203,7 +194,7 @@ jQuery(document).ready(function() {
     tables['RequestsParked'] = new Table({
         container: '#tableContainerRequestsParked',
         form: submissionsForm,
-        qualification: qualifications['RequestsParked'],
+        qualification: 'RequestsParked',
         fields: submissionsFields,
         hiddenFields: submissionsHiddenFields,
         sortField: submissionsSortField,
@@ -218,7 +209,7 @@ jQuery(document).ready(function() {
     tables['ApprovalsPending'] = new Table({
         container: '#tableContainerApprovalsPending',
         form: submissionsForm,
-        qualification: qualifications['ApprovalsPending'],
+        qualification: 'ApprovalsPending',
         fields: submissionsFields,
         hiddenFields: submissionsHiddenFields,
         sortField: submissionsSortField,
@@ -233,7 +224,7 @@ jQuery(document).ready(function() {
     tables['ApprovalsCompleted'] = new Table({
         container: '#tableContainerApprovalsComplete',
         form: submissionsForm,
-        qualification: qualifications['ApprovalsCompleted'],
+        qualification: 'ApprovalsCompleted',
         fields: submissionsFields,
         hiddenFields: submissionsHiddenFields,
         sortField: submissionsSortField,

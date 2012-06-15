@@ -11,6 +11,12 @@
     bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=LoremLogin");
     bundle.setProperty("logoutUrl", "KSAuthenticationServlet?Logout=true");
 
+    bundle.setProperty("RequestsParked",     "'ApplicationName'=\"Kinetic Request\" AND 'Status'=\"In Progress\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=$NULL$");
+    bundle.setProperty("RequestsOpen",       "'ApplicationName'=\"Kinetic Request\" AND 'Status'=\"Completed\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=$NULL$");
+    bundle.setProperty("RequestsClosed",     "'ApplicationName'=\"Kinetic Request\" AND 'Request_Status'=\"Closed\" AND 'Submit Type'=$NULL$");
+    bundle.setProperty("ApprovalsPending",   "'ApplicationName'=\"Kinetic Request\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=\"Approval\"");
+    bundle.setProperty("ApprovalsCompleted", "'ApplicationName'=\"Kinetic Request\" AND 'ApplicationName'=\"Kinetic Request\" AND 'Request_Status'=\"Closed\" AND 'Submit Type'=\"Approval\"");
+
     // This is a path to the review jsp to be used by review request.
     bundle.setProperty("reviewJsp", bundle.relativeBundlePath() + "packages/base/review.jsp");
 %>
