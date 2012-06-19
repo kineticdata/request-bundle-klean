@@ -1,0 +1,32 @@
+<%--
+    This file is responsible for initializing the common framework.  It is
+    loaded by the core bundleInitialization.jspf file (which is responsible for
+    initializing the bundle framework).  It loads the common configuration file
+    and any present helpers or models.
+
+    This file will need to be modified if there are any helper or model classes
+    that are added to common.  Samples are included below.
+--%>
+
+<%-- 
+    Include any helper files.
+
+    Format:
+      <%@include file="../helpers/HELPER.jspf
+    Example:
+      <%@include file="../helpers/LanguageHelper.jspf
+--%>
+
+
+<%--
+    Include any model files.
+
+    Format:
+      <%@include file="../models/SYSTEM/MODEL.jspf
+    Example:
+      <%@include file="../models/kineticSample/Person.jspf
+--%>
+
+
+<%-- Include the configuration file in the common package. --%>
+<%@include file="../../config/config.jspf" %>

@@ -25,9 +25,6 @@
     if (UserContext != null) { context = UserContext.getArContext(); }
 %>
 
-<%-- Include the configuration file in the common package. --%>
-<%@include file="../../../common/config/config.jspf" %>
-
 <%-- Include any helper files. --%>
 <%@include file="../helpers/BundleHelper.jspf" %>
 <%@include file="../helpers/CycleHelper.jspf" %>
@@ -43,3 +40,6 @@
 <%@include file="../models/kineticRequest/TemplateAttribute.jspf" %>
 <%@include file="../models/kineticTask/Task.jspf" %>
 <%@include file="../models/kineticTask/TaskMessage.jspf" %>
+
+<%-- Include the commonInitialization file. --%>
+<%@include file="../../../common/framework/includes/commonInitialization.jspf" %>
