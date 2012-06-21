@@ -127,7 +127,7 @@ jQuery(document).ready(function() {
                             closeText: 'close',
                             width: 500
                         });
-                        $(element).parent().append('<div class="shadow"></div>');
+                        $(element).parent().append('<div class="kd-shadow"></div>');
                     });
             });
             jQuery(element).append(anchor);

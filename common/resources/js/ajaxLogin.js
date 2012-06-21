@@ -61,5 +61,5 @@ BUNDLE.ajaxLogin = function(options) {
             }
         }
     });
-    $(element).parent().append('<div class="shadow"></div>');
+    $(element).parent().append('<div class="kd-shadow"></div>');
 }

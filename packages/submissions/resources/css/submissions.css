@@ -121,33 +121,8 @@ table.kd-table tr:hover a:hover {
     background-color: #A0B9CE;
 }
 
-.ui-dialog {
-    position: absolute;
-    text-align: left;
-}
-.ui-dialog .ui-dialog-titlebar {
-    background-color: #88A7C3;
-    border: 1px solid #3B6E9C;
-    cursor: move;
-    padding: 3px;
-}
-.ui-dialog .ui-dialog-titlebar .ui-dialog-title {
-    color: white;
-    font-weight: bold;
-}
-.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
-    color: white;
-    position: absolute;
-    right: 5px;
-    top: 5px;
-}
-.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close span:hover {
-    text-decoration: underline;
-}
 .submissionDetails {
     background-color: #FFFFFF;
-    border: 1px solid #3B6E9C;
-    border-top-width: 0px;
     padding: 5px;
     overflow-y: scroll;
 }
@@ -195,81 +170,4 @@ table.kd-table tr:hover a:hover {
 }
 .submissionDetails .tasks .task.even {
     background-color: #F9F9F9;
-}
-
-.ui-resizable-handle {
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    font-size: 0.1px;
-    z-index: 1000;
-    display: block;
-}
-.ui-resizable-n {
-    cursor: n-resize;
-    height: 7px;
-    width: 100%;
-    top: -5px;
-    left: 0;
-}
-.ui-resizable-e {
-    cursor: e-resize;
-    width: 7px;
-    right: -5px;
-    top: 0;
-    height: 100%;
-}
-.ui-resizable-s {
-    cursor: s-resize;
-    height: 7px;
-    width: 100%;
-    bottom: -5px;
-    left: 0;
-}
-.ui-resizable-w {
-    cursor: w-resize;
-    width: 7px;
-    left: -5px;
-    top: 0;
-    height: 100%;
-}
-.ui-resizable-sw {
-    cursor: sw-resize;
-    width: 9px;
-    height: 9px;
-    left: -5px;
-    bottom: -5px;
-}
-.ui-resizable-nw {
-    cursor: nw-resize;
-    width: 9px;
-    height: 9px;
-    left: -5px;
-    top: -5px;
-}
-.ui-resizable-ne {
-    cursor: ne-resize;
-    width: 9px;
-    height: 9px;
-    right: -5px;
-    top: -5px;
-}
-.ui-resizable-se {
-    cursor: se-resize;
-    width: 9px;
-    height: 9px;
-    right: -5px;
-    bottom: -5px;
-}
-.shadow {
-    background-color: black;
-    display: block;
-    height: 100%;
-    left: 5px;
-    opacity: 0.50;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
-    position: absolute;
-    top: 5px;
-    width: 100%;
-    z-index: -1;
 }
