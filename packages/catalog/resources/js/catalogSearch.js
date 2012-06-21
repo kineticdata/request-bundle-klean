@@ -51,7 +51,7 @@ CatalogSearch.prototype.search = function() {
     
     // Execute the ajax request.
     BUNDLE.ajax({
-        url: BUNDLE.bundlePath + 'libraries/catalogSearch/catalogSearch.html.jsp?catalogName=' + this.catalogName + '&query=' + this.searchValue + '&noCache=' + timestamp,
+        url: BUNDLE.packagePath + 'interface/callbacks/catalogSearch.html.jsp?catalogName=' + this.catalogName + '&query=' + this.searchValue + '&noCache=' + timestamp,
         success: __bind(function(data) {
             jQuery(this.searchInput).val('');
             jQuery(this.searchResultsContainer).empty();

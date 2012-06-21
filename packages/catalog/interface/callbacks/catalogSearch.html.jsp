@@ -2,13 +2,13 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <%-- Include the bundle initialization file. --%>
-<%@include file="../../core/framework/includes/bundleInitialization.jspf"%>
+<%@include file="../../../../core/framework/includes/bundleInitialization.jspf"%>
 
 <%-- 
     Include the CatalogSearch fragment that defines the CatalogSearch class that
     will be used to retrieve and filter the catalog data.
 --%>
-<%@include file="CatalogSearch.jspf"%>
+<%@include file="../../framework/helpers/CatalogSearch.jspf"%>
 
 <%
     if (context == null) {
