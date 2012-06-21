@@ -128,7 +128,7 @@ Table.prototype.refresh = function() {
     var date = new Date();
     var timestamp = date.getTime();
     
-    var url = BUNDLE.bundlePath + '/libraries/arsTable/arsTable.json.jsp' +
+    var url = BUNDLE.bundlePath + '/common/interface/callbacks/arsTable.json.jsp' +
     '?form=' + this.form +
     '&qualification=' + this.qualification +
     '&fieldIds=' + fieldIds +

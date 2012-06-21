@@ -16,7 +16,7 @@
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissions.css" type="text/css">
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.bundlePath()%>libraries/arsTable/arsTable.js"></script>
+        <script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/arsTable.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissions.js"></script>
     </head>
 

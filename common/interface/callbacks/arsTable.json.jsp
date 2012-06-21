@@ -2,7 +2,7 @@
 <%@page import="com.remedy.arsys.api.*"%>
 <%@page import="com.kd.arsHelpers.*"%>
 <%@page import="java.util.*"%>
-<%@include file="../../core/framework/includes/bundleInitialization.jspf"%>
+<%@include file="../../../core/framework/includes/bundleInitialization.jspf"%>
 <%
     if (context == null) {
         ResponseHelper.sendUnauthorizedResponse(response);
