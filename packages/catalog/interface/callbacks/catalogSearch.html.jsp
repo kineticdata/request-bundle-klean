@@ -2,7 +2,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <%-- Include the bundle initialization file. --%>
-<%@include file="../../../../core/framework/includes/bundleInitialization.jspf"%>
+<%@include file="../../framework/includes/packageInitialization.jspf"%>
 
 <%-- 
     Include the CatalogSearch fragment that defines the CatalogSearch class that
