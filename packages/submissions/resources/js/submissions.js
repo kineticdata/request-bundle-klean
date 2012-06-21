@@ -118,9 +118,9 @@ jQuery(document).ready(function() {
             jQuery(element).empty();
             var anchor = jQuery('<a href="javascript:void(0)">' + cellData + '</a>');
             anchor.click(function() {
-                jQuery.get(BUNDLE.packagePath + 'interface/callbacks/submissionDetails.html.jsp?csrv=' +
-                    rowData[table.getIndex('Instance Id')],
-                    function(data) {
+                BUNDLE.ajax({
+                    url: BUNDLE.packagePath + 'interface/callbacks/submissionDetails.html.jsp?csrv=' + rowData[table.getIndex('Instance Id')],
+                    success: function(data) {
                         var element = jQuery(data);
                         jQuery('#dialogContainer').append(element);
                         element.dialog({
@@ -128,7 +128,8 @@ jQuery(document).ready(function() {
                             width: 500
                         });
                         $(element).parent().append('<div class="kd-shadow"></div>');
-                    });
+                    }
+                });
             });
             jQuery(element).append(anchor);
         }
