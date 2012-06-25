@@ -25,22 +25,22 @@
             <%@include file="../../common/interface/fragments/contentHeader.jspf"%>
             <div id="contentBody">
                 <div class="navigation">
-                    <div class="navigationItem active">Requests</div>
-                    <div class="navigationItem">Approvals</div>
+                    <div data-type="Requests" class="navigationItem active">Requests</div>
+                    <div data-type="Approvals" class="navigationItem">Approvals</div>
                     <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
 
                 <div class="content">
                     <div class="switches" id="switchesRequests">
-                        <div class="switch active">Open</div>
-                        <div class="switch">Closed</div>
-                        <div class="switch">Parked</div>
+                        <div data-type="Requests" data-subtype="Open" class="switch active">Open</div>
+                        <div data-type="Requests" data-subtype="Closed" class="switch">Closed</div>
+                        <div data-type="Requests" data-subtype="Parked" class="switch">Parked</div>
                         <div class="clear"></div>
                     </div>
                     <div class="switches hidden" id="switchesApprovals">
-                        <div class="switch active">Pending</div>
-                        <div class="switch">Completed</div>
+                        <div data-type="Approvals" data-subtype="Pending" class="switch active">Pending</div>
+                        <div data-type="Approvals" data-subtype="Completed" class="switch">Completed</div>
                         <div class="clear"></div>
                     </div>
                     <%@include file="interface/fragments/tableControls.jspf"%>
@@ -48,7 +48,7 @@
                     <div class="tableContainer hidden" id="tableContainerRequestsClosed"></div>
                     <div class="tableContainer hidden" id="tableContainerRequestsParked"></div>
                     <div class="tableContainer hidden" id="tableContainerApprovalsPending"></div>
-                    <div class="tableContainer hidden" id="tableContainerApprovalsComplete"></div>
+                    <div class="tableContainer hidden" id="tableContainerApprovalsCompleted"></div>
                     <%@include file="interface/fragments/tableControls.jspf"%>
                 </div>
 
