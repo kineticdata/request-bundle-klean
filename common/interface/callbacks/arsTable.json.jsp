@@ -103,7 +103,7 @@
         if (context != null) {
             // Retrieve the fields
             try {
-                fields = FieldFactory.findObjects(context.getContextCopy(), fieldListCriteria, fieldCriteria);
+                fields = FieldFactory.findObjects(context.getContext(), fieldListCriteria, fieldCriteria);
             } catch (ARException e) {
                 throw new RuntimeException(e);
             }
