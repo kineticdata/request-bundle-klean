@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-    // Click event for search
+    // Submit event for catalog search
     jQuery('#catalogSearchForm').submit(function(event) {
         // Prevent default action.
         event.preventDefault();
