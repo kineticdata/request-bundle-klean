@@ -6,9 +6,9 @@
 
 <%-- Specify the HTML5 Doctype --%>
 <!DOCTYPE html>
-
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Sample: Session Timeout</title>
 
         <!-- Dependencies -->

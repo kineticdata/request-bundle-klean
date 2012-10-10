@@ -3,7 +3,7 @@
     Specify that modern IE versions should render the page with their own 
     rendering engine (as opposed to falling back to compatibility mode.
 --%>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <%--
     Set the "Favicon" for the site.  Most modern browswers will associate this
@@ -53,6 +53,9 @@
 <%--
     Load the common bundle javascript files
 --%>
-<script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/jquery-ui-1.8.16.custom.min.js"></script>
+<!--[if IE]>
+    <script charset='utf-8' src='<%=bundle.bundlePath()%>common/resources/js/html5shiv.js' type='text/javascript'></script>
+<![endif]-->
+<script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/jquery-ui-1.9.0.custom.min.js"></script>
 <script type="text/javascript" src="<%=bundle.bundlePath()%>common/resources/js/ajaxLogin.js"></script>

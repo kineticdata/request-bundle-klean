@@ -1,6 +1,6 @@
 <div id="contentHeader">
     <a href="<%= bundle.getProperty("homeUrl")%>">
-        <img class="logo" src="<%= bundle.bundlePath()%>common/resources/images/logo.png"></img>
+        <img alt="<%= bundle.getProperty("companyName")%>" class="logo" src="<%= bundle.bundlePath()%>common/resources/images/logo.png"></img>
     </a>
     <% if (context != null) {%>
     <div class="userInfo">

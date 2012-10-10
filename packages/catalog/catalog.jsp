@@ -15,16 +15,16 @@
 %>
 
 <!DOCTYPE html>
-
 <html>
     <head>
+        <meta charset="utf-8">
         <title><%= bundle.getProperty("companyName") + " " + bundle.getProperty("catalogName")%></title>
 
         <%-- Include the common content. --%>
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/catalog.css" type="text/css">
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/catalog.css" type="text/css" />
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/catalogSearch.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/catalog.js"></script>
@@ -49,16 +49,20 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-                    <div class="search">
-                        <input id="searchInput"></input>
-                        <input id="searchButton" type="button" value="Search"></inupt>
-                    </div>
+                    <form id="catalogSearchForm" method="get" action="<%= bundle.packagePath()%>interface/callbacks/catalogSearch.html.jsp">
+                        <input type="hidden" name="catalogName" value="<%= bundle.getProperty("catalogName")%>" />
+                        <p class="search">
+                            <label for="searchInput"></label>
+                            <input type="search" name="query" id="searchInput" value="" />
+                            <input type="submit" id="searchButton" value="Search" />
+                        </p>
+                    </form>
                     <div class="clear"></div>
                 </div>
 
                 <div id="searchSpinner">
                     Searching for "<span class="searchValue"></span>"
-                    <img src="<%= bundle.bundlePath%>common/resources/images/spinner_00427E_FFFFFF.gif"></img>
+                    <img alt="Loading..." src="<%= bundle.bundlePath%>common/resources/images/spinner_00427E_FFFFFF.gif"></img>
                 </div>
                 <div id="searchResults">
                 </div>
@@ -76,7 +80,7 @@
                             <div class="templates">
                                 <% for (Template template : category.getTemplates()) {%>
                                 <div class="template">
-                                    <a href="<%= pathHelper.templateUrl(template.getId())%>" help="foo"><%= template.getName()%></a>
+                                    <a href="<%= pathHelper.templateUrl(template.getId())%>"><%= template.getName()%></a>
                                 </div>
                                 <% }%>
                             </div>
