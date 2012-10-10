@@ -49,10 +49,14 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-                    <div class="search">
-                        <input id="searchInput"></input>
-                        <input id="searchButton" type="button" value="Search"></inupt>
-                    </div>
+                    <form id="catalogSearchForm" method="get" action="<%= bundle.packagePath()%>interface/callbacks/catalogSearch.html.jsp">
+                        <input type="hidden" name="catalogName" value="<%= bundle.getProperty("catalogName")%>" />
+                        <p class="search">
+                            <label for="searchInput"></label>
+                            <input type="search" name="query" id="searchInput" value="" />
+                            <input type="submit" id="searchButton" value="Search" />
+                        </p>
+                    </form>
                     <div class="clear"></div>
                 </div>
 
