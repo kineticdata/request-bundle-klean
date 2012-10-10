@@ -12,9 +12,9 @@
 <%@include file="framework/includes/redirectIfLoggedIn.jspf"%>
 
 <!DOCTYPE html>
-
 <html>
     <head>
+        <meta charset="utf-8">
         <title><%= customerRequest.getTemplateName()%></title>
 
         <%-- Include the application head content. --%>
@@ -24,7 +24,7 @@
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/login.css" type="text/css">
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/login.css" type="text/css" />
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/login.js"></script>
     </head>
@@ -47,13 +47,13 @@
                         <!-- User Name -->
                         <div class="field" id="usernameField">
                             <div class="label"><label for="UserName">User:</label></div>
-                            <div class="value"><input id="UserName" class="formField" name="UserName" type="text" autocomplete="off" ></div>
+                            <div class="value"><input id="UserName" class="formField" name="UserName" type="text" autocomplete="off" /></div>
                             <div class="clear"></div>
                         </div>
                         <!-- Password -->
                         <div class="field" id="passwordField">
                             <div class="label"><label for="Password">Password:</label></div>
-                            <div class="value"><input id="Password" class="formField" name="Password" type="password" autocomplete="off" ></div>
+                            <div class="value"><input id="Password" class="formField" name="Password" type="password" autocomplete="off" /></div>
                             <div class="clear"></div>
                         </div>
 

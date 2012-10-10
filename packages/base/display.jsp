@@ -5,9 +5,9 @@
 <%@include file="framework/includes/packageInitialization.jspf"%>
 
 <!DOCTYPE html>
-
 <html>
     <head>
+        <meta charset="utf-8">
         <title><%= customerRequest.getTemplateName()%></title>
 
         <%-- Include the application head content. --%>
@@ -18,7 +18,7 @@
         <%@include file="../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css">
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css" />
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/display.js"></script>
 
