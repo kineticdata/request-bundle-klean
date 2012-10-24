@@ -30,6 +30,10 @@
             this.context = context;
             // Retrieve the catalog
             this.catalog = Catalog.findByName(context, catalogName);
+            // Raise an exception if the catalog was not found
+            if (catalog == null) {
+                throw new RuntimeException("Unable to find catalog: "+catalogName);
+            }
             // Preload the catalog items
             catalog.preload(context);
             // Set the query
