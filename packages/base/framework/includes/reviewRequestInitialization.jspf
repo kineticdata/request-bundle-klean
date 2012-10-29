@@ -38,6 +38,7 @@
             customerSurvey = new com.kd.kineticSurvey.beans.CustomerSurvey();
             request.setAttribute("customerSurvey", customerSurvey);
         }
+        customerSurvey.setCustomerSurveyRequestID(customerSurveyReview.getCustomerSurveyRequestID());
         customerSurvey.setCategory(customerSurveyReview.getCategory());
         customerSurvey.setCompanyName(customerSurveyReview.getCompanyName());
         customerSurvey.setCompanyID(customerSurveyReview.getCompanyID());
