@@ -55,5 +55,20 @@
      *     'authenticationType', and 'loginSessionID' to their associated
      *     values.
      */
-    KD.utils.Action.addListener(window, "load", KD.utils.Review.init, reviewObj, true);
+    KD.utils.Action.addListener(window, "load", function() {
+        // If a before callback is defined call it.
+        if ( KD.utils.Review.init.before !== undefined ) {
+            KD.utils.Review.init.before();
+        }
+        // Here we copy the KD.utils.Review.init function to a local variable
+        // and call it.  This is done so that the caller of the function is the
+        // window object rather than the KD.utils.Review object, which is what
+        // the KD.utils.Review.init function expects.
+        var initReivew = KD.utils.Review.init;
+        initReivew();
+        // If an after callback is defined call it.
+        if ( KD.utils.Review.init.after !== undefined ) {
+            KD.utils.Review.init.after();
+        }
+    });
 </script>
