@@ -10,9 +10,10 @@
         public static final String FIELD_STATUS = "7";
         public static final String FIELD_TREE_NAME = "700066802";
         public static final String FIELD_VISIBLE = "700000914";
+        public static final String FIELD_TOKEN = "700066700";
         public static final String[] FIELD_IDS = new String[] {
             FIELD_CREATE_DATE, FIELD_ID, FIELD_MODIFIED_DATE, FIELD_NAME,
-            FIELD_SOURCE_ID, FIELD_STATUS, FIELD_TREE_NAME};
+            FIELD_SOURCE_ID, FIELD_STATUS, FIELD_TREE_NAME, FIELD_TOKEN};
 
         public static Task[] findBySource(HelperContext context, String source, String sourceId) {
             Task[] results = new Task[0];
@@ -54,5 +55,6 @@
         public String getSourceId() {return entry.getEntryFieldValue(FIELD_SOURCE_ID);}
         public String getStatus() {return entry.getEntryFieldValue(FIELD_STATUS);}
         public String getTreeName() {return entry.getEntryFieldValue(FIELD_TREE_NAME);}
+        public String getToken() {return entry.getEntryFieldValue(FIELD_TOKEN);}
     }
 %>
