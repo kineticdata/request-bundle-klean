@@ -27,7 +27,7 @@
         
         public RecordList call() throws Exception {
             BridgeConnector connector = new KsrBridgeConnector(context, templateId);
-            return connector.retrieve(modelName, qualificationName, parameters, metadata, attributeNames);
+            return connector.search(modelName, qualificationName, parameters, metadata, attributeNames);
         }                             
     }
     
