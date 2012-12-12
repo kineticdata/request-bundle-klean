@@ -58,4 +58,29 @@
         }                             
     }
 
+    private static class BridgeCountCall implements Callable<Count> {
+        private HelperContext context;
+        private String templateId;
+        private String modelName;
+        private String qualificationName;
+        private Map<String, String> parameters;
+        private Map<String, String> metadata;
+
+        public BridgeCountCall(HelperContext context, String templateId, String modelName,
+                String qualificationName, Map<String, String> parameters,
+                Map<String, String> metadata) {
+            this.context = context;
+            this.templateId = templateId;
+            this.modelName = modelName;
+            this.qualificationName = qualificationName;
+            this.parameters = parameters;
+            this.metadata = metadata;
+        }
+
+        public Count call() throws Exception {
+            BridgeConnector connector = new KsrBridgeConnector(context, templateId);
+            return connector.count(modelName, qualificationName, parameters, metadata);
+        }
+    }
+
 %>

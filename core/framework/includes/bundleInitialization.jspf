@@ -36,6 +36,7 @@
 <%-- Include any lib files. --%>
 <%@include file="../lib/BridgeCall.jspf" %>
 <%@include file="../lib/BridgeList.jspf" %>
+<%@include file="../lib/BridgeCount.jspf" %>
 
 <%-- Include any helper files. --%>
 <%@include file="../helpers/BundleHelper.jspf" %>

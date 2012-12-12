@@ -1,0 +1,50 @@
+<%!
+    /*
+     * The BridgeCount class is defined to be used as a return type for
+     * asynchronous bridge base calls that would normally retrieve Count.
+     */
+    public static class BridgeCount {
+        // The count member stores the actual Count instance returned from the
+        // bridge call.
+        private Count count;
+        // The futureCount member stores the Future<Count> instance returned
+        // from the asynchronous bridge calls.  When data from the count is
+        // accessed the result from futureCount is accessed and stored as count.
+        private Future<Count> futureCount;
+        
+        public BridgeCount(Future<Count> futureCount) {
+            this.futureCount = futureCount;
+        }
+
+        /*
+         * Define methods that access data from the count member.  Note that
+         * they use the getCount method defined below because we want to ensure
+         * that the futureCount is evaluated if necessary.  Also note that since
+         * since we are evaluating the futureCount instance, these methods will
+         * block and wait for asynchronous calls to return if necessary.
+         */
+        public int value() {
+            return getCount().value();
+        }
+        public Map<String, String> metadata() {
+            return getCount().metadata();
+        }
+
+        /*
+         * Define a smart getter for the count member.  It checks to see if
+         * the futureCount should be evaluated, if so it calls get() on the
+         * futureCount member to retrieve the asynchronous result and stores it
+         * as count.
+         */
+        public Count getCount() {
+            if ( this.count == null && this.futureCount != null ) {
+                try {
+                    this.count = this.futureCount.get();
+                } catch (Exception e) {
+                    throw new RuntimeException("Could not access asynchronous bridge result in BridgeCount#getCount", e);
+                }
+            }
+            return this.count;
+        }
+    }
+%>

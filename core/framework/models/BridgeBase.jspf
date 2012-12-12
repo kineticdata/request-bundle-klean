@@ -146,7 +146,28 @@
         
         /*** COUNT ***
          * 
-         * TODO: Implement count
+         * Define the base bridge count method that uses the multi-threaded
+         * functionality.  It uses the BridgeCountCall and BridgeCount classes
+         * that also implement some of the multi-threaded functionality.
+         *
+         * The count method returns a BridgeCount instance.  The BridgeCount
+         * will have a Future<Count> member which is how it will access the data
+         * returned.
          */
+        public static BridgeCount count(HelperContext context, String templateId,
+                String model, String qualification, Map<String,String> paramaters,
+                Map<String,String> metadata) {
+            Future<Count> future = executor.submit(new BridgeCountCall(context,
+                    templateId, model, qualification, paramaters, metadata));
+            return new BridgeCount(future);
+        }
+        public static BridgeCount count(HelperContext context, String templateId,
+                String model, String qualification, Map<String,String> paramaters) {
+            return count(context, templateId, model, qualification, paramaters, null);
+        }
+        public static BridgeCount count(HelperContext context, String templateId,
+                String model, String qualification) {
+            return count(context, templateId, model, qualification, new java.util.HashMap<String,String>(), null);
+        }
     }
 %>
