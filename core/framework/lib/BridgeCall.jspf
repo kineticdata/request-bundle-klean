@@ -1,0 +1,61 @@
+<%!
+    /*
+     * Here we create the BridgeSearchCall, BridgeRetrieveCall, and
+     * BridgeCountCall classes that implement the Callable interface.  These
+     * classes are used to implement multi-threaded bridge calls.
+     */
+    private static class BridgeSearchCall implements Callable<RecordList> {
+        private HelperContext context;
+        private String templateId;
+        private String modelName;
+        private String qualificationName;
+        private Map<String, String> parameters;
+        private Map<String, String> metadata;
+        private String[] attributeNames;
+
+        public BridgeSearchCall(HelperContext context, String templateId, String modelName,
+                String qualificationName, Map<String, String> parameters,
+                Map<String, String> metadata, String[] attributeNames) {
+            this.context = context;
+            this.templateId = templateId;
+            this.modelName = modelName;
+            this.qualificationName = qualificationName;
+            this.parameters = parameters;
+            this.metadata = metadata;
+            this.attributeNames = attributeNames;
+        }
+        
+        public RecordList call() throws Exception {
+            BridgeConnector connector = new KsrBridgeConnector(context, templateId);
+            return connector.retrieve(modelName, qualificationName, parameters, metadata, attributeNames);
+        }                             
+    }
+    
+    private static class BridgeRetrieveCall implements Callable<Record> {
+        private HelperContext context;
+        private String templateId;
+        private String modelName;
+        private String qualificationName;
+        private Map<String, String> parameters;
+        private Map<String, String> metadata;
+        private String[] attributeNames;
+
+        public BridgeRetrieveCall(HelperContext context, String templateId, String modelName,
+                String qualificationName, Map<String, String> parameters,
+                Map<String, String> metadata, String[] attributeNames) {
+            this.context = context;
+            this.templateId = templateId;
+            this.modelName = modelName;
+            this.qualificationName = qualificationName;
+            this.parameters = parameters;
+            this.metadata = metadata;
+            this.attributeNames = attributeNames;
+        }
+        
+        public Record call() throws Exception {
+            BridgeConnector connector = new KsrBridgeConnector(context, templateId);
+            return connector.retrieve(modelName, qualificationName, parameters, metadata, attributeNames);
+        }                             
+    }
+
+%>

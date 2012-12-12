@@ -1,0 +1,152 @@
+<%!
+    /*
+     * BridgeBase is an abstract class which all models that use bridges to
+     * retrieve data should extend.  The most important functionality provided
+     * by the BridgeBase class are the search, retrieve, and count bridge calls
+     * defined below.  They are implemented in such a way that they are executed
+     * asynchronously which improves performance.
+     */
+    private static abstract class BridgeBase  {
+        // Instantiate the static thread pool that will be used to make bridge
+        // calls below.
+        private static ExecutorService executor = Executors.newFixedThreadPool(50);
+        // The record member stores the actual Record instance returned from the
+        // bridge call, which is where the data for the model resides.
+        private Record record;
+        // The futureRecord member stores the Future<Record> instance returned
+        // from the asynchronous calls defined below.  When data from the model
+        // is accessed the result from futureRecord is accessed and stored as
+        // record.
+        private Future<Record> futureRecord;
+
+        /*
+         * Define methods that access data from the record member.  Note that
+         * they use the getRecord method defined below because we want to ensure
+         * that the futureRecord is evaluated if necessary.  Also note that
+         * since we are evaluating the futureRecord, these methods will block
+         * and wait for asynchronous calls to return if necessary.
+         */
+        public String get(String attribute) {
+            return getRecord().get(attribute);
+        }
+        public Map<String, String> metadata() {
+            return getRecord().metadata();
+        }
+                                    
+        /*
+         * Define setters for the record and futureRecord members.  This is
+         * necessary because the calls that return bridge base models use the
+         * new instance method to create model instances and this does not allow
+         * for constructor arguments.  So these getters are used immediately
+         * after the model instance is created.
+         */
+        public void setRecord(Record record) {
+            this.record = record;
+        }        
+        public void setFutureRecord(Future<Record> futureRecord) {
+            this.futureRecord = futureRecord;
+        }
+        
+        /*
+         * Define a smart getter for the record attribute.  It checks to see if
+         * the futureRecord should be evaluated, if so it calls get() on the
+         * futureRecord member to retrieve the asynchronous result and stores it
+         * as record.
+         */
+        public Record getRecord() {
+            if ( this.record == null && this.futureRecord != null ) {
+                try {
+                    this.record = this.futureRecord.get();
+                } catch (Exception e) {
+                    throw new RuntimeException("Could not access asynchronous bridge result in BridgeBase#getRecord", e);
+                }
+            }
+            return this.record;
+        }
+
+        
+        /*** RETRIEVE ***
+         * 
+         * Define the base bridge retrieve method that uses the multi-threaded
+         * functionality.  To do this it uses the BridgeRetrieveCall class that
+         * also implements some of the multi-threaded functionality.
+         *
+         * The retrieve method returns a single instance of the specified model.
+         * The model instance will have a Future<Record> which is how it will
+         * access the data returned.
+         */
+        public static <T extends BridgeBase> T retrieve(HelperContext context,
+                String templateId, String model, String qualification, Map<String,String> parameters,
+                Map<String,String> metadata, String[] attributes, Class<T> modelClass) {
+            Future<Record> future = executor.submit(new BridgeRetrieveCall(context,
+                    templateId, model, qualification, parameters, metadata, attributes));
+            try {
+                T modelInstance = modelClass.newInstance();
+                modelInstance.setFutureRecord(future);
+                return modelInstance;
+            } catch (Exception e) {
+                throw new RuntimeException("Could not instantiate model in BridgeBase.retrieve "+modelClass.getName(), e);
+            }
+        }
+        public static <T extends BridgeBase> T retrieve(HelperContext context,
+                String templateId, String model, String qualification, Map<String,String> parameters,
+                Map<String,String> metadata, Class<T> modelClass) {
+            return retrieve(context, templateId, model, qualification, parameters,
+                    metadata, null, modelClass);
+        }
+        public static <T extends BridgeBase> T retrieve(HelperContext context,
+                String templateId, String model, String qualification, Map<String,String> parameters,
+                Class<T> modelClass) {
+            return retrieve(context, templateId, model, qualification, parameters,
+                    null, null, modelClass);
+        }
+        public static <T extends BridgeBase> T retrieve(HelperContext context,
+                String templateId, String model, String qualification, Class<T> modelClass) {
+            return retrieve(context, templateId, model, qualification, new java.util.HashMap<String,String>(),
+                    null, null, modelClass);
+        }
+
+               
+        /*** SEARCH ***
+         * 
+         * Define the base bridge search method that uses the multi-threaded
+         * functionality.  It uses the BridgeSearchCall and BridgeList classes
+         * that also implement some of the multi-threaded functionality.
+         *
+         * The search method returns a BridgeList of the specified model.  The
+         * BridgeList will have a Future<RecordList> which is how it will access
+         * the data returned.
+         */
+        public static <T extends BridgeBase> BridgeList<T> search(HelperContext context,
+                String templateId, String model, String qualification, Map<String,String> paramaters,
+                Map<String,String> metadata, String[] attributes, Class<T> modelClass) {
+            Future<RecordList> future = executor.submit(new BridgeSearchCall(context,
+                    templateId, model, qualification, paramaters, metadata,
+                    attributes));
+            return new BridgeList<T>(future, modelClass);
+        }
+        public static <T extends BridgeBase> BridgeList<T> search(HelperContext context,
+                String templateId, String model, String qualification, Map<String,String> paramaters,
+                Map<String,String> metadata, Class<T> modelClass) {
+            return search(context, templateId, model, qualification, paramaters,
+                    metadata, null, modelClass);
+        }
+        public static <T extends BridgeBase> BridgeList<T> search(HelperContext context,
+                String templateId, String model, String qualification, Map<String,String> paramaters,
+                Class<T> modelClass) {
+            return search(context, templateId, model, qualification, paramaters,
+                    null, null, modelClass);
+        }
+        public static <T extends BridgeBase> BridgeList<T> search(HelperContext context,
+                String templateId, String model, String qualification, Class<T> modelClass) {
+            return search(context, templateId, model, qualification, new java.util.HashMap<String,String>(),
+                    null, null, modelClass);
+        }
+        
+        
+        /*** COUNT ***
+         * 
+         * TODO: Implement count
+         */
+    }
+%>

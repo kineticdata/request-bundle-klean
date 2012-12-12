@@ -1,0 +1,79 @@
+<%!
+    /*
+     * The BridgeList class is defined to be used as a return type for
+     * asynchronous bridge base calls that would normally retrieve RecordList
+     * instances.
+     */
+    public static class BridgeList<T extends BridgeBase> implements Iterable<T> {
+        // The future member stores the Future<RecordList> instance where
+        // asynchronous results will be accessed.
+        private Future<RecordList> future;
+        // The modelClass member is the class of the bridge model to be
+        // instantiated by the bridge list.
+        private Class modelClass;
+        // The modelList member is the ArrayList of bridge model instances that
+        // have been created.  These will be instantiated with the results from
+        // the Future<RecordList> above.
+        private ArrayList<T> modelList;
+
+        
+        public <E extends BridgeBase> BridgeList(Future<RecordList> future, Class<E> modelClass) {
+            this.future = future;
+            this.modelClass = modelClass;
+        }
+
+        /*
+         * Define methods that access data from the modelList member.  Note that
+         * they use the getModelList method defined below because we want to
+         * ensure that the future is evaluated if necessary.  Also note that
+         * since we are evaluating the future instance, these methods will block
+         * and wait for asynchronous calls to return if necessary.
+         */
+        public Iterator<T> iterator() {
+            return getModelList().iterator();
+        }
+        public T get(int index) {
+            return getModelList().get(index);
+        }
+        public int size() {
+            return getModelList().size();
+        }
+        public Map<String, String> metadata() {
+            return getRecordList().metadata();
+        }
+
+        /*
+         * Define a smart accessor for the modelList member.  It checks to see
+         * if the modelList has been set, if not it instantiates it.  This is
+         * done by accessing the record list and creating a bridge model
+         * instance for each record.
+         */
+        public ArrayList<T> getModelList() {
+            if ( this.modelList == null ) {
+                this.modelList = new ArrayList<T>();
+                for (Record record : getRecordList()) {
+                    try {
+                        T modelInstance = (T) modelClass.newInstance();
+                        modelInstance.setRecord(record);
+                        this.modelList.add(modelInstance);
+                    } catch (Exception e) {
+                        throw new RuntimeException("Could not instantiate model in BridgeList#getModelList "+modelClass.getName(), e);
+                    }
+                }
+            }
+            return this.modelList;
+        }
+
+        /*
+         * Define an accessor for the record list within this bridge list.  This
+         * method accesses the asynchronous results from the future member.
+         */
+        public RecordList getRecordList() {
+            try {
+                return this.future.get();
+            } catch  (Exception e) {
+                throw new RuntimeException("Could not access asynchronous bridge result in BridgeList#getRecordList", e);
+            }
+        }
+    }
+%>

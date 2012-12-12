@@ -25,6 +25,18 @@
     if (UserContext != null) { context = UserContext.getArContext(); }
 %>
 
+<%-- Import java classes used within the bundle. --%>
+<%@page import="com.kd.ksr.bridges.KsrBridgeConnector"%>
+<%@page import="com.kineticdata.bridges.BridgeConnector"%>
+<%@page import="com.kineticdata.bridges.Count"%>
+<%@page import="com.kineticdata.bridges.Record"%>
+<%@page import="com.kineticdata.bridges.RecordList"%>
+<%@page import="java.util.concurrent.*"%>
+
+<%-- Include any lib files. --%>
+<%@include file="../lib/BridgeCall.jspf" %>
+<%@include file="../lib/BridgeList.jspf" %>
+
 <%-- Include any helper files. --%>
 <%@include file="../helpers/BundleHelper.jspf" %>
 <%@include file="../helpers/CycleHelper.jspf" %>
@@ -33,6 +45,7 @@
 
 <%-- Include any model files. --%>
 <%@include file="../models/ArsBase.jspf" %>
+<%@include file="../models/BridgeBase.jspf" %>
 <%@include file="../models/kineticRequest/Catalog.jspf" %>
 <%@include file="../models/kineticRequest/Category.jspf" %>
 <%@include file="../models/kineticRequest/Submission.jspf" %>
