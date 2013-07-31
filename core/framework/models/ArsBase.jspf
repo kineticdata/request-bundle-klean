@@ -1,11 +1,8 @@
-<%@page import="com.remedy.arsys.api.*"%>
 <%@page import="com.kd.arsHelpers.*"%>
+<%@page import="java.lang.reflect.*"%>
 <%@page import="java.util.*"%>
 <%!
     public abstract static class ArsBase {
-        private static HelperContext defaultHelperContext = null;
-        private static Map<String,Field[]> formFields = new HashMap();
-
         public static SimpleEntry[] find(HelperContext context, String formName, String qualification, String[] fieldIds) {
             return find(context, formName, qualification, fieldIds, new String[0], 0, 0, 1);
         }
@@ -31,7 +28,7 @@
             ArsPrecisionHelper helper = null;
             try {
                 helper = new ArsPrecisionHelper(context);
-            } catch (ARException e) {
+            } catch (Exception e) {
                 throw new RuntimeException("Unable to initialize an ArsHelper instance.", e);
             }
 
@@ -75,74 +72,85 @@
         }
 
         public static Integer count(HelperContext context, String formName, String qualification) {
-            // Declare the result
-            Integer result = new Integer(0);
-
-            // If the list of fields does not exist in the formFields cache
-            Field[] fields = new Field[0];
-            if (!formFields.containsKey(formName)) {
-                // Build up the fieldListCriteria
-                FieldListCriteria fieldListCriteria = new FieldListCriteria(
-                    new NameID(new NameID(formName)),
-                    new Timestamp(0),
-                    FieldType.AR_DATA_FIELD);
-                FieldCriteria fieldCriteria = new com.remedy.arsys.api.FieldCriteria();
-                fieldCriteria.setRetrieveAll(true);
-                fieldCriteria.setPropertiesToRetrieve(
-                    fieldCriteria.getPropertiesToRetrieve() &
-                    ~FieldCriteria.CHANGE_DIARY &
-                    ~FieldCriteria.HELP_TEXT);
-
-                if (defaultHelperContext != null) {
-                    // Retrieve the fields
-                    try {
-                        fields = FieldFactory.findObjects(defaultHelperContext.getContextCopy(), fieldListCriteria, fieldCriteria);
-                    } catch (ARException e) {
-                        throw new RuntimeException(e);
-                    }
-                    formFields.put(formName, fields);
-                } else {
-                    try {
-                        fields = FieldFactory.findObjects(context.getContext(), fieldListCriteria, fieldCriteria);
-                    } catch (ARException e) {
-                        throw new RuntimeException(e);
-                    }
+            Integer count;
+            try {
+                // Attempt to retrieve the ArsPrecisionHelper#getEntryCount method.  If it exists,
+                // indicating that the Kinetic Request version is >= 5.1.1 and the ARS 8.0 api is 
+                // being used, use the getEntryCount method.
+                try {
+                    Method getEntryCount = ArsPrecisionHelper.class.getMethod("getEntryCount", String.class, String.class);
+                    ArsPrecisionHelper helper = new ArsPrecisionHelper(context);
+                    count = (Integer)getEntryCount.invoke(helper, formName, qualification);
                 }
-            } else {
-                fields = formFields.get(formName);
-            }
+                // If the ArsPrecisionHelper#getEntryCount method does not exist, indicating that
+                // the Kinetic Request version is < 5.1.1 and the ARS 7.0 api is being used, use the
+                // ARS 7.0 API directly (via Reflection, so that this class does not have references
+                // to the 7.0 api, and can still be used in Kinetic Request 5.1.1+).
+                catch (NoSuchMethodException classNotFound) {
+                    // Build reflective references to the Ars70 classes
+                    HashMap<String,Class> arsClasses = new HashMap<String,Class>();
+                    arsClasses.put("ARServerUser",      Class.forName("com.remedy.arsys.api.ARServerUser"));
+                    arsClasses.put("Field",             Class.forName("com.remedy.arsys.api.Field"));
+                    arsClasses.put("Field[]",           Class.forName("[Lcom.remedy.arsys.api.Field;"));
+                    arsClasses.put("FieldCriteria",     Class.forName("com.remedy.arsys.api.FieldCriteria"));
+                    arsClasses.put("FieldFactory",      Class.forName("com.remedy.arsys.api.FieldFactory"));
+                    arsClasses.put("FieldListCriteria", Class.forName("com.remedy.arsys.api.FieldListCriteria"));
+                    arsClasses.put("InternalID",        Class.forName("com.remedy.arsys.api.InternalID"));
+                    arsClasses.put("InternalID[]",      Class.forName("[Lcom.remedy.arsys.api.InternalID;"));
+                    arsClasses.put("NameID",            Class.forName("com.remedy.arsys.api.NameID"));
+                    arsClasses.put("Operand",           Class.forName("com.remedy.arsys.api.ArithmeticOrRelationalOperand"));
+                    arsClasses.put("QualifierInfo",     Class.forName("com.remedy.arsys.api.QualifierInfo"));
+                    arsClasses.put("ResultInfo",        Class.forName("com.remedy.arsys.api.StatisticsResultInfo"));
+                    arsClasses.put("SchemaKey",         Class.forName("com.remedy.arsys.api.SchemaKey"));
+                    arsClasses.put("Util",              Class.forName("com.remedy.arsys.api.Util"));
+                    arsClasses.put("Timestamp",         Class.forName("com.remedy.arsys.api.Timestamp"));
+                    arsClasses.put("Value",             Class.forName("com.remedy.arsys.api.Value"));
 
-            // Build the qualification
-            QualifierInfo qualifierInfo = null;
-            try {
-               qualifierInfo = Util.ARGetQualifier(context.getContext(), qualification, fields, null, Constants.AR_QUALCONTEXT_DEFAULT);
-            } catch (ARException e) {
+                    // Obtain a reference to Util.getEntryStatistics(...)
+                    Method getEntryStatistics = arsClasses.get("Util").getDeclaredMethod("ARGetEntryStatistics", 
+                        arsClasses.get("ARServerUser"), arsClasses.get("SchemaKey"), arsClasses.get("QualifierInfo"),
+                        arsClasses.get("Operand"), int.class, arsClasses.get("InternalID[]"));
+                    Method getQualifier = arsClasses.get("Util").getDeclaredMethod("ARGetQualifier", 
+                        arsClasses.get("ARServerUser"), String.class, arsClasses.get("Field[]"), arsClasses.get("Field[]"), int.class);
+                    // Obtain a reference to StatisticsResultInfo.getResult()
+                    Method getResult = arsClasses.get("ResultInfo").getMethod("getResult"); // Returns a Value
+                    // Obtain a reference to Value.getValue()
+                    Method getValue = arsClasses.get("Value").getMethod("getValue");        // Returns an Object (Integer)
+
+                    // Build the Schema Key
+                    Constructor schemaKeyConstructor = arsClasses.get("SchemaKey").getConstructor(String.class);
+                    Object schemaKey = schemaKeyConstructor.newInstance(formName);
+                    // Build the qualification
+                    Constructor nameIdConstructor = arsClasses.get("NameID").getConstructor(String.class);
+                    Object schemaNameId = nameIdConstructor.newInstance(formName);
+                    Constructor timestampConstructor = arsClasses.get("Timestamp").getConstructor(long.class);
+                    Object timestamp = timestampConstructor.newInstance(0);
+                    Constructor fieldListCriteriaConstructor = arsClasses.get("FieldListCriteria").
+                        getConstructor(arsClasses.get("NameID"), arsClasses.get("Timestamp"), int.class);
+                    Object fieldListCriteria = fieldListCriteriaConstructor.newInstance(schemaNameId, timestamp, 1); // FieldType.AR_DATA_FIELD == 1
+                    Object fieldCriteria = arsClasses.get("FieldCriteria").newInstance();
+                    int changeDiary = arsClasses.get("FieldCriteria").getDeclaredField("CHANGE_DIARY").getInt(arsClasses.get("FieldCriteria"));
+                    int helpText = arsClasses.get("FieldCriteria").getDeclaredField("HELP_TEXT").getInt(arsClasses.get("FieldCriteria"));
+                    Method setPropertiesToRetrieve = arsClasses.get("FieldCriteria").getMethod("setPropertiesToRetrieve", int.class);
+                    setPropertiesToRetrieve.invoke(fieldCriteria, ~changeDiary & ~helpText);
+                    Method findObjects = arsClasses.get("FieldFactory").getDeclaredMethod("findObjects", 
+                        arsClasses.get("ARServerUser"), arsClasses.get("FieldListCriteria"), arsClasses.get("FieldCriteria"));
+                    Object fields = findObjects.invoke(arsClasses.get("FieldFactory"), context.getContext(), fieldListCriteria, fieldCriteria);
+                    Object qualifierInfo = getQualifier.invoke(arsClasses.get("Util"), context.getContext(), qualification, fields, null, 0);
+
+                    // Execute the getEntryStatistics call
+                    Object[] results = (Object[])getEntryStatistics.invoke(arsClasses.get("Util"),
+                            context.getContext(), schemaKey, qualifierInfo, null, 1, 
+                            Array.newInstance(arsClasses.get("InternalID"), 0)); // Constants.AR_STAT_OP_COUNT == 1
+                    // Obtain the singular result (no groupings)
+                    Object result = getResult.invoke(results[0]);
+                    // Determine the value
+                    count = ((Double)getValue.invoke(result)).intValue();
+                }
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
-            // Build the query criteria
-            EntryCriteria entryCriteria = new EntryCriteria();
-            EntryListCriteria entryListCriteria = new EntryListCriteria();
-            entryListCriteria.setSchemaID(new NameID(formName));
-            entryListCriteria.setQualifier(qualifierInfo);
-            entryListCriteria.setMaxLimit(1);
-
-            // Do an "empty" retrieval (of no more than 1 record), storing the count in result
-            try {
-               EntryFactory.findObjects(context.getContext(), entryListCriteria, entryCriteria, false, result);
-            } catch (ARException e) {
-                throw new RuntimeException(e);
-            }
-
-            // Return the result
-            return result;
-        }
-
-        public static HelperContext getDefaultHelperContext() {
-            return defaultHelperContext;
-        }
-        public static void setDefaultHelperContext(HelperContext helperContext) {
-            defaultHelperContext = helperContext;
+            return count;
         }
     }
 %>

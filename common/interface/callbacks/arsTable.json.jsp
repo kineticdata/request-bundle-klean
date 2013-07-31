@@ -1,7 +1,4 @@
 <%@page contentType="application/json; charset=UTF-8"%>
-<%@page import="com.remedy.arsys.api.*"%>
-<%@page import="com.kd.arsHelpers.*"%>
-<%@page import="java.util.*"%>
 <%@include file="../../../core/framework/includes/bundleInitialization.jspf"%>
 <%
     if (context == null) {
@@ -57,90 +54,13 @@
     if (context == null) {
         throw new IllegalArgumentException("The \"context\" argument can't be null.");
     }
-    /*
-     * Build the ArsPrecisionHelper instance.
-     */
-    ArsPrecisionHelper helper = null;
-    try {
-        helper = new ArsPrecisionHelper(context);
-    } catch (ARException e) {
-        throw new RuntimeException("Unable to initialize an ArsHelper instance.", e);
-    }
-    /*
-     * Make the getSimpleEntryList call.
-     */
-    SimpleEntry[] entries = new SimpleEntry[0];
-    try {
-        entries = helper.getSimpleEntryList(form, qualification, fieldIds, sortFieldIds, pageSize, pageOffset, sortOrder);
-    } catch (Exception e) {
-        throw new RuntimeException("There was a problem retrieving the " + form + " records.", e);
-    }
-
 
     /*
-     * START OF COUNT CODE
-     * 
-     * Here is some code that performs a count of the records on the given form
-     * that match the given qualification.
+     * Retrieve the entries with the parameters gathered above.  Also retrieve a
+     * count of the total number of entries that match the qualification.
      */
-    // Declare the result
-    Integer count = new Integer(0);
-    Map<String, Field[]> formFields = new HashMap();
-    // If the list of fields does not exist in the formFields cache
-    Field[] fields = new Field[0];
-    if (!formFields.containsKey(form)) {
-        // Build up the fieldListCriteria
-        FieldListCriteria fieldListCriteria = new FieldListCriteria(
-                new NameID(new NameID(form)),
-                new Timestamp(0),
-                FieldType.AR_DATA_FIELD);
-        FieldCriteria fieldCriteria = new com.remedy.arsys.api.FieldCriteria();
-        fieldCriteria.setRetrieveAll(true);
-        fieldCriteria.setPropertiesToRetrieve(
-                fieldCriteria.getPropertiesToRetrieve()
-                & ~FieldCriteria.CHANGE_DIARY
-                & ~FieldCriteria.HELP_TEXT);
-        if (context != null) {
-            // Retrieve the fields
-            try {
-                fields = FieldFactory.findObjects(context.getContext(), fieldListCriteria, fieldCriteria);
-            } catch (ARException e) {
-                throw new RuntimeException(e);
-            }
-            formFields.put(form, fields);
-        } else {
-            try {
-                fields = FieldFactory.findObjects(context.getContext(), fieldListCriteria, fieldCriteria);
-            } catch (ARException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    } else {
-        fields = formFields.get(form);
-    }
-    // Build the qualification
-    QualifierInfo qualifierInfo = null;
-    try {
-        qualifierInfo = Util.ARGetQualifier(context.getContext(), qualification, fields, null, Constants.AR_QUALCONTEXT_DEFAULT);
-    } catch (ARException e) {
-        throw new RuntimeException(e);
-    }
-    // Build the query criteria
-    EntryCriteria entryCriteria = new EntryCriteria();
-    EntryListCriteria entryListCriteria = new EntryListCriteria();
-    entryListCriteria.setSchemaID(new NameID(form));
-    entryListCriteria.setQualifier(qualifierInfo);
-    entryListCriteria.setMaxLimit(1);
-    // Do an "empty" retrieval (of no more than 1 record), storing the count in result
-    try {
-        EntryFactory.findObjects(context.getContext(), entryListCriteria, entryCriteria, false, count);
-    } catch (ARException e) {
-        throw new RuntimeException(e);
-    }
-    /*
-     * END OF COUNT CODE
-     */
-
+    SimpleEntry[] entries = ArsBase.find(context, form, qualification, fieldIds, sortFieldIds, pageSize, pageOffset, sortOrder);
+    int count = ArsBase.count(context, form, qualification);
 
     /*
      * Here we are parsing the results of the ars helpers call and building the
