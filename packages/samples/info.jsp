@@ -20,7 +20,7 @@
         <div><b>Relative Package Path:</b> <%= bundle.relativePackagePath() %></div>
         <br/>
         <div>Configuration Properties</div>
-        <% for (String name : bundle.propertyKeys()) { %>
+        <% for (String name : bundle.propertyNames()) { %>
         <div><b><%= name %>:</b> <%= bundle.getProperty(name) %></div>
         <% } %>
     </body>
