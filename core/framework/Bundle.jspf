@@ -42,7 +42,7 @@
             // Retrieve the URI of the request.  This is the actual URI of the
             // JSP that is being rendered, not the URL of the Servlet that is
             // dispatching the request.
-            String requestUri = request.getRequestURI();
+            String requestUri = request.getContextPath()+request.getServletPath();
             // Calculate the terminating indexes
             int endOfRootPath = requestUri.indexOf("/"+BUNDLE_DIR);
             int startOfBundleName = requestUri.indexOf("/"+BUNDLE_DIR+"/")+("/"+BUNDLE_DIR+"/").length();
